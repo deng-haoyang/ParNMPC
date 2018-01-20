@@ -8,5 +8,7 @@ The current version of ParNMPC does not contain any globalization strategies suc
 See UserManual for more details.
 
 Please feel free to contact me or submit issues if you have any questions.
+
 email: deng.haoyang.23r@st.kyoto-u.ac.jp
+
 wechat: ideadhy
