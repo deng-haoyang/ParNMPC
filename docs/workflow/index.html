@@ -762,6 +762,28 @@
 </pre></div></p>
 </li>
 </ol>
+<p>Configuration Table:</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Configurable discretization method</th>
+<th>Configurable Hessian approximation method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="codehilite">M</code> enabled</td>
+<td><code class="codehilite">&#39;Euler&#39;</code></td>
+<td><code class="codehilite">&#39;GaussNewton&#39;</code></td>
+</tr>
+<tr>
+<td><code class="codehilite">M</code> disabled</td>
+<td><code class="codehilite">&#39;Euler&#39;</code>, <code class="codehilite">&#39;RK4&#39;</code></td>
+<td><code class="codehilite">&#39;Newton&#39;</code>, <code class="codehilite">&#39;GaussNewton&#39;</code> when <code class="codehilite">&#39;Euler&#39;</code>;<br><code class="codehilite">&#39;GaussNewton&#39;</code> when <code class="codehilite">&#39;RK4&#39;</code>;</td>
+</tr>
+</tbody>
+</table>
 <h2 id="code-generation-and-deployment">Code Generation and Deployment</h2>
 <h3 id="matlab">MATLAB</h3>
 <p>Assume that you have written a MATLAB function to carry out the closed-loop simulation for your problem defined above using the functions provided by ParNMPC, that is, <code class="codehilite">NMPC_Iter</code> is used to calculate the optimal control input, and <code class="codehilite">SIM_Plant_RK4</code> is used to simulate the controlled plant.</p>
