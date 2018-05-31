@@ -3,7 +3,7 @@
 Homepage: https://deng-haoyang.github.io/ParNMPC/
 
 **`ParNMPC`** is a MATLAB real-time optimization toolkit for nonlinear model predictive control (NMPC).
-**`ParNMPC`** can utilize multiple CPU cores to solve the optimal control problem, and thus can be very fast (the computation time is usually in the range of $\mu$s). 
+**`ParNMPC`** can utilize multiple CPU cores to solve the optimal control problem, and thus can be very fast (the computation time is usually in the range of us). 
 The purpose of **`ParNMPC`** is to provide an easy-to-use environment for NMPC problem formulation, closed-loop simulation and deployment.
 
 ### Features
