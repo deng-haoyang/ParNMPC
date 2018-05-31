@@ -3,12 +3,15 @@ function codeGen(OCP)
     if OCP.dim.mu == 0
        OCP.C = symfun(zeros(OCP.dim.mu,1),[OCP.u;OCP.x;OCP.p]);
     end
-    % init M if it is disabled
-    if ~OCP.isMEnabled
-       % init M
+    % 
+    if OCP.isMEnabled
+        % forced to 'Euler'
+        OCP.discretizationMethod = 'Euler';
+    else
+        % init M if it is disabled
         OCP.M = symfun(eye(OCP.dim.x),[OCP.u;OCP.x;OCP.p]);
     end
-    % L, Lu, Lx
+    %% L, Lu, Lx
     Lu = jacobian(OCP.L,OCP.u);
     Lx = jacobian(OCP.L,OCP.x);
     UXP = {OCP.u;OCP.x;OCP.p};
@@ -25,7 +28,7 @@ function codeGen(OCP)
         'Vars',UXP,...
         'Outputs',{'Lx'});
     
-    % C, Cu, Cx
+    %% C, Cu, Cx
     Cu = jacobian(OCP.C,OCP.u);
     Cx = jacobian(OCP.C,OCP.x);
     matlabFunction(OCP.C,...
@@ -41,7 +44,7 @@ function codeGen(OCP)
         'Vars',UXP,...
         'Outputs',{'Cx'});
     
-    % f, fu, fx, M(optional)
+    %% f, fu, fx, M(optional)
     fudt = jacobian(OCP.f*OCP.deltaTau,OCP.u);
     fxdt = jacobian(OCP.f*OCP.deltaTau,OCP.x);
     matlabFunction(OCP.f*OCP.deltaTau,...

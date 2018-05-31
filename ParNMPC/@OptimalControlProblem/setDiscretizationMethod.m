@@ -1,8 +1,5 @@
-function state = setDiscretizationMethod(OCP,method)
-% state 0: ok
-% state 1: Not Euler or RK4 selected
+function setDiscretizationMethod(OCP,method)
 
-state = 0;
 switch method
     case 'Euler'
     	OCP.discretizationMethod = 'Euler';
@@ -10,6 +7,5 @@ switch method
         OCP.discretizationMethod = 'RK4';
     otherwise
     	OCP.discretizationMethod = 'Euler';
-        state = 1;
 end
 end
