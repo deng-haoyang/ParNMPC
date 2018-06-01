@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="white" data-md-color-accent="indigo">
   
     <svg class="md-svg">
       <defs>
@@ -271,8 +275,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#file-layout" title="File Layout" class="md-nav__link">
-    File Layout
+  <a href="#directory-layout" title="Directory Layout" class="md-nav__link">
+    Directory Layout
   </a>
   
 </li>
@@ -448,8 +452,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#file-layout" title="File Layout" class="md-nav__link">
-    File Layout
+  <a href="#directory-layout" title="Directory Layout" class="md-nav__link">
+    Directory Layout
   </a>
   
 </li>
@@ -502,21 +506,24 @@ Check <a href="https://ww2.mathworks.cn/matlabcentral/answers/399991-syms-sym-an
 </div>
 </li>
 </ol>
-<h2 id="file-layout">File Layout</h2>
-<p>The file layout of <strong><code class="codehilite">ParNMPC</code></strong> looks like this:</p>
-<div class="codehilite"><pre><span></span><span class="n">ParNMPC</span><span class="o">/</span>                          <span class="c">% The toolkit folder.</span>
-<span class="n">docs</span><span class="o">/</span>                             <span class="c">% The documents folder.</span>
-<span class="n">SemiActiveDamper</span><span class="o">/</span>       <span class="c">% Example of controlling a semi-active damper.</span>
-    <span class="n">NMPC_Problem_Formulation</span><span class="p">.</span><span class="n">m</span>    <span class="c">% NMPC formulation and initialization.</span>
-    <span class="n">Simu_Matlab</span><span class="p">.</span><span class="n">m</span>                 <span class="c">% Closed-loop simulation in MATLAB.</span>
-    <span class="n">Simu_Simulink</span><span class="p">.</span><span class="n">slx</span>             <span class="c">% Closed-loop simulation in Simulink.</span>
-    <span class="n">Simu_Simulink_Setup</span><span class="p">.</span><span class="n">m</span>         <span class="c">% Setup for the Simulink simulation.</span>
-    <span class="n">Timer</span><span class="p">.</span><span class="n">m</span>                       <span class="c">% Your own timer function.</span>
-    <span class="n">GEN_initData</span><span class="p">.</span><span class="n">mat</span>              <span class="c">% Initial guess</span>
-<span class="n">DoubleInvertedPendulum</span><span class="o">/</span> <span class="c">% Example of swinging up a double inverted pendulum on a cart.</span>
-    <span class="c">...                           % Files</span>
-<span class="n">Quadrotor</span><span class="o">/</span>              <span class="c">% Example of controlling a quadrotor.</span>
-    <span class="c">...                           % Files </span>
+<h2 id="directory-layout">Directory Layout</h2>
+<p>The directory layout of <strong><code class="codehilite">ParNMPC</code></strong> is as follows:</p>
+<div class="codehilite"><pre><span></span>.
+├─ ParNMPC/                  <span class="c1"># Toolkit</span>
+│  ├─ ...
+├─ docs/                     <span class="c1"># Homepage</span>
+│  ├─ ...                    
+├─ SemiActiveDamper/         <span class="c1"># Example of controlling a semi-active damper</span>
+│  ├─ NMPC_Problem_Formulation.m    <span class="c1"># NMPC formulation and initialization                   </span>
+│  ├─ Simu_Matlab.m                 <span class="c1"># Closed-loop simulation in MATLAB                    </span>
+│  ├─ Simu_Simulink.slx             <span class="c1"># Closed-loop simulation in Simulink      </span>
+│  ├─ Simu_Simulink_Setup.m         <span class="c1"># Setup for the Simulink simulation              </span>
+│  ├─ Timer.m                       <span class="c1"># Your own timer function           </span>
+│  ├─ GEN_initData.mat              <span class="c1"># Initial guess                    </span>
+├─ DoubleInvertedPendulum/   <span class="c1"># Example of swinging up a double inverted pendulum on a cart</span>
+│  ├─ ...                    
+└─ Quadrotor/                <span class="c1"># Example of controlling a quadrotor</span>
+│  ├─ ...                    
 </pre></div>
 
 <h2 id="getting-started">Getting Started</h2>
