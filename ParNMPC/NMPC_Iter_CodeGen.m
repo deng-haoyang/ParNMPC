@@ -52,7 +52,7 @@ else
     cfg.CustomSource = 'OCP_F_Fu_Fx.c';
 end
 
-cfg.CustomInclude = '.\codegen\lib\OCP_F_Fu_Fx';
+cfg.CustomInclude = './codegen/lib/OCP_F_Fu_Fx';
 
 if ~strcmp(target,'mex')
     cfg.BuildConfiguration = 'Faster Runs'; % no MexCodeConfig 

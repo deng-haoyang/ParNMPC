@@ -109,7 +109,7 @@ function codeGen(OCP)
     cfg_OCP_KKTs.CustomHeaderCode = '#include "OCP_F_Fu_Fx.h"';
     cfg_OCP_KKTs.FilePartitionMethod = 'SingleFile';% single file
     cfg_OCP_KKTs.TargetLang = 'C';
-    include_path = '.\codegen\lib\OCP_F_Fu_Fx';
+    include_path = './codegen/lib/OCP_F_Fu_Fx';
     cfg_OCP_KKTs.CustomInclude = include_path;
     cfg_OCP_KKTs.CustomSource = 'OCP_F_Fu_Fx.c';
     cfg_OCP_KKTs.EnableOpenMP = true;

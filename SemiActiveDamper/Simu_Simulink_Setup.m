@@ -43,5 +43,5 @@ if reGen
                       coder.Constant(isMEnabled)};
     NMPC_Iter_CodeGen('dll','C',args_NMPC_Iter);
     clear mex
-    copyfile('.\codegen\dll\NMPC_Iter\NMPC_Iter.dll');
+    copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.dll');
 end
