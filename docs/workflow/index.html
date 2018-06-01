@@ -872,7 +872,7 @@ Next, the code generation process using the MATLAB Coder App for this simulation
                   <span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">discretizationMethod</span><span class="p">),</span><span class="c">...</span>
                   <span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">isMEnabled</span><span class="p">)};</span>
 <span class="n">NMPC_Iter_CodeGen</span><span class="p">(</span><span class="s">&#39;dll&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="n">args_NMPC_Iter</span><span class="p">);</span>
-<span class="n">copyfile</span><span class="p">(</span><span class="s">&#39;.\codegen\dll\NMPC_Iter\NMPC_Iter.dll&#39;</span><span class="p">);</span>
+<span class="n">copyfile</span><span class="p">(</span><span class="s">&#39;./codegen/dll/NMPC_Iter/NMPC_Iter.dll&#39;</span><span class="p">);</span>
 </pre></div></p>
 </li>
 </ol>
@@ -896,8 +896,8 @@ You can also call the C/C++ interface utilizing S-function.</p>
 </li>
 <li>
 <p>Add the following directories to <strong>Additional Build Information: Include directories</strong>:
-<div class="codehilite"><pre><span></span><span class="o">.\</span><span class="n">codegen</span><span class="o">\</span><span class="n">dll</span><span class="o">\</span><span class="n">NMPC_Iter</span>
-<span class="o">.\</span><span class="n">codegen</span><span class="o">\</span><span class="n">lib</span><span class="o">\</span><span class="n">OCP_F_Fu_Fx</span>
+<div class="codehilite"><pre><span></span><span class="o">./</span><span class="n">codegen</span><span class="o">/</span><span class="n">dll</span><span class="o">/</span><span class="n">NMPC_Iter</span>
+<span class="o">./</span><span class="n">codegen</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">OCP_F_Fu_Fx</span>
 </pre></div></p>
 </li>
 <li>
