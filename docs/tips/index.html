@@ -527,7 +527,9 @@
 </li>
 </ul>
 <h2 id="solving-the-very-first-ocp">Solving the Very First OCP</h2>
-<p>In most of the cases, the very first OCP can be solved offline and its solution can be used as warm start. In solving the very first OCP offline, you can start with a mild parameter and then gradually change it to the parameter you want.</p>
+<p>In most of the cases, the very first OCP can be solved offline to exploit warm-start.
+In solving the very first OCP offline, you can start with an easy-to-solve OCP, for example, OCP with less constraints or mild parameters. 
+Then, you can gradually modify and solve the OCP to the one you want by starting from the solution obtained before.</p>
 <h2 id="degree-of-parallelism-dop">Degree of Parallelism (DoP)</h2>
 <p><code class="codehilite">DoP</code> is a parameter to specify the number of pieces to split the OCP along the prediction horizon for parallel computing. In general, a faster rate of convergence can be achieved by choosing a smaller <code class="codehilite">DoP</code>. In the case of <code class="codehilite">DoP=1</code>, a full step Newton or Gauss-Newton iteration (depending on the Hessian approximation method) is performed.</p>
 <p>Meanwhile, when you want to generate serial code without any parallel computing, you can set <code class="codehilite">DoP</code> to 1 and edit <code class="codehilite">Timer.m</code> to specify your own timer function (the default is <code class="codehilite">omp_get_wtime</code>).</p>
