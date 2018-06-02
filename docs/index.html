@@ -305,13 +305,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#karush-kuhn-tucker-kkt-conditions" title="Karush-Kuhn-Tucker (KKT) conditions" class="md-nav__link">
-    Karush-Kuhn-Tucker (KKT) conditions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#solving-the-kkt-conditions-iteratively-in-parallel" title="Solving the KKT conditions iteratively in parallel" class="md-nav__link">
     Solving the KKT conditions iteratively in parallel
   </a>
@@ -541,13 +534,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#karush-kuhn-tucker-kkt-conditions" title="Karush-Kuhn-Tucker (KKT) conditions" class="md-nav__link">
-    Karush-Kuhn-Tucker (KKT) conditions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#solving-the-kkt-conditions-iteratively-in-parallel" title="Solving the KKT conditions iteratively in parallel" class="md-nav__link">
     Solving the KKT conditions iteratively in parallel
   </a>
@@ -676,39 +662,19 @@ For detailed instructions, check <a href="tips/#inequality">Tips &gt; Handling I
 <div class="MathJax_Preview">\begin{align}
 \min_{X,\ U}\sum_{i=1}^{N}&amp;L(u_i,x_i,p_i) \\
 \text{s.t.}\quad &amp; x_0 = \bar{x}_0,\\
-&amp;x_{i-1}+ F(u_i,x_i,p_i)=0, \quad i\in\{1,\cdots,N\},\\
+&amp;F(x_{i-1},u_i,x_i,p_i)=0, \quad i\in\{1,\cdots,N\},\\
 &amp; C(u_i,x_i,p_i)=0,\quad i\in\{1,\cdots,N\}.
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
 \min_{X,\ U}\sum_{i=1}^{N}&L(u_i,x_i,p_i) \\
 \text{s.t.}\quad & x_0 = \bar{x}_0,\\
-&x_{i-1}+ F(u_i,x_i,p_i)=0, \quad i\in\{1,\cdots,N\},\\
+&F(x_{i-1},u_i,x_i,p_i)=0, \quad i\in\{1,\cdots,N\},\\
 & C(u_i,x_i,p_i)=0,\quad i\in\{1,\cdots,N\}.
 \end{align}</script>
 </div>
-<p>Here, the continuous-time state equation <span><span class="MathJax_Preview">\dot{x}(t)=f(u(t),x(t),p(t))</span><script type="math/tex">\dot{x}(t)=f(u(t),x(t),p(t))</script></span> (if <span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span> is not imposed) is discretized using the reverse-time discretization method, e.g., the backward Euler's method with <span><span class="MathJax_Preview">F(u_i,x_i,p_i) = f(u_i,x_i,p_i)\Delta\tau - x_i</span><script type="math/tex">F(u_i,x_i,p_i) = f(u_i,x_i,p_i)\Delta\tau - x_i</script></span>, where <span><span class="MathJax_Preview">\Delta\tau=T/N</span><script type="math/tex">\Delta\tau=T/N</script></span>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Higher order discretization methods such as the explicit Runge-Kutta method with order 4 can also be utilized in a reverse-time manner. </p>
-</div>
-<h3 id="karush-kuhn-tucker-kkt-conditions">Karush-Kuhn-Tucker (KKT) conditions</h3>
-<p>Then, <strong><code class="codehilite">ParNMPC</code></strong> derives the KKT conditions for the discretized OCP as:</p>
-<div>
-<div class="MathJax_Preview">\begin{align}
-&amp;x_{i-1}+F(u_{i},x_i,p_i)=0,\ i\in\{1,\cdots,N\},\\
-&amp;C(u_{i},x_i,p_i)=0,\ i\in\{1,\cdots,N\},\\
-&amp;H_{u}^{T}(\lambda_{i},\mu_{i},u_{i},x_{i},p_i)=0,\ i\in\{1,\cdots,N\},\\
-&amp;\lambda_{i+1}+H_{x}^{T}(\lambda_{i},\mu_{i},u_{i},x_{i},p_i)=0,\ i\in\{1,\cdots,N\}.
-\end{align}</div>
-<script type="math/tex; mode=display">\begin{align}
-&x_{i-1}+F(u_{i},x_i,p_i)=0,\ i\in\{1,\cdots,N\},\\
-&C(u_{i},x_i,p_i)=0,\ i\in\{1,\cdots,N\},\\
-&H_{u}^{T}(\lambda_{i},\mu_{i},u_{i},x_{i},p_i)=0,\ i\in\{1,\cdots,N\},\\
-&\lambda_{i+1}+H_{x}^{T}(\lambda_{i},\mu_{i},u_{i},x_{i},p_i)=0,\ i\in\{1,\cdots,N\}.
-\end{align}</script>
-</div>
-<p>Here, <span><span class="MathJax_Preview">\lambda</span><script type="math/tex">\lambda</script></span> is the Lagrange multiplier for the state equation, <span><span class="MathJax_Preview">\mu</span><script type="math/tex">\mu</script></span> is the Lagrange multiplier for the equality constraint, <span><span class="MathJax_Preview">H(\lambda,\mu,u,x,p) = L(u,x,p)+\lambda^{T}F(u,x,p)+\mu^{T}C(u,x,p)</span><script type="math/tex">H(\lambda,\mu,u,x,p) = L(u,x,p)+\lambda^{T}F(u,x,p)+\mu^{T}C(u,x,p)</script></span> is called the Hamiltonian, <span><span class="MathJax_Preview">\{p_i\}_{i=1}^{N}</span><script type="math/tex">\{p_i\}_{i=1}^{N}</script></span> are given, <span><span class="MathJax_Preview">x_0=\bar{x}_0</span><script type="math/tex">x_0=\bar{x}_0</script></span>, and <span><span class="MathJax_Preview">\lambda_{N+1}=0</span><script type="math/tex">\lambda_{N+1}=0</script></span>.</p>
+<p>Here, the continuous-time state equation <span><span class="MathJax_Preview">\dot{x}(t)=f(u(t),x(t),p(t))</span><script type="math/tex">\dot{x}(t)=f(u(t),x(t),p(t))</script></span> (if <span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span> is not imposed) is discretized to be <span><span class="MathJax_Preview">F(x_{i-1},u_i,x_i,p_i)=0</span><script type="math/tex">F(x_{i-1},u_i,x_i,p_i)=0</script></span>, e.g., the backward Euler's method with <span><span class="MathJax_Preview">F(x_{i-1},u_i,x_i,p_i) = x_{i-1} + f(u_i,x_i,p_i)\Delta\tau - x_i</span><script type="math/tex">F(x_{i-1},u_i,x_i,p_i) = x_{i-1} + f(u_i,x_i,p_i)\Delta\tau - x_i</script></span>, where <span><span class="MathJax_Preview">\Delta\tau=T/N</span><script type="math/tex">\Delta\tau=T/N</script></span>.</p>
 <h3 id="solving-the-kkt-conditions-iteratively-in-parallel">Solving the KKT conditions iteratively in parallel</h3>
+<p>Then, <strong><code class="codehilite">ParNMPC</code></strong> derives the KKT conditions for the discretized OCP by introducing Lagrange multipliers <span><span class="MathJax_Preview">\{\lambda_i\}_{i=1}^{N}</span><script type="math/tex">\{\lambda_i\}_{i=1}^{N}</script></span> for the state equations and <span><span class="MathJax_Preview">\{\mu_i\}_{i=1}^{N}</span><script type="math/tex">\{\mu_i\}_{i=1}^{N}</script></span> for the equality constraints.</p>
 <p>Next, <strong><code class="codehilite">ParNMPC</code></strong> solves the KKT conditions iteratively in parallel for a given initial state <span><span class="MathJax_Preview">\bar{x}_0</span><script type="math/tex">\bar{x}_0</script></span> and given parameters <span><span class="MathJax_Preview">\{p_i\}_{i=1}^{N}</span><script type="math/tex">\{p_i\}_{i=1}^{N}</script></span>.
 The NMPC controller is implemented by applying the first optimal control input <span><span class="MathJax_Preview">u_1^*</span><script type="math/tex">u_1^*</script></span> as the actual input.</p>
 <div class="admonition note">
