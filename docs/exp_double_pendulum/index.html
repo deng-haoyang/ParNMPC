@@ -591,19 +591,19 @@ The pendulum we want to swing up is:</p>
 <li>Input: <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span>.</li>
 <li>Parameter: <span><span class="MathJax_Preview">p=[Q_d,R_d,\gamma_u,\gamma_{\theta_0},\beta_{\theta_0}]</span><script type="math/tex">p=[Q_d,R_d,\gamma_u,\gamma_{\theta_0},\beta_{\theta_0}]</script></span>.</li>
 <li>
-<p><span><span class="MathJax_Preview">L(u,x,p) = L_s(u,x,p) + L_{u}(u,x,p) + L_{\theta_0}(u,x,p)</span><script type="math/tex">L(u,x,p) = L_s(u,x,p) + L_{u}(u,x,p) + L_{\theta_0}(u,x,p)</script></span>, where <span><span class="MathJax_Preview">L_s(u,x,p) = \frac{1}{2}\|x\|_{Q}^2+\frac{1}{2}\|u\|_{R}^2</span><script type="math/tex">L_s(u,x,p) = \frac{1}{2}\|x\|_{Q}^2+\frac{1}{2}\|u\|_{R}^2</script></span> with <span><span class="MathJax_Preview">Q=\text{diag}(Q_d)</span><script type="math/tex">Q=\text{diag}(Q_d)</script></span> and <span><span class="MathJax_Preview">R=\text{diag}(R_d)</span><script type="math/tex">R=\text{diag}(R_d)</script></span>, <span><span class="MathJax_Preview">L_u(u,x,p) = -\gamma_u\text{log}(1-u)-\gamma_u\text{log}(u)</span><script type="math/tex">L_u(u,x,p) = -\gamma_u\text{log}(1-u)-\gamma_u\text{log}(u)</script></span>, and <span><span class="MathJax_Preview">L_{\theta_0}(u,x,p) = \beta_{\theta_0}\text{log}(1+e^{\frac{1}{\gamma_{\theta_0}}(\theta_0-0.19)}) + \beta_{\theta_0}\text{log}(1+e^{\frac{1}{\gamma_{\theta_0}}(-0.19-\theta_0)})</span><script type="math/tex">L_{\theta_0}(u,x,p) = \beta_{\theta_0}\text{log}(1+e^{\frac{1}{\gamma_{\theta_0}}(\theta_0-0.19)}) + \beta_{\theta_0}\text{log}(1+e^{\frac{1}{\gamma_{\theta_0}}(-0.19-\theta_0)})</script></span>.</p>
+<p><span><span class="MathJax_Preview">L(u,x,p) = L_s(u,x,p) + L_{u}(u,x,p) + L_{\theta_0}(u,x,p)</span><script type="math/tex">L(u,x,p) = L_s(u,x,p) + L_{u}(u,x,p) + L_{\theta_0}(u,x,p)</script></span>, where <span><span class="MathJax_Preview">L_s(u,x,p) = \frac{1}{2}\|x\|_{Q}^2+\frac{1}{2}\|u\|_{R}^2</span><script type="math/tex">L_s(u,x,p) = \frac{1}{2}\|x\|_{Q}^2+\frac{1}{2}\|u\|_{R}^2</script></span> with <span><span class="MathJax_Preview">Q=\text{diag}(Q_d)</span><script type="math/tex">Q=\text{diag}(Q_d)</script></span> and <span><span class="MathJax_Preview">R=\text{diag}(R_d)</span><script type="math/tex">R=\text{diag}(R_d)</script></span>, <span><span class="MathJax_Preview">L_u(u,x,p) = -\gamma_u\text{log}(15-u)-\gamma_u\text{log}(u+15)</span><script type="math/tex">L_u(u,x,p) = -\gamma_u\text{log}(15-u)-\gamma_u\text{log}(u+15)</script></span>, and <span><span class="MathJax_Preview">L_{\theta_0}(u,x,p) = \beta_{\theta_0}\text{log}(1+e^{\frac{1}{\gamma_{\theta_0}}(\theta_0-0.19)}) + \beta_{\theta_0}\text{log}(1+e^{\frac{1}{\gamma_{\theta_0}}(-0.19-\theta_0)})</span><script type="math/tex">L_{\theta_0}(u,x,p) = \beta_{\theta_0}\text{log}(1+e^{\frac{1}{\gamma_{\theta_0}}(\theta_0-0.19)}) + \beta_{\theta_0}\text{log}(1+e^{\frac{1}{\gamma_{\theta_0}}(-0.19-\theta_0)})</script></span>.</p>
 </li>
 <li>
 <p><span><span class="MathJax_Preview">f(u,x,p)=[\dot{\theta};Hu-G(\theta)-C(\theta,\dot{\theta})\dot{\theta}]</span><script type="math/tex">f(u,x,p)=[\dot{\theta};Hu-G(\theta)-C(\theta,\dot{\theta})\dot{\theta}]</script></span>.</p>
 </li>
 <li>
-<p><span><span class="MathJax_Preview">M(u,x,p) = \text{blkdiag}(eye(3),D(\theta))</span><script type="math/tex">M(u,x,p) = \text{blkdiag}(eye(3),D(\theta))</script></span>.</p>
+<p><span><span class="MathJax_Preview">M(u,x,p) = \text{blkdiag}(\text{eye(3)},D(\theta))</span><script type="math/tex">M(u,x,p) = \text{blkdiag}(\text{eye(3)},D(\theta))</script></span>.</p>
 </li>
 <li>
 <p>Prediction horizon <span><span class="MathJax_Preview">T=1.5</span><script type="math/tex">T=1.5</script></span>.</p>
 </li>
 <li>Number of the discritization grids <span><span class="MathJax_Preview">N=48</span><script type="math/tex">N=48</script></span>.</li>
-<li>Discretization method: Euler in reverse time (backward Euler).</li>
+<li>Discretization method: Euler.</li>
 </ul>
 <h2 id="closed-loop-simulation-using-parnmpc">Closed-loop Simulation using <strong><code class="codehilite">ParNMPC</code></strong></h2>
 <h3 id="step-1-nmpc-problem-formulation">Step 1. NMPC problem formulation</h3>
