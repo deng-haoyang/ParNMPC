@@ -72,7 +72,7 @@ uRefConstant = [g;0;0;0;...
                 sqrt(-(g - uBar(1))^2 + (uMax(1)-uBar(1))^2);...
                 uMax(2);uMax(3);uMax(4)];
 pVal = repmat([xRefConstant;uRefConstant],1,N); % init parameters
-MaxIterNum = 5; % max num of iterations per update
+MaxIterNum = 20; % max num of iterations per update
 tolerance = 5e-3; % tolerance of the KKT conditions to terminate
 %<<<<<<----------------END_FOR_USER--------------------------<<<<<<
 
@@ -132,7 +132,7 @@ global Ts simuLength
 
 %>>>>>>------------------FOR_USER---------------------------->>>>>>
 Ts = 0.01;       % sampling interval
-simuLength = 10; % simulation length
+simuLength = 20; % simulation length
 %<<<<<<----------------END_FOR_USER--------------------------<<<<<<
 
 disp('Problem has been defined!');

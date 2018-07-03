@@ -244,10 +244,10 @@ for step=1:simuSteps %simulation steps
     xPrevVal(:,1) = xCurrentState;
     %>>>>>>------------------FOR_USER---------------------------->>>>>>
     % MPC parameters
-    if step >= 500 && step <= 515
-        pVal(1,:) = (step-500)*0.1;
-        pVal(3,:) = (step-500)*0.1;
-        pVal(5,:) = (step-500)*0.1;
+    if step >= 1000 && step <= 1003
+        pVal(1,:) = (step-1000)*0.5;
+        pVal(3,:) = (step-1000)*0.5;
+        pVal(5,:) = (step-1000)*0.5;
     end
     % Simulation plant parameters
     pSimVal = zeros(pSimDim,1);

@@ -31,7 +31,7 @@ INIT_BY_REF_GUESS    = 1;
 INIT_BY_FILE         = 2;
 
 %>>>>>>------------------FOR_USER---------------------------->>>>>>
-initMethod = INIT_BY_REF_GUESS;
+initMethod = INIT_BY_FILE;
 % INIT_BY_INPUT 
 lambdaInitGuess = repmat(randn(lambdaDim,1),N,1);
 muInitGuess     = repmat(randn(muDim,1),N,1);
