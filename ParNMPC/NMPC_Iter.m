@@ -61,8 +61,7 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
         lambdaNext(:,sizeSeg,i-1) = lambda(:,1,i);
     end
     %% V(:,index_inside_sig_j,which_sigment_i)
-%     parfor (i=1:1:DoP,numThreads)
-    for i=1:1:DoP
+    parfor (i=1:1:DoP,numThreads)
         lambda_i = lambda(:,:,i);
         mu_i = mu(:,:,i);
         u_i = u(:,:,i);
