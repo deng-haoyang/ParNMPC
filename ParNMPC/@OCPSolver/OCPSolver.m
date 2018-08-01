@@ -17,16 +17,13 @@ classdef OCPSolver < handle
             solver.x0  = x0;
             solver.p   = par;
             % declare global variables for OCP_KKTs.m
-            global x0Global pValGlobal NGlobal...
-                   dimGlobal isMEnabledGlobal discretizationMethodGlobal
+            global x0Global pValGlobal NGlobal dimGlobal  
             x0Global   =  solver.x0;
             pValGlobal =  solver.p;
             dimGlobal  =  solver.OCP.dim;
-            isMEnabledGlobal = solver.OCP.isMEnabled;
-            discretizationMethodGlobal = solver.OCP.discretizationMethod;
             NGlobal = solver.OCP.N;
       end
-      [lambda,mu,u,x] = OCPSolve(solver,lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess,method)
+      [lambda,mu,u,x] = OCPSolve(solver,lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess,method,maxIter)
       [lambda,mu,u,x] = initFromMatFile(solver,matFile)
       [lambda,mu,u,x] = initFromStartEnd(solver,lambdaStart,muStart,uStart,xStart,...
                                                 lambdaEnd,  muEnd,  uEnd,  xEnd)

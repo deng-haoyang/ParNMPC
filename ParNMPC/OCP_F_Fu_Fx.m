@@ -1,7 +1,8 @@
 function [F,Fu,Fx] = OCP_F_Fu_Fx(u,x,p,discretizationMethod,isMEnabled) %#codegen
     [xDim,unused] = size(x);
     [uDim,unused] = size(u);
-    if isMEnabled == true
+        
+    if isMEnabled
         % forced to 'Euler'
         M = OCP_GEN_M(u,x,p);
         invM = inv(M);

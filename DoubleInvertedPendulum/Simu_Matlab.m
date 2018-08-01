@@ -20,9 +20,7 @@ mu         = initData.mu;
 u          = initData.u;
 x          = initData.x;
 LAMBDA     = initData.LAMBDA;
-isMEnabled = initData.isMEnabled;
 
-discretizationMethod = initData.discretizationMethod;
 % reshape initial guess
 sizeSeg     = N/DoP;
 lambdaSplit = reshape(lambda,lambdaDim,sizeSeg,DoP);
@@ -42,7 +40,7 @@ rec.cost    = zeros(simuSteps,1);
 rec.t       = zeros(simuSteps,1);
 rec.cpuTime = zeros(simuSteps,1);
 %% Simulation
-MaxIterNum = 5;
+MaxIterNum = 10;
 tolerance  = 5e-3;
 
 % init
@@ -68,9 +66,7 @@ for step = 1:simuSteps %simulation steps
                                   uSplit,...
                                   xSplit,...
                                   pSplit,...
-                                  LAMBDASplit,...
-                                  discretizationMethod,...
-                                  isMEnabled);
+                                  LAMBDASplit);
         RTITime = RTITime + timeElapsed;
         if error<tolerance
             break;
@@ -82,7 +78,7 @@ for step = 1:simuSteps %simulation steps
     uOpt = uSplit(:,1,1);
     % System simulation by the 4th-order Explicit Runge-Kutta Method
     pSimVal = zeros(0,1);
-    x0 = SIM_Plant_RK4(uOpt(:,1),x0,pSimVal,Ts);
+    x0 = SIM_Plant_RK4(uOpt(1),x0,pSimVal,Ts);
 
     % Update parameters
 

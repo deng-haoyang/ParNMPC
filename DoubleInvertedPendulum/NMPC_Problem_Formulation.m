@@ -6,7 +6,7 @@ addpath('../ParNMPC/')
 OCP = OptimalControlProblem(0,... % constraints dim
                             1,... % inputs dim
                             6,... % states dim
-                            10,... % parameters dim
+                            8,... % parameters dim
                             1.5,... % T: prediction horizon
                             48);  % N: num of discritization grids
 % Give names to x, u, p
@@ -56,27 +56,21 @@ uDim      = OCP.dim.u;
 xDim      = OCP.dim.x;
 pDim      = OCP.dim.p;
 N         = OCP.N;
-% swing-up cost
-Q = diag([OCP.p(1), OCP.p(2), OCP.p(3), OCP.p(4), OCP.p(5), OCP.p(6)]);
+Q = diag(OCP.p(1:6));
 R = diag(OCP.p(7));
 xRef  = [0;0;0;0;0;0];
 uRef  = 0;
-swingCost = 0.5*(OCP.x-xRef).'*Q*(OCP.x-xRef)...
-               +0.5*(OCP.u-uRef).'*R*(OCP.u-uRef);
-% input constraint: log barrier function
-uMax  = 15;
-uMin  = -15;
-uConstraintCost = - sum(OCP.p(8).*log(uMax-OCP.u))...
-                  - sum(OCP.p(8).*log(OCP.u-uMin));
-% state constraint: KS function with a relaxation of 0.01
-x1Max =  0.2;
-x1Min = -0.2;
-xConstraintCost = ...
-    OCP.p(10)*sum(OCP.p(9)*log(1 + exp(1/OCP.p(9)*(OCP.x(1)-(x1Max-0.01)))))...
-  + OCP.p(10)*sum(OCP.p(9)*log(1 + exp(1/OCP.p(9)*(x1Min+0.01-OCP.x(1))))); 
-L  =  swingCost + uConstraintCost + xConstraintCost;
-L  = L*OCP.deltaTau;
+L     =   0.5*(OCP.x-xRef).'*Q*(OCP.x-xRef)...
+        + 0.5*(OCP.u-uRef).'*R*(OCP.u-uRef);
+L     = L*OCP.deltaTau;
 OCP.setL(L);
+
+% Set the bound constraints
+uMax  =  10;
+uMin  = -10;
+uBarrierPara = OCP.p(8);
+OCP.setUpperBound('u',uMax,uBarrierPara);
+OCP.setLowerBound('u',uMin,uBarrierPara);
 
 % Generate necessary files
 isReGen = true; % is re-gen?
@@ -107,9 +101,7 @@ RDiagVal = 0.1;
 par = zeros(pDim,N);
 par(1:7,:) = repmat([QDiagVal;RDiagVal],1,N);
 par(1:7,end) = [100;100;100;10;10;10;0.1]; % terminal penlty
-par(8,:) = 2; % barrier parameter
-par(9,:) = 0.01; % parameter of the KS function
-par(10,:) = 1000; % magnifier of the KS function
+par(8,:) = 0.1; % barrier parameter
 
 % Create an OCPSolver object
 ocpSolver = OCPSolver(OCP,nmpcSolver,x0,par);
@@ -124,31 +116,32 @@ ocpSolver = OCPSolver(OCP,nmpcSolver,x0,par);
 
 % 2. init guess by interpolation
 
-% lambdaStart = randn(xDim,1);
-% muStart     = randn(muDim,1);
-% uStart      = uRef;
-% xStart      = x0;
-% lambdaEnd   = zeros(lambdaDim,1);
-% muEnd       = zeros(muDim,1);
-% uEnd        = uRef;
-% xEnd        = xRef;
-% [lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess] = ...
-%     ocpSolver.initFromStartEnd(lambdaStart,muStart,uStart,xStart,...
-%                                lambdaEnd,  muEnd,  uEnd,  xEnd);
+lambdaStart = randn(xDim,1);
+muStart     = randn(muDim,1);
+uStart      = uRef;
+xStart      = x0;
+lambdaEnd   = zeros(lambdaDim,1);
+muEnd       = zeros(muDim,1);
+uEnd        = uRef;
+xEnd        = xRef;
+[lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess] = ...
+    ocpSolver.initFromStartEnd(lambdaStart,muStart,uStart,xStart,...
+                               lambdaEnd,  muEnd,  uEnd,  xEnd);
 % 3. init guess from file
 
-[lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess] = ...
-                        ocpSolver.initFromMatFile('GEN_initData.mat');
+% [lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess] = ...
+%                         ocpSolver.initFromMatFile('GEN_initData.mat');
 
 % Solve the OCP
 [lambda,mu,u,x] = ocpSolver.OCPSolve(lambdaInitGuess,...
                                       muInitGuess,...
                                       uInitGuess,...
                                       xInitGuess,...
-                                      'fsolve');%NMPC_Iter_GaussNewton
+                                      'NMPC_Iter',...
+                                      40);
 plot(x([2 3],:).');
 figure(2);
-plot(u.');
+plot(u(1,:).');
 figure(3);
 plot(x(1,:).');
 

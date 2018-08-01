@@ -17,8 +17,6 @@ u          = data.u;
 x          = data.x;
 par        = data.par;
 LAMBDA     = data.LAMBDA;
-isMEnabled = data.isMEnabled;
-discretizationMethod = data.discretizationMethod;
 
 % split into DoP pieces
 sizeSeg     = N/DoP;
@@ -38,9 +36,7 @@ if reGen
                       uSplit,...
                       xSplit,...
                       pSplit,...
-                      LAMBDASplit,...
-                      coder.Constant(discretizationMethod),...
-                      coder.Constant(isMEnabled)};
+                      LAMBDASplit};
     NMPC_Iter_CodeGen('dll','C',args_NMPC_Iter);
     clear mex
     copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.dll');

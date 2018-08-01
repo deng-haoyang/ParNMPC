@@ -1,8 +1,6 @@
 %% NMPC_Iter
 DoP = 4; % degree of parallism: 1 = in serial, otherwise in parallel
 %% 
-addpath('../ParNMPC');
-addpath('./funcgen/')
 data       = coder.load('GEN_initData.mat');
 lambdaDim  = data.lambdaDim;
 muDim      = data.muDim;
@@ -17,8 +15,6 @@ u          = data.u;
 x          = data.x;
 par        = data.par;
 LAMBDA     = data.LAMBDA;
-isMEnabled = data.isMEnabled;
-discretizationMethod = data.discretizationMethod;
 
 % split into DoP pieces
 sizeSeg     = N/DoP;
@@ -38,10 +34,8 @@ if reGen
                       uSplit,...
                       xSplit,...
                       pSplit,...
-                      LAMBDASplit,...
-                      coder.Constant(discretizationMethod),...
-                      coder.Constant(isMEnabled)};
-    NMPC_Iter_CodeGen('dll','C',args_NMPC_Iter);
+                      LAMBDASplit};
+    NMPC_Iter_CodeGen('mex','C',args_NMPC_Iter);
     clear mex
     copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.dll');
 end

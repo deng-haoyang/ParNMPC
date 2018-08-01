@@ -20,9 +20,7 @@ mu         = initData.mu;
 u          = initData.u;
 x          = initData.x;
 LAMBDA     = initData.LAMBDA;
-isMEnabled = initData.isMEnabled;
 
-discretizationMethod = initData.discretizationMethod;
 % reshape initial guess
 sizeSeg     = N/DoP;
 lambdaSplit = reshape(lambda,lambdaDim,sizeSeg,DoP);
@@ -68,9 +66,7 @@ for step = 1:simuSteps %simulation steps
                                   uSplit,...
                                   xSplit,...
                                   pSplit,...
-                                  LAMBDASplit,...
-                                  discretizationMethod,...
-                                  isMEnabled);
+                                  LAMBDASplit);
         RTITime = RTITime + timeElapsed;
         if error<tolerance
             break;

@@ -54,4 +54,4 @@ This section shows how to do the closed-loop simulation in Simulink using MATLAB
 5. Open `Simu_Simulink.slx` and run. `Simu_Simulink.slx` calls the generated NMPC controller function from the DLL file.
 
 ## Version
-Version 1806-1
+Version 1808-1

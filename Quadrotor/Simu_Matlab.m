@@ -1,6 +1,6 @@
 %% For closed-loop simulation or code generation
 function Simu_Matlab
-DoP        = 40; % degree of parallism: 1 = in serial, otherwise in parallel
+DoP        = 4; % degree of parallism: 1 = in serial, otherwise in parallel
 simuLength = 10;
 Ts         = 0.01; % sampling interval
 
@@ -20,8 +20,7 @@ mu         = initData.mu;
 u          = initData.u;
 x          = initData.x;
 LAMBDA     = initData.LAMBDA;
-isMEnabled = initData.isMEnabled;
-discretizationMethod = initData.discretizationMethod;
+
 % reshape initial guess
 sizeSeg     = N/DoP;
 lambdaSplit = reshape(lambda,lambdaDim,sizeSeg,DoP);
@@ -29,7 +28,7 @@ muSplit     = reshape(mu,muDim,sizeSeg,DoP);
 uSplit      = reshape(u,uDim,sizeSeg,DoP);
 xSplit      = reshape(x,xDim,sizeSeg,DoP);
 pSplit      = reshape(par,pDim,sizeSeg,DoP);
-LAMBDASplit  = reshape(LAMBDA,xDim,xDim,sizeSeg,DoP);
+LAMBDASplit = reshape(LAMBDA,xDim,xDim,sizeSeg,DoP);
 
 % define record variables
 rec.x       = zeros(simuSteps+1,xDim);
@@ -41,7 +40,7 @@ rec.cost    = zeros(simuSteps,1);
 rec.t       = zeros(simuSteps,1);
 rec.cpuTime = zeros(simuSteps,1);
 %% Simulation
-MaxIterNum = 3;
+MaxIterNum = 15;
 tolerance  = 5e-3;
 
 % init
@@ -67,10 +66,8 @@ for step = 1:simuSteps %simulation steps
                                   uSplit,...
                                   xSplit,...
                                   pSplit,...
-                                  LAMBDASplit,...
-                                  discretizationMethod,...
-                                  isMEnabled);
-                                      
+                                  LAMBDASplit);
+
         RTITime = RTITime + timeElapsed;
         if error<tolerance
             break;
@@ -84,15 +81,16 @@ for step = 1:simuSteps %simulation steps
     % System simulation by the 4th-order Explicit Runge-Kutta Method
     pSimVal = zeros(0,1);
     x0 = SIM_Plant_RK4(uOpt(1:4,1),x0,pSimVal,Ts);
-
+%     x0([2;4;6]) = x0([2;4;6]) + randn(3,1)*0.01;
     % Update parameters
-    if step >= 500 && step <= 515
-        pSplit(1,:,:) = (step-500)*0.1; % X ref
-        pSplit(2,:,:) = (step-500)*0.1; % Y ref
-        pSplit(3,:,:) = (step-500)*0.1; % Z ref
-    end
-    if step >= 400 && step <= 415 % prediction horizon to 2 s
-        pSplit(5,:,:) = (step-400)*0.1 + 0.5;
+    if step >= 300 && step <= 305
+        pSplit(1,:,:) =  pSplit(1,:,:) + 0.1; % X ref
+        pSplit(2,:,:) =  pSplit(2,:,:) - 0.1; % Y ref
+        pSplit(3,:,:) =  pSplit(3,:,:) + 0.1; % Z ref
+    elseif step >= 600 && step <= 610
+        pSplit(1,:,:) = pSplit(1,:,:)  - 0.1; % X ref
+        pSplit(2,:,:) = pSplit(2,:,:)  + 0.1; % Y ref
+        pSplit(3,:,:) = pSplit(3,:,:)  - 0.1; % Z ref
     end
 
     % Record data

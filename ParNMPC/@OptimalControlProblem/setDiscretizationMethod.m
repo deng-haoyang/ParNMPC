@@ -8,4 +8,7 @@ switch method
     otherwise
     	OCP.discretizationMethod = 'Euler';
 end
+global discretizationMethod
+discretizationMethod = OCP.discretizationMethod;
+
 end

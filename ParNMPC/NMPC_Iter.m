@@ -1,6 +1,11 @@
-function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,u,x,p,LAMBDA,discretizationMethod,isMEnabled) %#codegen
+function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,u,x,p,LAMBDA) %#codegen
     timerRTIStart = Timer();
     
+    % global variables
+    global discretizationMethod isMEnabled ...
+           uMin uMax xMin xMax GMax GMin ...
+           veryBigNum
+           
     [xDim,sizeSeg,DoP] = size(x);
     lambdaDim = xDim;
     [muDim,sizeSeg,DoP] = size(mu);
@@ -13,7 +18,23 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
         coder.cinclude('OCP_F_Fu_Fx.h');
     end
     LAMBDA_N    = zeros(xDim,xDim);
-
+    
+    % backup 
+    lambda_k = lambda;
+    mu_k = mu;
+    u_k = u;
+    x_k = x;
+    
+    % line search parameters
+    stepSizeUMax    = ones(DoP,1);
+    stepSizeUMin    = ones(DoP,1);
+    stepSizeXMax    = ones(DoP,1);
+    stepSizeXMin    = ones(DoP,1);
+    [GDim,unused]   = size(GMax);
+    stepSizeGMax    = ones(DoP,1);
+    stepSizeGMin    = ones(DoP,1);
+    
+    
     % local variables
     lambdaNext    = zeros(lambdaDim,sizeSeg,DoP);
     xPrev         = zeros(xDim,sizeSeg,DoP);
@@ -40,7 +61,8 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
         lambdaNext(:,sizeSeg,i-1) = lambda(:,1,i);
     end
     %% V(:,index_inside_sig_j,which_sigment_i)
-    parfor (i=1:1:DoP,numThreads)
+%     parfor (i=1:1:DoP,numThreads)
+    for i=1:1:DoP
         lambda_i = lambda(:,:,i);
         mu_i = mu(:,:,i);
         u_i = u(:,:,i);
@@ -70,9 +92,9 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
             u_j_i   = u_i(:,j);
             x_j_i   = x_i(:,j);
             p_j_i   = p_i(:,j);
-            % Jacobian Evaluation
-            [L_j_i,Lu_j_i,Lx_j_i] = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i);
             
+            % Jacobian Evaluation
+            [L_j_i,LBarrier_j_i,Lu_j_i,Lx_j_i] = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i);
             
             C_i(:,j) = zeros(muDim,1);
             Cu_j_i   = zeros(muDim,uDim);
@@ -81,7 +103,7 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
                 [C_i(:,j),Cu_j_i,Cx_j_i] = OCP_C_Cu_Cx(u_j_i,x_j_i,p_j_i);
             end
             [F_j_i,Fu_j_i,Fx_j_i] = F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
-
+            
             Aux_j_i   = OCP_Aux(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i);
             Axx_j_i   = OCP_Axx(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i);
             Auu_j_i   = OCP_Auu(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i);
@@ -105,8 +127,6 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
                 lambdaEq_i(:,j) = lambdaEq_i(:,j) + Cx_j_i.'*mu_j_i;
             end
 
-    
-    
             if j < sizeSeg
                 LAMBDA_i(:,:,j) = LAMBDA_i(:,:,j+1);
             end
@@ -216,7 +236,6 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
         mu(:,:,i)     = mu_i;
         u(:,:,i)      = u_i;
         x(:,:,i)      = x_i;
-
     end
     %% Step 3: Forward correction due to the approximation of x
     for i = 1:1:DoP
@@ -239,7 +258,21 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
         lambda_i = lambda(:,:,i);
         mu_i = mu(:,:,i);
         u_i = u(:,:,i);
+        x_i = x(:,:,i);
+        p_i = p(:,:,i);
         dx_i = dx(:,:,i);
+        
+        % line search variables
+        u_k_i = u_k(:,:,i);
+        x_k_i = x_k(:,:,i);
+        stepSizeUMax_i = zeros(uDim,sizeSeg);
+        stepSizeUMin_i = zeros(uDim,sizeSeg);
+        stepSizeXMax_i = zeros(xDim,sizeSeg);
+        stepSizeXMin_i = zeros(xDim,sizeSeg);
+        stepSizeGMax_i = zeros(GDim,sizeSeg);
+        stepSizeGMin_i = zeros(GDim,sizeSeg);
+        
+        
         dlambda_i = dlambda(:,:,i);
         p_muu_F_i = p_muu_F(:,:,:,i);
         LAMBDA_i = LAMBDA(:,:,:,i);
@@ -255,6 +288,99 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
         lambda(:,:,i) = lambda_i;
         mu(:,:,i)     = mu_i;
         u(:,:,i)      = u_i;
+        %% Line Search for primal feasibility
+        % Line search of u for primal feasibility
+        du_i = u_i - u_k_i;
+        % uMax
+        if ~all(uMax == veryBigNum)
+            for j = 1:sizeSeg
+                stepSizeUMax_i(:,j) = (1 - 0.005).*((uMax - u_k_i(:,j))./(du_i(:,j)));
+            end
+            stepSizeUMax_i(stepSizeUMax_i>1 | stepSizeUMax_i<0) = 1;
+            stepSizeMaxUMax_i = min(stepSizeUMax_i(:));
+            if isempty(stepSizeMaxUMax_i)
+                stepSizeMaxUMax_i = 1;
+            end
+            stepSizeUMax(i,1) = stepSizeMaxUMax_i;
+        end
+        % uMin
+        if ~all(uMin == -veryBigNum)
+            for j = 1:sizeSeg
+                stepSizeUMin_i(:,j) = (0.005 - 1).*((u_k_i(:,j) - uMin)./(du_i(:,j)));
+            end
+            stepSizeUMin_i(stepSizeUMin_i>1 | stepSizeUMin_i<0) = 1;
+            stepSizeMaxUMin_i = min(stepSizeUMin_i(:));
+            if isempty(stepSizeMaxUMin_i)
+                stepSizeMaxUMin_i = 1;
+            end
+            stepSizeUMin(i,1) = stepSizeMaxUMin_i;
+        end
+        % Line search of x for primal feasibility
+        dx_i = x_i - x_k_i;
+        % xMax
+        if ~all(xMax == veryBigNum)
+            for j = 1:sizeSeg
+                stepSizeXMax_i(:,j) = (1 - 0.005).*((xMax - x_k_i(:,j))./(dx_i(:,j)));
+            end
+            stepSizeXMax_i(stepSizeXMax_i>1 | stepSizeXMax_i<0) = 1;
+            stepSizeMaxXMax_i = min(stepSizeXMax_i(:));
+            if isempty(stepSizeMaxXMax_i)
+                stepSizeMaxXMax_i = 1;
+            end
+            stepSizeXMax(i,1) = stepSizeMaxXMax_i;
+        end
+        % xMin
+        if ~all(xMin == -veryBigNum)
+            for j = 1:sizeSeg
+                stepSizeXMin_i(:,j) = (0.005 - 1).*((x_k_i(:,j) - xMin)./(dx_i(:,j)));
+            end
+            stepSizeXMin_i(stepSizeXMin_i>1 | stepSizeXMin_i<0) = 1;
+            stepSizeMaxXMin_i = min(stepSizeXMin_i(:));
+            if isempty(stepSizeMaxXMin_i)
+                stepSizeMaxXMin_i = 1;
+            end
+            stepSizeXMin(i,1) = stepSizeMaxXMin_i;
+        end
+        % Line search of G for primal feasibility
+        if GDim ~= 0
+            G_i   = OCP_GEN_G(u_i,x_i,p_i);
+            G_k_i = OCP_GEN_G(u_k_i,x_k_i,p_i);
+            dG_i  = G_i - G_k_i;
+            % GMax
+            if ~all(GMax == veryBigNum)
+                for j=1:sizeSeg
+                    stepSizeGMax_i(:,j) = (1 - 0.005).*((GMax - G_k_i(:,j))./(dG_i(:,j)));
+                end
+                stepSizeGMax_i(stepSizeGMax_i>1 | stepSizeGMax_i<0) = 1;
+                stepSizeMaxGMax_i = min(stepSizeGMax_i(:));
+                if isempty(stepSizeMaxGMax_i)
+                    stepSizeMaxGMax_i = 1;
+                end
+                stepSizeGMax(i,1) = stepSizeMaxGMax_i;
+            end
+            % GMin
+            if ~all(GMin == -veryBigNum)
+                for j=1:sizeSeg
+                    stepSizeGMin_i(:,j) = (0.005 - 1).*((G_k_i(:,j) - GMin)./(dG_i(:,j)));
+                end
+                stepSizeGMin_i(stepSizeGMin_i>1 | stepSizeGMin_i<0) = 1;
+                stepSizeMaxGMin_i = min(stepSizeGMin_i(:));
+                if isempty(stepSizeMaxGMin_i)
+                    stepSizeMaxGMin_i = 1;
+                end
+                stepSizeGMin(i,1) = stepSizeMaxGMin_i;
+            end
+        end
+    end
+    %% Line Search to Guarantee Primal Stability
+    stepSize = min([stepSizeUMax;stepSizeUMin;...
+                    stepSizeXMax;stepSizeXMin;...
+                    stepSizeGMax;stepSizeGMin]);
+    if stepSize ~= 1
+        lambda = (1-stepSize)*lambda_k + stepSize* lambda;
+        mu     = (1-stepSize)*mu_k     + stepSize* mu;
+        u      = (1-stepSize)*u_k      + stepSize* u;
+        x      = (1-stepSize)*x_k      + stepSize* x;
     end
     %% Update Coupling Variables
     for i=2:1:DoP
@@ -304,14 +430,13 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
             if j < sizeSeg
                 lambdaNext_i(:,j) = lambda_i(:,j+1);
             end
-            [L_i(:,j),Lu_j_i,Lx_j_i] = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i);
+            [L_i(:,j),LBarrier_j_i,Lu_j_i,Lx_j_i] = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i);
             C_i(:,j) = zeros(muDim,1);
             Cu_j_i   = zeros(muDim,uDim);
             Cx_j_i   = zeros(muDim,xDim);
             if muDim ~=0
                 [C_i(:,j),Cu_j_i,Cx_j_i] = OCP_C_Cu_Cx(u_j_i,x_j_i,p_j_i);
             end
-            
             
             [F_j_i,Fu_j_i,Fx_j_i] = F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
 
