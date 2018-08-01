@@ -1,4 +1,10 @@
-# ParNMPC
+# ParNMPC Version 1808-1
+
+### New Features in Version 1808-1:
+* Built-in support for inequality constraints. It becomes much reliable than the last version.
+* Support for `fmincon` to solve the very first OCP.
+
+
 
 Homepage: https://deng-haoyang.github.io/ParNMPC/
 
@@ -6,7 +12,7 @@ Homepage: https://deng-haoyang.github.io/ParNMPC/
 **`ParNMPC`** can utilize multiple CPU cores to solve the optimal control problem, and thus can be very fast (the computation time is usually in the range of us). 
 The purpose of **`ParNMPC`** is to provide an easy-to-use environment for NMPC problem formulation, closed-loop simulation and deployment.
 
-### Features
+### Highlights
 * Symbolic problem representation
 * Automatic parallel C/C++ code generation with OpenMP
 * Fast rate of convergence (up to be superlinear)
@@ -52,6 +58,3 @@ This section shows how to do the closed-loop simulation in Simulink using MATLAB
 4. Open `Simu_Simulink_Setup.m` and run. By doing this, the NMPC controller is generated into C codes and compilied into a DLL file.
 
 5. Open `Simu_Simulink.slx` and run. `Simu_Simulink.slx` calls the generated NMPC controller function from the DLL file.
-
-## Version
-Version 1808-1
