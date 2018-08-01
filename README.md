@@ -5,7 +5,7 @@
 * Support for `fmincon` to solve the very first OCP.
 
 
-
+## Introduction
 Homepage: https://deng-haoyang.github.io/ParNMPC/
 
 **`ParNMPC`** is a MATLAB real-time optimization toolkit for nonlinear model predictive control (NMPC).
