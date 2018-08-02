@@ -3,17 +3,17 @@ addpath('../ParNMPC/')
 %% Formulate an OCP using Class OptimalControlProblem
 
 % Create an OptimalControlProblem object
-OCP = OptimalControlProblem(1,... % dim of equality constraints
-                            4,... % dim of inputs 
+OCP = OptimalControlProblem(2,... % dim of equality constraints
+                            6,... % dim of inputs 
                             4,... % dim of states 
-                            5,... % dim of parameters
+                            1,... % dim of parameters
                             3,... % T: prediction horizon
-                            64);  % N: num of discritization grids
+                            48);  % N: num of discritization grids
 % Give names to x, u, p
 [y,z,v,theta] = ...
     OCP.setStateName({'y','z','v','theta'});
-[F, s, slackC1,slackslackC1] = ...
-    OCP.setInputName({'F','s', 'slackC1','slackslackC1'});
+[F, s, slackC1,slackslackC1,slackC2,slackslackC2] = ...
+    OCP.setInputName({'F','s', 'slackC1','slackslackC1','slackC2','slackslackC2'});
 
 % Set the dynamic function f
 m = 1;
@@ -26,30 +26,33 @@ OCP.setf(f);
 OCP.setDiscretizationMethod('Euler');
 
 % Set the equality constraint function C
-C = [y^2 + z^2 - slackC1];
+C = [y^2    + z^2     - slackC1;...
+    (y-2)^2 + (z-2)^2 - slackC2];
 OCP.setC(C);
 
 % Set the cost function L
-xRef = [2;1;0;0];
+xRef = [3.5;2;0;0];
 Q = diag([10,10,0.1,0.1]);
 L =  (OCP.x-xRef)'*Q*(OCP.x-xRef)...
-    + 0.01*F^2 + 0.01*s^2 ...
-    + 10000*slackslackC1^2;
+    + 0.1*F^2 + 0.1*s^2 ...
+    + 1000*(slackslackC1^2 + slackslackC2^2);
 OCP.setL(L);
 
 % Set the bound constraints
-uMax = [ 5;  1;  Inf; Inf];
-uMin = [-5; -1; -Inf; 0];
+uMax = [ 5;  1;  Inf; Inf;  Inf; Inf];
+uMin = [-5; -1; -Inf; 0;   -Inf; 0];
 uBarrierPara = ones(OCP.dim.u,1)*OCP.p(1);
 OCP.setUpperBound('u',uMax,uBarrierPara);
 OCP.setLowerBound('u',uMin,uBarrierPara);
 
 % Set the linear constraints G(u,x,p)
 G = [slackC1 - slackslackC1;...
-     slackC1 + slackslackC1];
-GMax = [ Inf; Inf];
-GMin = [-Inf;  1];
-GBarrierPara = ones(2,1)*OCP.p(1);
+     slackC1 + slackslackC1;...
+     slackC2 - slackslackC2;...
+     slackC2 + slackslackC2];
+GMax = [ Inf; Inf; Inf; Inf];
+GMin = [-Inf;  1; -Inf;  1];
+GBarrierPara = ones(4,1)*OCP.p(1);
 OCP.setG(G);
 OCP.setUpperBound('G',GMax,GBarrierPara);
 OCP.setLowerBound('G',GMin,GBarrierPara);
@@ -100,11 +103,11 @@ ocpSolver = OCPSolver(OCP,nmpcSolver,x0,par);
 % 2. init guess by interpolation
 lambdaStart = rand(xDim,1);
 muStart     = rand(muDim,1);
-uStart      = [0;0;3;1];
+uStart      = [0;0;3;1;3;1];
 xStart      = x0;
 lambdaEnd   = zeros(lambdaDim,1);
 muEnd       = zeros(muDim,1);
-uEnd        = [0;0;3;1];
+uEnd        = [0;0;3;1;3;1];
 xEnd        = xRef;
 [lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess] = ...
     ocpSolver.initFromStartEnd(lambdaStart,muStart,uStart,xStart,...
@@ -119,11 +122,13 @@ xEnd        = xRef;
                                      uInitGuess,...
                                      xInitGuess,...
                                      'NMPC_Iter',...
-                                     100);
+                                     150);
 
 plot(x(1,:).',x(2,:).');
 hold on
 circle(0,0,sqrt(1));
+hold on
+circle(2,2,sqrt(1));
 % Get the dependent variable LAMBDA
 LAMBDA = ocpSolver.getLAMBDA(x0,lambda,mu,u,x,par);
 
