@@ -351,23 +351,13 @@
             "title": "Step 2. Speed up the closed-loop simulation in Matlab using mex"
         }, 
         {
-            "location": "/exp_single_pendulum/", 
-            "text": "Single Inverted Pendulum on a Cart\n\n\nComing soon.", 
-            "title": "Experiment: Single Inverted Pendulum on a Cart"
-        }, 
-        {
-            "location": "/exp_single_pendulum/#single-inverted-pendulum-on-a-cart", 
-            "text": "Coming soon.", 
-            "title": "Single Inverted Pendulum on a Cart"
-        }, 
-        {
             "location": "/exp_heli/", 
-            "text": "Helicopter\n\n\nComing soon.\n\n\nQuanser: 3 DoF Helicopter", 
+            "text": "Helicopter\n\n\nQuanser: 3 DoF Helicopter", 
             "title": "Experiment: Helicopter"
         }, 
         {
             "location": "/exp_heli/#helicopter", 
-            "text": "Coming soon.  Quanser: 3 DoF Helicopter", 
+            "text": "Quanser: 3 DoF Helicopter", 
             "title": "Helicopter"
         }, 
         {
