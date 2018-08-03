@@ -574,10 +574,10 @@ ICRA, Shanghai, China, 2011, pp. 763–770.</p>
 
 <ul>
 <li>
-<p>The state vector of the quadrotor is <span><span class="MathJax_Preview">x =  [X,\dot{X}  , Y ,\dot{Y} ,Z  ,\dot{Z} ,\gamma ,\beta  ,\alpha ]^{T}\in\mathbb{R}^{9}</span><script type="math/tex">x =  [X,\dot{X}  , Y ,\dot{Y} ,Z  ,\dot{Z} ,\gamma ,\beta  ,\alpha ]^{T}\in\mathbb{R}^{9}</script></span>, where <span><span class="MathJax_Preview">(X,Y,Z)</span><script type="math/tex">(X,Y,Z)</script></span> and <span><span class="MathJax_Preview">(\gamma,\beta,\alpha)</span><script type="math/tex">(\gamma,\beta,\alpha)</script></span> are the position and angles of the quadrotor, respectively. </p>
+<p>The state vector of the quadrotor is <span><span class="MathJax_Preview">x =  [X,\dot{X}  , Y ,\dot{Y} ,Z  ,\dot{Z} ,\gamma ,\beta  ,\alpha ]^{T}\in\mathbb{R}^{9}</span><script type="math/tex">x =  [X,\dot{X}  , Y ,\dot{Y} ,Z  ,\dot{Z} ,\gamma ,\beta  ,\alpha ]^{T}\in\mathbb{R}^{9}</script></span>, where <span><span class="MathJax_Preview">(X,Y,Z)</span><script type="math/tex">(X,Y,Z)</script></span> and <span><span class="MathJax_Preview">(\gamma,\beta,\alpha)</span><script type="math/tex">(\gamma,\beta,\alpha)</script></span> are the position and angles of the quadrotor, respectively. The state is bounded by <span><span class="MathJax_Preview">[-1,-1,-1]^T \leq [dX,dY,dZ]^T \leq [1,1,1]^T</span><script type="math/tex">[-1,-1,-1]^T \leq [dX,dY,dZ]^T \leq [1,1,1]^T</script></span>.</p>
 </li>
 <li>
-<p>The input vector is <span><span class="MathJax_Preview">u=[a,\omega_{X},\omega_{Y},\omega_{Z}]^T</span><script type="math/tex">u=[a,\omega_{X},\omega_{Y},\omega_{Z}]^T</script></span>, where <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span> represents the thrust and <span><span class="MathJax_Preview">(\omega_{X},\omega_{Y},\omega_{Z})</span><script type="math/tex">(\omega_{X},\omega_{Y},\omega_{Z})</script></span> the rotational rates. The control input is bounded by <span><span class="MathJax_Preview">[0,-1,-1,-1]^T \leq u \leq [11,1,1,1]^T</span><script type="math/tex">[0,-1,-1,-1]^T \leq u \leq [11,1,1,1]^T</script></span>.  The state is bounded by <span><span class="MathJax_Preview">[-1,-1,-1]^T \leq [dX,dY,dZ]^T \leq [1,1,1]^T</span><script type="math/tex">[-1,-1,-1]^T \leq [dX,dY,dZ]^T \leq [1,1,1]^T</script></span>.</p>
+<p>The input vector is <span><span class="MathJax_Preview">u=[a,\omega_{X},\omega_{Y},\omega_{Z}]^T</span><script type="math/tex">u=[a,\omega_{X},\omega_{Y},\omega_{Z}]^T</script></span>, where <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span> represents the thrust and <span><span class="MathJax_Preview">(\omega_{X},\omega_{Y},\omega_{Z})</span><script type="math/tex">(\omega_{X},\omega_{Y},\omega_{Z})</script></span> the rotational rates. The control input is bounded by <span><span class="MathJax_Preview">[0,-1,-1,-1]^T \leq u \leq [11,1,1,1]^T</span><script type="math/tex">[0,-1,-1,-1]^T \leq u \leq [11,1,1,1]^T</script></span>. </p>
 </li>
 <li>
 <p>The dynamics of the quadrotor are given by the following equations:</p>
@@ -601,7 +601,7 @@ ICRA, Shanghai, China, 2011, pp. 763–770.</p>
 &\dot{\alpha} = \omega_{X}\cos\gamma\tan\beta + \omega_{Y}\sin\gamma\tan\beta+\omega_{Z}
 \end{align}</script>
 </div>
-<p>The task is to use NMPC to control the quadrotor to track the given position reference under a variable prediction horizon.</p>
+<p>The task is to control the quadrotor to track a given position reference under a variable prediction horizon.</p>
 <h2 id="ocp-in-parnmpc">OCP in <strong><code class="codehilite">ParNMPC</code></strong></h2>
 <p>The state constraints are softened by introducing slack variables <span><span class="MathJax_Preview">sdX</span><script type="math/tex">sdX</script></span>, <span><span class="MathJax_Preview">sdY</span><script type="math/tex">sdY</script></span>, and <span><span class="MathJax_Preview">sdZ</span><script type="math/tex">sdZ</script></span>.</p>
 <p>The underlying OCP defined in <strong><code class="codehilite">ParNMPC</code></strong> is formulated as:</p>

@@ -366,9 +366,72 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Experiment: Helicopter
+      </label>
+    
     <a href="./" title="Experiment: Helicopter" class="md-nav__link md-nav__link--active">
       Experiment: Helicopter
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem-description" title="Problem Description" class="md-nav__link">
+    Problem Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ocp-in-parnmpc" title="OCP in ParNMPC" class="md-nav__link">
+    OCP in ParNMPC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#closed-loop-control-using-parnmpc" title="Closed-loop control using ParNMPC" class="md-nav__link">
+    Closed-loop control using ParNMPC
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-nmpc-problem-formulation" title="Step 1. NMPC problem formulation" class="md-nav__link">
+    Step 1. NMPC problem formulation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-code-generation-and-deployment-in-simulink" title="Step 2. Code generation and deployment in Simulink" class="md-nav__link">
+    Step 2. Code generation and deployment in Simulink
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -419,6 +482,56 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem-description" title="Problem Description" class="md-nav__link">
+    Problem Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ocp-in-parnmpc" title="OCP in ParNMPC" class="md-nav__link">
+    OCP in ParNMPC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#closed-loop-control-using-parnmpc" title="Closed-loop control using ParNMPC" class="md-nav__link">
+    Closed-loop control using ParNMPC
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-nmpc-problem-formulation" title="Step 1. NMPC problem formulation" class="md-nav__link">
+    Step 1. NMPC problem formulation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-code-generation-and-deployment-in-simulink" title="Step 2. Code generation and deployment in Simulink" class="md-nav__link">
+    Step 2. Code generation and deployment in Simulink
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -431,16 +544,143 @@
                 
                 
                 <h1 id="helicopter">Helicopter</h1>
-<p><a href="https://www.quanser.com/products/3-dof-helicopter/">Quanser: 3 DoF Helicopter</a></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code class="codehilite">Helicopter/</code></p>
+</div>
+<div class="admonition quote">
+<p class="admonition-title">Where you can find this helicopter</p>
+<p>Quanser website. <a href="https://www.quanser.com/products/3-dof-helicopter/">3 DoF Helicopter</a>. <br>
+Model:
+Benchmark model of Quanser’s 3 DOF Helicopter - 2018 </p>
+</div>
+<h2 id="problem-description">Problem Description</h2>
 <p align="center">
 <img src="../heli.png" width="300px" >
+<img src="../heli_comment.png" width="300px" >
 </p>
 
+<ul>
+<li>
+<p>The state vector of the helicopter is <span><span class="MathJax_Preview">x =  [q,\dot{q} ]^{T}\in\mathbb{R}^{6}</span><script type="math/tex">x =  [q,\dot{q} ]^{T}\in\mathbb{R}^{6}</script></span>, where <span><span class="MathJax_Preview">q = [\epsilon,\rho,\lambda]^T</span><script type="math/tex">q = [\epsilon,\rho,\lambda]^T</script></span> is the vector of the elevation angle, pitch angle, and yaw angle. The pitch angle <span><span class="MathJax_Preview">\rho</span><script type="math/tex">\rho</script></span> is set to be <span><span class="MathJax_Preview">|\rho|\leq 1</span><script type="math/tex">|\rho|\leq 1</script></span>.</p>
+</li>
+<li>
+<p>The input vector is <span><span class="MathJax_Preview">u=[V_f,V_b]^T</span><script type="math/tex">u=[V_f,V_b]^T</script></span>, where <span><span class="MathJax_Preview">V_f</span><script type="math/tex">V_f</script></span> is the voltage on the front motor and  <span><span class="MathJax_Preview">V_b</span><script type="math/tex">V_b</script></span> is the voltage on the back motor. The control input is bounded by <span><span class="MathJax_Preview">[0,0]^T \leq u \leq [20,20]^T</span><script type="math/tex">[0,0]^T \leq u \leq [20,20]^T</script></span>.</p>
+</li>
+<li>
+<p>The dynamics of the helicopter are given by the following equations:</p>
+</li>
+</ul>
+<div>
+<div class="MathJax_Preview">\begin{align*}
+\ddot{q}
+ =
+&amp;-\left[
+\begin{array}{c}
+\sin(\epsilon)(a_{\epsilon_1}+a_{\epsilon_2}\cos(\rho)) \\ 
+-a_{\rho} \cos(\epsilon)\sin(\rho)\\ 
+0
+\end{array} 
+\right]
+-
+\left[
+\begin{array}{ccc}
+C_\epsilon &amp;  &amp;  \\ 
+&amp;  C_\rho&amp;  \\ 
+&amp;  &amp; C_\lambda
+\end{array} 
+\right]\dot{q}\\
+&amp;+K_f
+\left[
+\begin{array}{cc}
+b_{\epsilon}\cos(\rho)&amp; 0 \\ 
+0 &amp;  b_{\rho}\\ 
+b_{\lambda}\cos(\epsilon)\sin(\rho)&amp; 0
+\end{array} 
+\right]u
+\end{align*}</div>
+<script type="math/tex; mode=display">\begin{align*}
+\ddot{q}
+ =
+&-\left[
+\begin{array}{c}
+\sin(\epsilon)(a_{\epsilon_1}+a_{\epsilon_2}\cos(\rho)) \\ 
+-a_{\rho} \cos(\epsilon)\sin(\rho)\\ 
+0
+\end{array} 
+\right]
+-
+\left[
+\begin{array}{ccc}
+C_\epsilon &  &  \\ 
+&  C_\rho&  \\ 
+&  & C_\lambda
+\end{array} 
+\right]\dot{q}\\
+&+K_f
+\left[
+\begin{array}{cc}
+b_{\epsilon}\cos(\rho)& 0 \\ 
+0 &  b_{\rho}\\ 
+b_{\lambda}\cos(\epsilon)\sin(\rho)& 0
+\end{array} 
+\right]u
+\end{align*}</script>
+</div>
+<p>The task is to control the helicopter to track a given yaw reference.</p>
+<h2 id="ocp-in-parnmpc">OCP in <strong><code class="codehilite">ParNMPC</code></strong></h2>
+<p>The state constraints are softened by introducing a slack variable <span><span class="MathJax_Preview">s\rho</span><script type="math/tex">s\rho</script></span>.</p>
+<p>The underlying OCP defined in <strong><code class="codehilite">ParNMPC</code></strong> is formulated as:</p>
+<ul>
+<li>State: <span><span class="MathJax_Preview">x=[\epsilon,\rho,\lambda,\dot\epsilon,\dot\rho,\dot\lambda]^T</span><script type="math/tex">x=[\epsilon,\rho,\lambda,\dot\epsilon,\dot\rho,\dot\lambda]^T</script></span>.</li>
+<li>Input: <span><span class="MathJax_Preview">u=[V_f,V_b,s\rho]^T</span><script type="math/tex">u=[V_f,V_b,s\rho]^T</script></span> with <span><span class="MathJax_Preview">u_{max}=[20,20,\infty]^T</span><script type="math/tex">u_{max}=[20,20,\infty]^T</script></span> and <span><span class="MathJax_Preview">u_{min} = [0,0,0]^T</span><script type="math/tex">u_{min} = [0,0,0]^T</script></span>.</li>
+<li>Parameter: <span><span class="MathJax_Preview">p=[Q_d,R_d,x_{ref},\gamma]^T</span><script type="math/tex">p=[Q_d,R_d,x_{ref},\gamma]^T</script></span>, where <span><span class="MathJax_Preview">Q_d</span><script type="math/tex">Q_d</script></span> and <span><span class="MathJax_Preview">R_d</span><script type="math/tex">R_d</script></span> are tuning parameters, <span><span class="MathJax_Preview">x_{ref}</span><script type="math/tex">x_{ref}</script></span> is the varying reference, and <span><span class="MathJax_Preview">\gamma&gt;0</span><script type="math/tex">\gamma>0</script></span> is the barrier parameter.</li>
+<li>Cost function <span><span class="MathJax_Preview">L(u,x,p) = L_{tracking}(u,x,p) + L_{penalty}(u,x,p)</span><script type="math/tex">L(u,x,p) = L_{tracking}(u,x,p) + L_{penalty}(u,x,p)</script></span>, where <span><span class="MathJax_Preview">L_{tracking}(u,x,p) = \frac{1}{2}\|x-x_{ref}\|_{Q_d}^2+\frac{1}{2}\|u-u_{ref}\|_{R_d}^2</span><script type="math/tex">L_{tracking}(u,x,p) = \frac{1}{2}\|x-x_{ref}\|_{Q_d}^2+\frac{1}{2}\|u-u_{ref}\|_{R_d}^2</script></span> and <span><span class="MathJax_Preview">L_{penalty}(u,x,p)=1000s\rho^2</span><script type="math/tex">L_{penalty}(u,x,p)=1000s\rho^2</script></span> is the penalty function.</li>
+<li>Polytopic function (linear constraint): <span><span class="MathJax_Preview">G = [\rho - s\rho, \rho + s\rho]^T</span><script type="math/tex">G = [\rho - s\rho, \rho + s\rho]^T</script></span> with <span><span class="MathJax_Preview">G_{max}=[1,\infty]^T</span><script type="math/tex">G_{max}=[1,\infty]^T</script></span> and <span><span class="MathJax_Preview">G_{min} = [-\infty,-1]^T</span><script type="math/tex">G_{min} = [-\infty,-1]^T</script></span>.</li>
+<li><span><span class="MathJax_Preview">f(u,x,p)</span><script type="math/tex">f(u,x,p)</script></span> is shown before.</li>
+<li>Prediction horizon <span><span class="MathJax_Preview">T=4</span><script type="math/tex">T=4</script></span> s.</li>
+<li>Number of the discritization grids <span><span class="MathJax_Preview">N=48</span><script type="math/tex">N=48</script></span>.</li>
+<li>Discretization method: Euler.</li>
+</ul>
+<p>Experiment settings:</p>
+<ul>
+<li>CPU: i7-8700K.</li>
+<li>MATLAB R2015b + Microsoft Visual C++ 2015 (C)</li>
+<li>Tolerance: 1e-4.</li>
+<li>DoP: 4.</li>
+<li>Hessian approximation method: Newton.</li>
+</ul>
+<h2 id="closed-loop-control-using-parnmpc">Closed-loop control using <strong><code class="codehilite">ParNMPC</code></strong></h2>
+<h3 id="step-1-nmpc-problem-formulation">Step 1. NMPC problem formulation</h3>
+<p>See <a href="../workflow/#nmpc_formulation">Workflow of ParNMPC &gt; NMPC Problem Formulation</a>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code class="codehilite">Helicopter/NMPC_Problem_Formulation.m</code></p>
+</div>
+<h3 id="step-2-code-generation-and-deployment-in-simulink">Step 2. Code generation and deployment in Simulink</h3>
+<p>See <a href="../workflow/#workflow_deploy_simulink">Workflow of ParNMPC &gt; Code Generation and Deployment &gt; Simulink</a>.</p>
+<ol>
+<li>
+<p>Code generation</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code class="codehilite">Helicopter/Simulink_Setup.m</code></p>
+</div>
+</li>
+<li>
+<p>Deployment</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code class="codehilite">Helicopter/Deploy_Simulink_R2015b.slx</code></p>
+</div>
+<p>Add <code class="codehilite">-openmp</code> to the makefile provided by Quanser.</p>
+</li>
+</ol>
+<p>Experiment results (left: first 15 seconds; right: last 15 seconds):
 <p align="center">
 <img src="../heli_gif1.gif" width="350px" >
 <img src="../heli_gif2.gif" width="350px" >
-</p>
-
+</p></p>
 <p align="center">
 <img src="../heli_res_2.png" width="700px" >
 </p>
