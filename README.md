@@ -3,7 +3,7 @@
 ### New Features in Version 1808-1:
 * Built-in support for inequality constraints. It becomes much reliable than the last version.
 * Support for `fmincon` to solve the very first OCP.
-* Code generation procedure is simplified.
+* Simplified code generation procedure.
 
 ## Introduction
 Homepage: https://deng-haoyang.github.io/ParNMPC/
