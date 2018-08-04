@@ -1,7 +1,7 @@
 function NMPC_Iter_CodeGen(target,targetLang,args)
 % target: 'mex' 'lib' 'dll'
 % targetLang: 'C' 'C++'
-% args: {x0,lambda,mu,u,x,p,LAMBDA,discretizationMethod,isMEnabled}
+% args: {x0,lambda,mu,u,x,p,LAMBDA}
 
 target = lower(target);
 targetLang = upper(targetLang);
@@ -17,7 +17,6 @@ global discretizationMethod isMEnabled ...
 
 cfg = coder.config(target);
 cfg.FilePartitionMethod = 'SingleFile';
-cfg.CustomHeaderCode = '#include "OCP_F_Fu_Fx.h"';
 
 if DoP == 1
     isInParallel = false;
@@ -29,35 +28,7 @@ cfg.EnableOpenMP = isInParallel;
 cfg.TargetLang = targetLang;
 stackUsageMax = lambdaDim*segSize*DoP/360*200000;
 cfg.StackUsageMax = stackUsageMax;
-
-%% Generate C++ for OCP_F_Fu_Fx
-cfg_OCP_F_Fu_Fx = coder.config('lib');
-cfg_OCP_F_Fu_Fx.FilePartitionMethod = 'SingleFile';% single file
-cfg_OCP_F_Fu_Fx.BuildConfiguration = 'Faster Runs';
-cfg_OCP_F_Fu_Fx.TargetLang = targetLang;
-cfg_OCP_F_Fu_Fx.SupportNonFinite = false;
-cfg_OCP_F_Fu_Fx.EnableOpenMP = true;
-cfg_OCP_F_Fu_Fx.GenerateExampleMain = 'DoNotGenerate';
-genArgs_F_Fu_Fx = {zeros(uDim,1),...
-                   zeros(lambdaDim,1),...
-                   zeros(pDim,1),...
-                   coder.Constant(discretizationMethod),...
-                   coder.Constant(isMEnabled)};
-               
-codegen -config cfg_OCP_F_Fu_Fx...
-         OCP_F_Fu_Fx...
-         -args genArgs_F_Fu_Fx...
-         -d codegen/lib/OCP_F_Fu_Fx
 %% Generate C/C++ for NMPC_Iter
-if strcmp(targetLang,'C++')
-    % cpp source
-    cfg.CustomSource = 'OCP_F_Fu_Fx.cpp';
-else
-    cfg.CustomSource = 'OCP_F_Fu_Fx.c';
-end
-
-cfg.CustomInclude = './codegen/lib/OCP_F_Fu_Fx';
-
 globalVariable = {'discretizationMethod',coder.Constant(discretizationMethod),...
                   'isMEnabled',coder.Constant(isMEnabled),...
                   'uMax',coder.Constant(uMax),...

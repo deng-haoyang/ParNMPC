@@ -821,23 +821,39 @@
 </table>
 <h2 id="code-generation-and-deployment">Code Generation and Deployment</h2>
 <h3 id="matlab">MATLAB</h3>
-<p>Here, assume your closed-loop simulation is performed in a m-file, i.e., <code class="codehilite">NMPC_Iter</code> is used to calculate the optimal control input and <code class="codehilite">SIM_Plant_RK4</code> is used to simulate the controlled plant.</p>
+<p>Here, assume your closed-loop simulation is performed in <code class="codehilite">Simu_Matlab.m</code>.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p><code class="codehilite">./Simu_Matlab.m</code></p>
 </div>
 <h4 id="code-generation">Code generation</h4>
-<p>Assume that you have run <code class="codehilite">NMPC_Problem_Formulation.m</code>.
-Next, the code generation process using the MATLAB Coder App for this simulation is shown. </p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code class="codehilite">./Simu_Matlab_Codegen.m</code></p>
+</div>
 <ol>
 <li>
-<p>Open the MATLAB Coder App.</p>
+<p>Declare global variables as constants:
+<div class="codehilite"><pre><span></span><span class="k">global</span> <span class="n">discretizationMethod</span> <span class="n">isMEnabled</span> <span class="c">...</span>
+       <span class="n">uMin</span> <span class="n">uMax</span> <span class="n">xMin</span> <span class="n">xMax</span> <span class="n">GMax</span> <span class="n">GMin</span> <span class="c">...</span>
+       <span class="n">veryBigNum</span>
+
+<span class="n">globalVariable</span> <span class="p">=</span> <span class="p">{</span><span class="s">&#39;discretizationMethod&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">discretizationMethod</span><span class="p">),</span><span class="c">...</span>
+                  <span class="s">&#39;isMEnabled&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">isMEnabled</span><span class="p">),</span><span class="c">...</span>
+                  <span class="s">&#39;uMax&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">uMax</span><span class="p">),</span><span class="c">...</span>
+                  <span class="s">&#39;uMin&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">uMin</span><span class="p">),</span><span class="c">...</span>
+                  <span class="s">&#39;xMax&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">xMax</span><span class="p">),</span><span class="c">...</span>
+                  <span class="s">&#39;xMin&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">xMin</span><span class="p">),</span><span class="c">...</span>
+                  <span class="s">&#39;GMax&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">GMax</span><span class="p">),</span><span class="c">...</span>
+                  <span class="s">&#39;GMin&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">GMin</span><span class="p">),</span><span class="c">...</span>
+                  <span class="s">&#39;veryBigNum&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">veryBigNum</span><span class="p">)};</span>
+</pre></div></p>
 </li>
 <li>
-<p>Select <code class="codehilite">Simu_Matlab.m</code>.</p>
-</li>
-<li>
-<p>Click the <strong>Generate</strong> button, and the C code will be automatically generated to <code class="codehilite">./codegen/lib/Simu_Matlab</code>.</p>
+<p>Generate code using <code class="codehilite">codegen</code>:
+<div class="codehilite"><pre><span></span><span class="n">codegen</span> <span class="o">-</span><span class="n">config</span><span class="p">:</span><span class="n">lib</span> <span class="n">Simu_Matlab</span> <span class="o">-</span><span class="n">globals</span> <span class="n">globalVariable</span> 
+</pre></div>
+C code will be automatically generated to <code class="codehilite">./codegen/lib/Simu_Matlab</code>.</p>
 </li>
 </ol>
 <h4 id="deployment-in-visual-studio">Deployment in Visual Studio</h4>
@@ -855,10 +871,7 @@ Next, the code generation process using the MATLAB Coder App for this simulation
 <p>Add  <code class="codehilite">main.h</code> and <code class="codehilite">main.c</code> in <code class="codehilite">.\codegen\lib\Simu_Matlab\examples</code> to the project.</p>
 </li>
 <li>
-<p>Add  <code class="codehilite">OCP_F_Fu_Fx.h</code> and <code class="codehilite">OCP_F_Fu_Fx.c</code> in <code class="codehilite">.\codegen\lib\OCP_F_Fu_Fx</code> to the project.</p>
-</li>
-<li>
-<p>Add directories <code class="codehilite">.\codegen\lib\Simu_Matlab</code> and <code class="codehilite">.\codegen\lib\OCP_F_Fu_Fx</code> to <strong>Properties &gt; C/C++ &gt; General &gt;  Additional Include Directories</strong>.</p>
+<p>Add directory <code class="codehilite">.\codegen\lib\Simu_Matlab</code> to <strong>Properties &gt; C/C++ &gt; General &gt;  Additional Include Directories</strong>.</p>
 </li>
 <li>
 <p><strong>Properties &gt; C/C++ &gt; Language &gt;  Open MP Support: Yes (/openmp)</strong>.</p>
@@ -892,7 +905,7 @@ Next, the code generation process using the MATLAB Coder App for this simulation
 </pre></div></p>
 </li>
 <li>
-<p>Generate DLL and copy it to the working directory:
+<p>Generate dll (lib or mex) and copy it to the working directory:
 <div class="codehilite"><pre><span></span><span class="n">args_NMPC_Iter</span> <span class="p">=</span> <span class="p">{</span><span class="n">x0</span><span class="p">,</span><span class="c">...</span>
                   <span class="n">lambdaSplit</span><span class="p">,</span><span class="c">...</span>
                   <span class="n">muSplit</span><span class="p">,</span><span class="c">...</span>
@@ -913,7 +926,7 @@ Next, the code generation process using the MATLAB Coder App for this simulation
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This example shows how to call the generated C interface in Simulink using the <code class="codehilite">coder.cevel</code> function within a <code class="codehilite">MATLAB Function</code> block. 
-You can also call the C/C++ interface utilizing S-function.</p>
+You can also call the C/C++ interface using S-function.</p>
 </div>
 <ol>
 <li>
@@ -924,9 +937,8 @@ You can also call the C/C++ interface utilizing S-function.</p>
 <p>Add <code class="codehilite"><span class="cp">#include</span> <span class="cpf">&quot;NMPC_Iter.h&quot;</span><span class="cp"></span></code> to <strong>Insert custom C code in generated: Header file</strong>.</p>
 </li>
 <li>
-<p>Add the following directories to <strong>Additional Build Information: Include directories</strong>:
+<p>Add the following directory to <strong>Additional Build Information: Include directories</strong>:
 <div class="codehilite"><pre><span></span><span class="o">./</span><span class="n">codegen</span><span class="o">/</span><span class="n">dll</span><span class="o">/</span><span class="n">NMPC_Iter</span>
-<span class="o">./</span><span class="n">codegen</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">OCP_F_Fu_Fx</span>
 </pre></div></p>
 </li>
 <li>
@@ -984,7 +996,7 @@ and run.</p>
 
 <p>Legend：
 <p align="center">
-<img src="../P_F_D_exp.png" >
+<img src="../P_F_D_exp.png"  width="500px">
 </p></p>
 <h2 id="advanced-functions">Advanced Functions</h2>
 <ul>

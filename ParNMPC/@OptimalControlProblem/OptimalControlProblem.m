@@ -69,9 +69,7 @@ classdef OptimalControlProblem < DynamicSystem
           veryBigNum = OCP.veryBigNum;
           % make dir and add to path
           [mkdirs,mkdirmess,mkdirmessid] = mkdir('./funcgen');
-          [mkdirs,mkdirmess,mkdirmessid] = mkdir('./codegen/lib/OCP_F_Fu_Fx');
           addpath('./funcgen/')
-          addpath('./codegen/lib/OCP_F_Fu_Fx')
       end
       setf(OCP,f)
       setM(OCP,M)

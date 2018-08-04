@@ -136,6 +136,7 @@ LAMBDA = ocpSolver.getLAMBDA(x0,lambda,mu,u,x,par);
 save GEN_initData.mat  ...
      lambdaDim muDim uDim xDim pDim N...
      x0 lambda mu u x par LAMBDA
+	 
 %% Define the controlled plant using Class DynamicSystem
 
 % M(u,x,p)\dot(x) = f(u,x,p)

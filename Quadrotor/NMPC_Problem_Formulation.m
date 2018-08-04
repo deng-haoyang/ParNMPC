@@ -96,8 +96,6 @@ uDim      = OCP.dim.u;
 xDim      = OCP.dim.x;
 pDim      = OCP.dim.p;
 N         = OCP.N;
-discretizationMethod = OCP.discretizationMethod;
-isMEnabled = OCP.isMEnabled;
 xRef = [0;0;0;0;0;0;0;0;0];
 par      = zeros(pDim,N);
 par(1,:) = 0;   % X setpoint
@@ -149,8 +147,8 @@ LAMBDA = ocpSolver.getLAMBDA(x0,lambda,mu,u,x,par);
 % Save to file
 save GEN_initData.mat  ...
      lambdaDim muDim uDim xDim pDim N...
-     x0 lambda mu u x par LAMBDA...
-     discretizationMethod isMEnabled
+     x0 lambda mu u x par LAMBDA
+	 
 %% Define the controlled plant using Class DynamicSystem
 
 % M(u,x,p)\dot(x) = f(u,x,p)

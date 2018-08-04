@@ -151,13 +151,11 @@ LAMBDA = ocpSolver.getLAMBDA(x0,lambda,mu,u,x,par);
 % Get the cost
 cost = ocpSolver.getCost(u,x,par);
 
-discretizationMethod = OCP.discretizationMethod;
-isMEnabled = OCP.isMEnabled;
 % Save to file
 save GEN_initData.mat  ...
      lambdaDim muDim uDim xDim pDim N...
-     x0 lambda mu u x par LAMBDA...
-     discretizationMethod isMEnabled
+     x0 lambda mu u x par LAMBDA
+	 
 %% Define the controlled plant using Class DynamicSystem
 
 % M(u,x,p)\dot(x) = f(u,x,p)

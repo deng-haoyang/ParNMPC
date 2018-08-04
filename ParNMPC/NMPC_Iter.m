@@ -15,7 +15,7 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
         numThreads = 0;
     else % Code generation
         numThreads = DoP;
-        coder.cinclude('OCP_F_Fu_Fx.h');
+%         coder.cinclude('OCP_F_Fu_Fx.h');
     end
     LAMBDA_N    = zeros(xDim,xDim);
     
@@ -101,7 +101,7 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
             if muDim ~=0
                 [C_i(:,j),Cu_j_i,Cx_j_i] = OCP_C_Cu_Cx(u_j_i,x_j_i,p_j_i);
             end
-            [F_j_i,Fu_j_i,Fx_j_i] = F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
+            [F_j_i,Fu_j_i,Fx_j_i] = OCP_F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
             
             Aux_j_i   = OCP_Aux(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i);
             Axx_j_i   = OCP_Axx(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i);
@@ -437,7 +437,7 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
                 [C_i(:,j),Cu_j_i,Cx_j_i] = OCP_C_Cu_Cx(u_j_i,x_j_i,p_j_i);
             end
             
-            [F_j_i,Fu_j_i,Fx_j_i] = F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
+            [F_j_i,Fu_j_i,Fx_j_i] = OCP_F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
 
             xEq_i(:,j)      = F_j_i + xPrev_i(:,j);
             HuT_i(:,j)      = Lu_j_i.'  + Fu_j_i.'*lambda_i(:,j);
