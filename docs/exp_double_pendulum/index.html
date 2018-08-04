@@ -384,13 +384,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#step-2-speed-up-the-closed-loop-simulation-in-matlab-using-mex" title="Step 2. Speed up the closed-loop simulation in Matlab using mex" class="md-nav__link">
-    Step 2. Speed up the closed-loop simulation in Matlab using mex
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -528,13 +521,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#step-2-speed-up-the-closed-loop-simulation-in-matlab-using-mex" title="Step 2. Speed up the closed-loop simulation in Matlab using mex" class="md-nav__link">
-    Step 2. Speed up the closed-loop simulation in Matlab using mex
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -632,35 +618,6 @@ The pendulum we want to swing up is:</p>
 <p class="admonition-title">Example</p>
 <p><code class="codehilite">DoubleInvertedPendulum/Simu_Simulink.slx</code></p>
 </div>
-</li>
-</ol>
-<h3 id="step-2-speed-up-the-closed-loop-simulation-in-matlab-using-mex">Step 2. Speed up the closed-loop simulation in Matlab using <code class="codehilite">mex</code></h3>
-<ol>
-<li>
-<p>Code generation</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p><code class="codehilite">DoubleInvertedPendulum/Simu_Simulink_Setup.m</code></p>
-</div>
-<p>Modify the generation target to <code class="codehilite">mex</code>:
-<div class="codehilite"><pre><span></span><span class="n">NMPC_Iter_CodeGen</span><span class="p">(</span><span class="s">&#39;mex&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="n">args_NMPC_Iter</span><span class="p">);</span>
-</pre></div>
-and run.</p>
-</li>
-<li>
-<p>Deployment</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p><code class="codehilite">DoubleInvertedPendulum/Simu_Matlab.m</code></p>
-</div>
-<p>Modify <code class="codehilite">NMPC_Iter</code> to <code class="codehilite">NMPC_Iter_mex</code> to call the generated <code class="codehilite">mex</code> function:
-<div class="codehilite"><pre><span></span><span class="p">[</span><span class="n">lambdaSplit</span><span class="p">,</span><span class="n">muSplit</span><span class="p">,</span><span class="n">uSplit</span><span class="p">,</span><span class="n">xSplit</span><span class="p">,</span><span class="c">...</span>
- <span class="n">LAMBDASplit</span><span class="p">,</span><span class="n">cost</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="n">timeElapsed</span><span class="p">]</span> <span class="p">=</span>
- <span class="n">NMPC_Iter_mex</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">lambdaSplit</span><span class="p">,</span><span class="n">muSplit</span><span class="p">,</span><span class="c">...</span>
-               <span class="n">uSplit</span><span class="p">,</span><span class="n">xSplit</span><span class="p">,</span><span class="n">pSplit</span><span class="p">,</span><span class="c">...</span>
-               <span class="n">LAMBDASplit</span><span class="p">);</span>
-</pre></div>
-and run.</p>
 </li>
 </ol>
                 
