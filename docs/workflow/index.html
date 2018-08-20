@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
+      <meta name="generator" content="mkdocs-1.0.1, mkdocs-material-3.0.3">
     
     
       
@@ -98,7 +98,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#workflow-of-parnmpc" tabindex="1" class="md-skip">
+      <a href="../#workflow-of-parnmpc" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -810,12 +810,12 @@
 <tr>
 <td><code class="codehilite">M</code> enabled</td>
 <td><code class="codehilite">&#39;Euler&#39;</code></td>
-<td><code class="codehilite">&#39;GaussNewton&#39;</code></td>
+<td><code class="codehilite">&#39;GaussNewton&#39;</code> or <code class="codehilite">&#39;GaussNewtonLC&#39;</code></td>
 </tr>
 <tr>
 <td><code class="codehilite">M</code> disabled</td>
-<td><code class="codehilite">&#39;Euler&#39;</code>, <code class="codehilite">&#39;RK4&#39;</code></td>
-<td><code class="codehilite">&#39;Newton&#39;</code>, <code class="codehilite">&#39;GaussNewton&#39;</code> when <code class="codehilite">&#39;Euler&#39;</code>;<br><code class="codehilite">&#39;GaussNewton&#39;</code> when <code class="codehilite">&#39;RK4&#39;</code>;</td>
+<td>All  discretization methods</td>
+<td>When <code class="codehilite">&#39;Euler&#39;</code>: All Hessian approximation methods ;<br>When else: <code class="codehilite">&#39;GaussNewton&#39;</code> or  <code class="codehilite">&#39;GaussNewtonLC&#39;</code>;</td>
 </tr>
 </tbody>
 </table>
@@ -914,7 +914,7 @@ C code will be automatically generated to <code class="codehilite">./codegen/lib
                   <span class="n">pSplit</span><span class="p">,</span><span class="c">...</span>
                   <span class="n">LAMBDASplit</span><span class="p">};</span>
 <span class="n">NMPC_Iter_CodeGen</span><span class="p">(</span><span class="s">&#39;dll&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="n">args_NMPC_Iter</span><span class="p">);</span>
-<span class="n">copyfile</span><span class="p">(</span><span class="s">&#39;./codegen/dll/NMPC_Iter/NMPC_Iter.dll&#39;</span><span class="p">);</span>
+<span class="n">copyfile</span><span class="p">(</span><span class="s">&#39;./codegen/dll/NMPC_Iter/NMPC_Iter.dll&#39;</span><span class="p">);</span> <span class="c">% NMPC_Iter.so in linux</span>
 </pre></div></p>
 </li>
 </ol>
@@ -942,7 +942,7 @@ You can also call the C/C++ interface using S-function.</p>
 </pre></div></p>
 </li>
 <li>
-<p>Add <code class="codehilite">NMPC_Iter.lib</code> to <strong>Additional Build Information: Libraries</strong>.</p>
+<p>Add <code class="codehilite">NMPC_Iter.lib</code> (<code class="codehilite">NMPC_Iter.so</code> in linux) to <strong>Additional Build Information: Libraries</strong>.</p>
 </li>
 <li>
 <p>Call the generated C function in a <code class="codehilite">MATLAB Function</code> block in Simulink:
@@ -1078,9 +1078,9 @@ and run.</p>
       
     </div>
     
-      <script src="../assets/javascripts/application.30f6b8b1.js"></script>
+      <script src="../assets/javascripts/application.583bbe55.js"></script>
       
-      <script>app.initialize({version:"0.17.5",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.0.1",url:{base:".."}})</script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
