@@ -11,12 +11,15 @@ function F = OCP_F(u,x,p,discretizationMethod,isMEnabled) %#codegen
         F = invMf - x;
     else % M disabled
         switch discretizationMethod
-            case 'RK4'
-                Ix = eye(xDim);
+            case 'RK2'
                 k1 = OCP_GEN_fdt(u,x,p);
-                k2 = OCP_GEN_fdt(u,x+k1/2,p);
-                k3 = OCP_GEN_fdt(u,x+k2/2,p);
-                k4 = OCP_GEN_fdt(u,x+k3,p);
+                k2 = OCP_GEN_fdt(u,x-k1/2,p);
+                F  = k2 - x;
+            case 'RK4'
+                k1 = OCP_GEN_fdt(u,x,p);
+                k2 = OCP_GEN_fdt(u,x-k1/2,p);
+                k3 = OCP_GEN_fdt(u,x-k2/2,p);
+                k4 = OCP_GEN_fdt(u,x-k3,p);
                 F = (k1+2*k2+2*k3+k4)/6 - x;
             otherwise % 'Euler'
                 F = OCP_GEN_fdt(u,x,p) - x;

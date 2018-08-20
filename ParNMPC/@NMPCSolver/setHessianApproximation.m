@@ -24,4 +24,5 @@ else
             solver.HessianApproximation = 'GaussNewton';
     end
 end
+disp(['Hessian approximation method: ' solver.HessianApproximation]);
 end

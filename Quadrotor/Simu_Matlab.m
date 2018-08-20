@@ -1,6 +1,6 @@
 %% For closed-loop simulation or code generation
 function Simu_Matlab
-DoP        = 4; % degree of parallism: 1 = in serial, otherwise in parallel
+DoP        = 1; % degree of parallism: 1 = in serial, otherwise in parallel
 simuLength = 10;
 Ts         = 0.01; % sampling interval
 

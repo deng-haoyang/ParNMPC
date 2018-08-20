@@ -45,6 +45,14 @@ if ~strcmp(target,'mex')
     cfg.GenerateExampleMain = 'DoNotGenerate'; % no MexCodeConfig
 end
 
+myCCompiler = mex.getCompilerConfigurations(targetLang,'Selected');
+switch myCCompiler.Name
+    case 'gcc'
+        cfg.PostCodeGenCommand = 'buildInfo.addLinkFlags(''-fopenmp'')'; 
+    case 'g++'
+        cfg.PostCodeGenCommand = 'buildInfo.addLinkFlags(''-fopenmp'')'; 
+end
+
 codegen -config cfg ...
          NMPC_Iter ...
          -globals globalVariable...
