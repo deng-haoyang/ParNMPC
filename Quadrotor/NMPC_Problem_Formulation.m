@@ -102,7 +102,7 @@ par(1,:) = 0;   % X setpoint
 par(2,:) = 0;   % Y setpoint
 par(3,:) = 0;   % Z setpoint 
 par(4,:) = 0.05; % barrier parameter
-par(5,:) = 4;   % prediction horizon
+par(5,:) = 1;   % prediction horizon
 
 % Create an OCPSolver object
 ocpSolver = OCPSolver(OCP,nmpcSolver,x0,par);
