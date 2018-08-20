@@ -37,5 +37,5 @@ if reGen
                       LAMBDASplit};
     NMPC_Iter_CodeGen('dll','C',args_NMPC_Iter);
     clear mex
-    copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.so');% NMPC_Iter.so for linux
+    copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.dll');% NMPC_Iter.so for linux
 end
