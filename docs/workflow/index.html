@@ -843,7 +843,7 @@
 <p><code class="codehilite">SIM_Plant_RK4</code>: one-step simulation of the controlled plant based on the 4-th order Runge-Kutta method. See <a href="../interfaces/#SIM_Plant_RK4">Interfaces &gt; Functions &gt; SIM_Plant_RK4</a>.</p>
 </li>
 </ul>
-<p>The degree of parallelism in <code class="codehilite">NMPC_Iter</code> depends on how you slice its input parameters. For example, an input parameter <code class="codehilite">a</code> with shape <code class="codehilite">[aDim,N]</code> split or reshaped into <code class="codehilite">[aDim,N/DoP,DoP]</code> will result in a degree of parallelism of <code class="codehilite">DoP</code>, which can utilize <code class="codehilite">DoP</code> cores to compute in parallel. In the case of <code class="codehilite">DoP=1</code>, the NMPC solver performs one Newton's iteration or QP exactly.</p>
+<p>The degree of parallelism in <code class="codehilite">NMPC_Iter</code> depends on how you slice its input parameters. For example, an input parameter <code class="codehilite">a</code> with shape <code class="codehilite">[aDim,N]</code> split or reshaped into <code class="codehilite">[aDim,N/DoP,DoP]</code> will result in a degree of parallelism of <code class="codehilite">DoP</code>, which can utilize <code class="codehilite">DoP</code> cores to compute in parallel. In the case of <code class="codehilite">DoP=1</code>, the NMPC solver performs one Newton's (depending on your choice) iteration exactly and is equivalent to the interior-point method.</p>
 <h2 id="code-generation-and-deployment">Code Generation and Deployment</h2>
 <h3 id="matlab">MATLAB</h3>
 <p>Here, assume your closed-loop simulation is performed in <code class="codehilite">Simu_Matlab.m</code>.</p>
