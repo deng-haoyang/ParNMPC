@@ -1,7 +1,7 @@
 function NMPC_Iter_CodeGen(target,targetLang,DoP)
 % target: 'mex' 'lib' 'dll'
 % targetLang: 'C' 'C++'
-% args: {x0,lambda,mu,u,x,p,LAMBDA}
+% DoP: degree of parallelism
 
 target     = lower(target);
 targetLang = upper(targetLang);
@@ -12,6 +12,7 @@ global discretizationMethod isMEnabled ...
        veryBigNum dim N_global
    
 % formulate args of NMPC_Iter
+% args: {x0,lambda,mu,u,x,p,LAMBDA}
 N     = N_global;
 xDim  = dim.x;
 muDim = dim.mu;
