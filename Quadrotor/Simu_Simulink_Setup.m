@@ -1,5 +1,5 @@
 %% NMPC_Iter
-DoP = 1; % degree of parallism: 1 = in serial, otherwise in parallel
+DoP = 4; % degree of parallism: 1 = in serial, otherwise in parallel
 %% 
 data       = coder.load('GEN_initData.mat');
 lambdaDim  = data.lambdaDim;
@@ -28,14 +28,7 @@ LAMBDASplit = reshape(LAMBDA, xDim, xDim, sizeSeg,DoP);
 % is re-gen?
 reGen = true;
 if reGen
-    args_NMPC_Iter = {x0,...
-                      lambdaSplit,...
-                      muSplit,...
-                      uSplit,...
-                      xSplit,...
-                      pSplit,...
-                      LAMBDASplit};
-    NMPC_Iter_CodeGen('dll','C',args_NMPC_Iter);
+    NMPC_Iter_CodeGen('dll','C',DoP);
     clear mex
-    copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.dll');% NMPC_Iter.so for linux
+    copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.so');% NMPC_Iter.so for linux
 end

@@ -170,8 +170,7 @@ fPlant = [  dX;...
            (omegaX*cos(Gamma) + omegaY*sin(Gamma))/cos(Beta);...
            -omegaX*sin(Gamma) + omegaY*cos(Gamma);...
             omegaX*cos(Gamma)*tan(Beta) + omegaY*sin(Gamma)*tan(Beta) + omegaZ];
-    
-
+        
 % Set the dynamic function f
 plant.setf(fPlant); % same model 
 

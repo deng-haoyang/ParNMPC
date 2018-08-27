@@ -58,7 +58,7 @@ classdef OptimalControlProblem < DynamicSystem
           OCP.xMax.value =  ones(OCP.dim.x,1)*OCP.veryBigNum;
           OCP.xMin.value = -ones(OCP.dim.x,1)*OCP.veryBigNum;
           % 
-          global uMax uMin xMax xMin GMax GMin discretizationMethod veryBigNum
+          global uMax uMin xMax xMin GMax GMin discretizationMethod veryBigNum dim N_global
           uMax = OCP.uMax.value;
           uMin = OCP.uMin.value;
           xMax = OCP.xMax.value;
@@ -67,6 +67,8 @@ classdef OptimalControlProblem < DynamicSystem
           GMin = OCP.GMin.value;
           discretizationMethod = 'Euler';
           veryBigNum = OCP.veryBigNum;
+          dim  = OCP.dim;
+          N_global    = OCP.N;
           % make dir and add to path
           [mkdirs,mkdirmess,mkdirmessid] = mkdir('./funcgen');
           addpath('./funcgen/')
