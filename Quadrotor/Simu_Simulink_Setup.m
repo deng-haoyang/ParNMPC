@@ -30,5 +30,5 @@ reGen = true;
 if reGen
     NMPC_Iter_CodeGen('dll','C',DoP);
     clear mex
-    copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.so');% NMPC_Iter.so for linux
+    copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.dll');% NMPC_Iter.so for linux
 end
