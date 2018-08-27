@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/installation/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/interfaces/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/workflow/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/exp_damper/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/exp_double_pendulum/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/exp_quadrotor/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/exp_vehicle/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/exp_heli/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/tips/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/about/</loc>
-     <lastmod>2018-08-22</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-08-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -36,7 +36,7 @@
     
     
       
-        <title>Tips - ParNMPC Homepage</title>
+        <title>Single Inverted Pendulum on a Cart - ParNMPC Homepage</title>
       
     
     
@@ -98,7 +98,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#tips" tabindex="1" class="md-skip">
+      <a href="../#single-inverted-pendulum-on-a-cart" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -124,7 +124,7 @@
                 ParNMPC Homepage
               </span>
               <span class="md-header-nav__topic">
-                Tips
+                Single Inverted Pendulum on a Cart
               </span>
             
           
@@ -371,63 +371,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Tips
-      </label>
-    
-    <a href="./" title="Tips" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../tips/" title="Tips" class="md-nav__link">
       Tips
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#solving-the-very-first-ocp" title="Solving the Very First OCP" class="md-nav__link">
-    Solving the Very First OCP
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#degree-of-parallelism-dop" title="Degree of Parallelism (DoP)" class="md-nav__link">
-    Degree of Parallelism (DoP)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tuning" title="Tuning" class="md-nav__link">
-    Tuning
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -460,36 +408,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#solving-the-very-first-ocp" title="Solving the Very First OCP" class="md-nav__link">
-    Solving the Very First OCP
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#degree-of-parallelism-dop" title="Degree of Parallelism (DoP)" class="md-nav__link">
-    Degree of Parallelism (DoP)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tuning" title="Tuning" class="md-nav__link">
-    Tuning
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -501,18 +419,8 @@
               
                 
                 
-                <h1 id="tips">Tips</h1>
-<h2 id="solving-the-very-first-ocp">Solving the Very First OCP</h2>
-<p>In most of the cases, the very first OCP can be solved offline so that warm-start can be used.
-In solving the very first OCP offline, you can start with an easy-to-solve OCP, for example, OCP with less constraints or mild parameters. 
-Then, you can gradually modify and solve the OCP to the one you want by starting from the solution obtained before.</p>
-<h2 id="degree-of-parallelism-dop">Degree of Parallelism (DoP)</h2>
-<p><code class="codehilite">DoP</code> is a parameter to specify the number of pieces to split the OCP along the prediction horizon for parallel computing. In general, a faster rate of convergence can be achieved by choosing a smaller <code class="codehilite">DoP</code>. In the case of <code class="codehilite">DoP=1</code>, the solver is exactly equivalent to the interior-point method.</p>
-<p>Meanwhile, when you want to generate serial code without any parallel computing, you can set <code class="codehilite">DoP</code> to 1 and edit <code class="codehilite">Timer.m</code> to specify your own timer function (the default is <code class="codehilite">omp_get_wtime</code>, which is not supported when OpenMP is disabled).</p>
-<h2 id="tuning">Tuning</h2>
-<ul>
-<li>Specify the tuning parameters such as the weighting matrices as parameters so that they can be tuned without re-generating the OCP.</li>
-</ul>
+                <h1 id="single-inverted-pendulum-on-a-cart">Single Inverted Pendulum on a Cart</h1>
+<p>Coming soon.</p>
                 
                   
                 
@@ -529,41 +437,6 @@ Then, you can gradually modify and solve the OCP to the one you want by starting
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../exp_heli/" title="Experiment: Helicopter" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Experiment: Helicopter
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../about/" title="About" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                About
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
