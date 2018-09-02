@@ -3,10 +3,10 @@ addpath('../ParNMPC/')
 %% Formulate an OCP using Class OptimalControlProblem
 
 % Create an OptimalControlProblem object
-OCP = OptimalControlProblem(0,... % constraints dim
+OCP = OptimalControlProblem(2,... % constraints dim
                             1,... % inputs dim
                             6,... % states dim
-                            8,... % parameters dim
+                            9,... % parameters dim
                             1.5,... % T: prediction horizon
                             48);  % N: num of discritization grids
 % Give names to x, u, p
@@ -49,6 +49,11 @@ OCP.setf(f);
 OCP.setM(M);
 OCP.setDiscretizationMethod('Euler');
 
+% Set the constraint function C
+C = [ OCP.p(1)*Theta1;...
+      OCP.p(1)*Theta2];
+OCP.setC(C);
+
 % Set the cost function L
 lambdaDim = OCP.dim.lambda;
 muDim     = OCP.dim.mu;
@@ -56,8 +61,8 @@ uDim      = OCP.dim.u;
 xDim      = OCP.dim.x;
 pDim      = OCP.dim.p;
 N         = OCP.N;
-Q = diag(OCP.p(1:6));
-R = diag(OCP.p(7));
+Q = diag([10;10;10;1;1;1]);
+R = diag(0.1);
 xRef  = [0;0;0;0;0;0];
 uRef  = 0;
 L     =   0.5*(OCP.x-xRef).'*Q*(OCP.x-xRef)...
@@ -67,7 +72,7 @@ OCP.setL(L);
 % Set the bound constraints
 uMax  =  10;
 uMin  = -10;
-uBarrierPara = OCP.p(8);
+uBarrierPara = OCP.p(2);
 OCP.setUpperBound('u',uMax,uBarrierPara);
 OCP.setLowerBound('u',uMin,uBarrierPara);
 
@@ -95,12 +100,9 @@ end
 x0   = [0;pi;pi;0;0;0];
 
 % Set the parameters
-QDiagVal = [10;10;10;1;1;1];
-RDiagVal = 0.1;
 par = zeros(pDim,N);
-par(1:7,:) = repmat([QDiagVal;RDiagVal],1,N);
-par(1:7,end) = [100;100;100;10;10;10;0.1]; % terminal penlty
-par(8,:) = 0.1; % barrier parameter
+par(1,end) = 1;    % terminal constraints
+par(2,:)   = 0.1;  % barrier parameter
 
 % Create an OCPSolver object
 ocpSolver = OCPSolver(OCP,nmpcSolver,x0,par);

@@ -4,7 +4,8 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
     % global variables
     global discretizationMethod isMEnabled ...
            uMin uMax xMin xMax GMax GMin ...
-           veryBigNum
+           veryBigNum...
+           nonsingularRegularization descentRegularization
            
     [xDim,sizeSeg,DoP] = size(x);
     lambdaDim = xDim;
@@ -15,7 +16,6 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
         numThreads = 0;
     else % Code generation
         numThreads = DoP;
-%         coder.cinclude('OCP_F_Fu_Fx.h');
     end
     LAMBDA_N    = zeros(xDim,xDim);
     
@@ -34,6 +34,10 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
     stepSizeGMax    = ones(DoP,1);
     stepSizeGMin    = ones(DoP,1);
     
+    % regularization
+    NSRMatrix  = -nonsingularRegularization*eye(muDim);
+    uDRMatrix  =  descentRegularization*eye(uDim);
+    xDRMatrix  =  descentRegularization*eye(xDim);
     
     % local variables
     lambdaNext    = zeros(lambdaDim,sizeSeg,DoP);
@@ -104,11 +108,11 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
             [F_j_i,Fu_j_i,Fx_j_i] = OCP_F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
             
             Aux_j_i   = OCP_Aux(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i);
-            Axx_j_i   = OCP_Axx(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i);
-            Auu_j_i   = OCP_Auu(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i);
-
-            d_CHuT_muu_j_i  = [zeros(muDim,muDim),  Cu_j_i;...
-                                   Cu_j_i.',        Auu_j_i];
+            Axx_j_i   = OCP_Axx(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i) + xDRMatrix; % descent regularization
+            Auu_j_i   = OCP_Auu(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i) + uDRMatrix; % descent regularization
+            
+            d_CHuT_muu_j_i  = [    NSRMatrix,       Cu_j_i;...
+                                   Cu_j_i.',        Auu_j_i]; % nonsingular regularization
             % Function Evaluation
             if j > 1
                 xPrev_i(:,j) = x_i(:,j-1);
@@ -131,7 +135,7 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
             end
             % Intermediate Variables
             invFx_j_i     = inv(Fx_j_i);
-            LAMBDAUncrt_j_i  = invFx_j_i.'*(Axx_j_i-LAMBDA_i(:,:,j))*invFx_j_i;
+            LAMBDAUncrt_j_i  = invFx_j_i.'*(Axx_j_i -LAMBDA_i(:,:,j) )*invFx_j_i;
 
             Aux_invFx_j_i  = Aux_j_i*invFx_j_i;
             Cx_invFx_j_i = [];

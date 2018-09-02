@@ -2,7 +2,9 @@ classdef NMPCSolver < handle
    properties
       OCP
       % Newton GaussNewton_LC GaussNewon
-      HessianApproximation = 'GaussNewton';
+      HessianApproximation      = 'GaussNewton';
+      nonsingularRegularization = 1e-8;
+      descentRegularization     = 0;
    end
    properties( Access = private)
       % default: Euler + GaussNewton + M disabled
@@ -11,9 +13,14 @@ classdef NMPCSolver < handle
    methods
       function solver = NMPCSolver(OCP)
             solver.OCP = OCP;
+            global nonsingularRegularization descentRegularization
+            nonsingularRegularization = solver.nonsingularRegularization;
+            descentRegularization     = solver.descentRegularization;
       end
       codeGen(solver)
       solverMode = getSolverMode(solver)
       setHessianApproximation(solver,method)
+      setNonsingularRegularization(solver,value)
+      setDescentRegularization(solver,value)
    end
 end
