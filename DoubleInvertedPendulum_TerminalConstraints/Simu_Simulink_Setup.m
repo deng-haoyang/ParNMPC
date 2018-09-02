@@ -30,7 +30,7 @@ LAMBDASplit = reshape(LAMBDA, xDim, xDim, sizeSeg,DoP);
 % is re-gen?
 reGen = true;
 if reGen
-    NMPC_Iter_CodeGen('mex','C',DoP);
+    NMPC_Iter_CodeGen('dll','C',DoP);
     clear mex
     copyfile('./codegen/dll/NMPC_Iter/NMPC_Iter.dll');
 end
