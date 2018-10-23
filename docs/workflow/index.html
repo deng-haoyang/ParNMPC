@@ -899,10 +899,13 @@ C code will be automatically generated to <code class="codehilite">./codegen/lib
 <p>Add directory <code class="codehilite">.\codegen\lib\Simu_Matlab</code> to <strong>Properties &gt; C/C++ &gt; General &gt;  Additional Include Directories</strong>.</p>
 </li>
 <li>
+<p>Add <code class="codehilite">tmwtypes.h</code> in directory <code class="codehilite">C:\Program Files\MATLAB\R2018b\extern\include</code> (for example) to the project or that directory to <strong>Properties &gt; C/C++ &gt; General &gt;  Additional Include Directories</strong>.</p>
+</li>
+<li>
 <p><strong>Properties &gt; C/C++ &gt; Language &gt;  Open MP Support: Yes (/openmp)</strong>.</p>
 </li>
 <li>
-<p>Compile and run.</p>
+<p>Compile and run. If there is something wrong with the <code class="codehilite">fopen</code> function when compiling, add <code class="codehilite">_CRT_SECURE_NO_WARNINGS</code> to <strong>Properties &gt; C/C++ &gt; Preprocessor &gt;  Preprocessor Definitions</strong>.</p>
 </li>
 </ol>
 <h3 id="simulink">Simulink <div id="workflow_deploy_simulink"></div></h3>
