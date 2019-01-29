@@ -32,7 +32,7 @@ f = [   dX;...
        -omegaX*sin(Gamma) + omegaY*cos(Gamma);...
         omegaX*cos(Gamma)*tan(Beta) + omegaY*sin(Gamma)*tan(Beta) + omegaZ];
 OCP.setf(f);
-OCP.setDiscretizationMethod('Euler');
+OCP.setDiscretizationMethod('RK4');
 
 % Set the cost function L
 Q = diag([10, 1, 10, 1, 10, 1, 1, 1, 1]);
@@ -77,7 +77,7 @@ end
 nmpcSolver = NMPCSolver(OCP);
 
 % Configurate the Hessian approximation method
-nmpcSolver.setHessianApproximation('Newton');
+nmpcSolver.setHessianApproximation('GaussNewton');
 
 % Generate necessary files
 isReGen = true; % is re-gen?

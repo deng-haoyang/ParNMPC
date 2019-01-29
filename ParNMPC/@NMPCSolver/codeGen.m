@@ -7,7 +7,7 @@ unknowns = [solver.OCP.lambda;...
         
 LAll = solver.OCP.L + solver.OCP.LBarrier.all;
 
-if strcmp(solver.OCP.discretizationMethod,'Euler') && solver.OCP.isMEnabled == false
+if  solver.OCP.isMEnabled == false
     switch solver.HessianApproximation
         case 'GaussNewton'
             A_ = LAll;

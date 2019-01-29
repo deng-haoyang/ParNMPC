@@ -24,10 +24,10 @@ LAMBDA     = initData.LAMBDA;
 % reshape initial guess
 sizeSeg     = N/DoP;
 lambdaSplit = reshape(lambda,lambdaDim,sizeSeg,DoP);
-muSplit     = reshape(mu,muDim,sizeSeg,DoP);
-uSplit      = reshape(u,uDim,sizeSeg,DoP);
-xSplit      = reshape(x,xDim,sizeSeg,DoP);
-pSplit      = reshape(par,pDim,sizeSeg,DoP);
+muSplit     = reshape(mu,    muDim,    sizeSeg,DoP);
+uSplit      = reshape(u,     uDim,     sizeSeg,DoP);
+xSplit      = reshape(x,     xDim,     sizeSeg,DoP);
+pSplit      = reshape(par,   pDim,     sizeSeg,DoP);
 LAMBDASplit = reshape(LAMBDA,xDim,xDim,sizeSeg,DoP);
 
 % define record variables
