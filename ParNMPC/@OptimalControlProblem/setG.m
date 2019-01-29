@@ -1,5 +1,8 @@
 function setG(OCP,G)
-    global GMax GMin
+    
+    % Global variable
+    global ParNMPCGlobalVariable
+
     OCP.G = symfun(G,[OCP.u;OCP.x;OCP.p]);
     
     G_formula = formula(OCP.G);
@@ -37,10 +40,10 @@ function setG(OCP,G)
     [GMinDim,unused] = size(OCP.GMin.value);
     if GMaxDim == 0
         OCP.GMax.value = ones(GDim,1)*OCP.veryBigNum;
-        GMax = OCP.GMax.value;
+        ParNMPCGlobalVariable.GMax = OCP.GMax.value;
     end
     if GMinDim == 0
         OCP.GMin.value = -ones(GDim,1)*OCP.veryBigNum;
-        GMin = OCP.GMin.value;
+        ParNMPCGlobalVariable.GMin = OCP.GMin.value;
     end
 end

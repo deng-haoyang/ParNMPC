@@ -2,11 +2,19 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
     timerRTIStart = Timer();
     
     % global variables
-    global discretizationMethod isMEnabled ...
-           uMin uMax xMin xMax GMax GMin ...
-           veryBigNum...
-           nonsingularRegularization descentRegularization
-           
+    global ParNMPCGlobalVariable
+    discretizationMethod = ParNMPCGlobalVariable.discretizationMethod;
+    isMEnabled = ParNMPCGlobalVariable.isMEnabled;
+    uMin  = ParNMPCGlobalVariable.uMin;
+    uMax  = ParNMPCGlobalVariable.uMax;
+    xMin  = ParNMPCGlobalVariable.xMin;
+    xMax  = ParNMPCGlobalVariable.xMax;
+    GMax  = ParNMPCGlobalVariable.GMax;
+    GMin = ParNMPCGlobalVariable.GMin;
+    veryBigNum = ParNMPCGlobalVariable.veryBigNum;
+    nonsingularRegularization  = ParNMPCGlobalVariable.nonsingularRegularization;
+    descentRegularization = ParNMPCGlobalVariable.descentRegularization;
+       
     [xDim,sizeSeg,DoP] = size(x);
     lambdaDim = xDim;
     [muDim,sizeSeg,DoP] = size(mu);

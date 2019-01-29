@@ -1,17 +1,18 @@
 function setUpperBound(OCP,field,boundValue,barrierParameter)
-    global xMax uMax GMax
+    % Global variable
+    global ParNMPCGlobalVariable
+    
     boundValue(boundValue>OCP.veryBigNum) = OCP.veryBigNum;
     
     switch field
         case 'x'
             OCP.xMax.value = boundValue;
             OCP.xMax.barrierParameter = barrierParameter;
-            xMax = OCP.xMax.value;
-            
+            ParNMPCGlobalVariable.xMax = OCP.xMax.value;
             OCP.LBarrier.xMax = sym(0);
             for i = 1:OCP.dim.x
                 % xMax
-                if OCP.xMax.value(i) ~= OCP.veryBigNum;
+                if OCP.xMax.value(i) ~= OCP.veryBigNum
                     OCP.LBarrier.xMax = OCP.LBarrier.xMax - ...
                         OCP.xMax.barrierParameter(i)*log(OCP.xMax.value(i)-OCP.x(i));
                 end
@@ -20,8 +21,7 @@ function setUpperBound(OCP,field,boundValue,barrierParameter)
         case 'u'
             OCP.uMax.value = boundValue;
             OCP.uMax.barrierParameter = barrierParameter;
-            uMax = OCP.uMax.value;
-            
+            ParNMPCGlobalVariable.uMax = OCP.uMax.value;
             OCP.LBarrier.uMax = sym(0);
             for i = 1:OCP.dim.u
                 % uMax
@@ -34,7 +34,7 @@ function setUpperBound(OCP,field,boundValue,barrierParameter)
         case 'G'
             OCP.GMax.value = boundValue;
             OCP.GMax.barrierParameter = barrierParameter;
-            GMax = OCP.GMax.value;
+            ParNMPCGlobalVariable.GMax = OCP.GMax.value;
             % barrier function
             G_formula = formula(OCP.G);
             [GDim,unused] = size(G_formula);

@@ -57,18 +57,19 @@ classdef OptimalControlProblem < DynamicSystem
           OCP.uMin.value = -ones(OCP.dim.u,1)*OCP.veryBigNum;
           OCP.xMax.value =  ones(OCP.dim.x,1)*OCP.veryBigNum;
           OCP.xMin.value = -ones(OCP.dim.x,1)*OCP.veryBigNum;
-          % 
-          global uMax uMin xMax xMin GMax GMin discretizationMethod veryBigNum dim N_global
-          uMax = OCP.uMax.value;
-          uMin = OCP.uMin.value;
-          xMax = OCP.xMax.value;
-          xMin = OCP.xMin.value;
-          GMax = OCP.GMax.value;
-          GMin = OCP.GMin.value;
-          discretizationMethod = 'Euler';
-          veryBigNum = OCP.veryBigNum;
-          dim  = OCP.dim;
-          N_global    = OCP.N;
+          % Global variable
+          global ParNMPCGlobalVariable
+          ParNMPCGlobalVariable.uMax = OCP.uMax.value;
+          ParNMPCGlobalVariable.uMin = OCP.uMin.value;
+          ParNMPCGlobalVariable.xMax = OCP.xMax.value;
+          ParNMPCGlobalVariable.xMin = OCP.xMin.value;
+          ParNMPCGlobalVariable.GMax = OCP.GMax.value;
+          ParNMPCGlobalVariable.GMin = OCP.GMin.value;
+          ParNMPCGlobalVariable.discretizationMethod = 'Euler';
+          ParNMPCGlobalVariable.veryBigNum = OCP.veryBigNum;
+          ParNMPCGlobalVariable.dim  = OCP.dim;
+          ParNMPCGlobalVariable.N_global    = OCP.N;
+          ParNMPCGlobalVariable.isMEnabled    = false;
           % make dir and add to path
           [mkdirs,mkdirmess,mkdirmessid] = mkdir('./funcgen');
           addpath('./funcgen/')

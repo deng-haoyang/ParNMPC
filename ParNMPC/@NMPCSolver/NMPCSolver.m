@@ -13,9 +13,11 @@ classdef NMPCSolver < handle
    methods
       function solver = NMPCSolver(OCP)
             solver.OCP = OCP;
-            global nonsingularRegularization descentRegularization
-            nonsingularRegularization = solver.nonsingularRegularization;
-            descentRegularization     = solver.descentRegularization;
+             % Global variable
+            global ParNMPCGlobalVariable
+            ParNMPCGlobalVariable.nonsingularRegularization = solver.nonsingularRegularization;
+            ParNMPCGlobalVariable.descentRegularization     = solver.descentRegularization;
+            
       end
       codeGen(solver)
       solverMode = getSolverMode(solver)

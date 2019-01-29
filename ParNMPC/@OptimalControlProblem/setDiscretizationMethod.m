@@ -10,7 +10,9 @@ switch method
     otherwise
     	OCP.discretizationMethod = 'Euler';
 end
-global discretizationMethod
-discretizationMethod = OCP.discretizationMethod;
+% Global variable
+global ParNMPCGlobalVariable
+ParNMPCGlobalVariable.discretizationMethod = OCP.discretizationMethod;
+
 
 end

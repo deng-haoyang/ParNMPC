@@ -1,9 +1,10 @@
 function setNonsingularRegularization(solver,value)
 % nonsingular regularization parameter
 if value > 0
-    global nonsingularRegularization
     solver.nonsingularRegularization = value;
-    nonsingularRegularization = value;
+     % Global variable
+    global ParNMPCGlobalVariable
+    ParNMPCGlobalVariable.nonsingularRegularization = value;
 else
     warning('Nonsingular regularization parameter must be nonnegtive!');
 end

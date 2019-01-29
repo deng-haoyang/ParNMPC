@@ -1,11 +1,14 @@
 function [cieq,ceq] = fmincon_Eq(X)
 
-global pValGlobal dimGlobal NGlobal x0Global discretizationMethod isMEnabled
+global pValGlobal dimGlobal NGlobal x0Global 
 uDim = dimGlobal.u;
 muDim = dimGlobal.mu;
 xDim = dimGlobal.x;
 N    = NGlobal;
+global ParNMPCGlobalVariable
 
+discretizationMethod = ParNMPCGlobalVariable.discretizationMethod;
+isMEnabled = ParNMPCGlobalVariable.isMEnabled;
 ux_vec   = reshape(X,uDim+xDim,NGlobal);
 u      = ux_vec(1:uDim,:);
 x      = ux_vec(uDim+1:end,:);

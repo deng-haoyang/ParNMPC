@@ -1,12 +1,13 @@
 function setLowerBound(OCP,field,boundValue,barrierParameter)
-    global xMin uMin GMin
+    % Global variable
+    global ParNMPCGlobalVariable
+
     boundValue(boundValue<-OCP.veryBigNum) = -OCP.veryBigNum;
     switch field
         case 'x'
             OCP.xMin.value = boundValue;
             OCP.xMin.barrierParameter = barrierParameter;
-            xMin = OCP.xMin.value;
-            
+            ParNMPCGlobalVariable.xMin = OCP.xMin.value;
             OCP.LBarrier.xMin = sym(0);
             for i = 1:OCP.dim.x
                 % xMin
@@ -19,8 +20,7 @@ function setLowerBound(OCP,field,boundValue,barrierParameter)
         case 'u'
             OCP.uMin.value = boundValue;
             OCP.uMin.barrierParameter = barrierParameter;
-            uMin = OCP.uMin.value;
-            
+            ParNMPCGlobalVariable.uMin = OCP.uMin.value;
             OCP.LBarrier.uMin = sym(0);
             for i = 1:OCP.dim.u
                 if OCP.uMin.value(i) ~= -OCP.veryBigNum
@@ -32,7 +32,7 @@ function setLowerBound(OCP,field,boundValue,barrierParameter)
         case 'G'
             OCP.GMin.value = boundValue;
             OCP.GMin.barrierParameter = barrierParameter;
-            GMin = OCP.GMin.value;
+            ParNMPCGlobalVariable.GMin = OCP.GMin.value;
             % barrier function
             G_formula = formula(OCP.G);
             [GDim,unused] = size(G_formula);

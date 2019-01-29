@@ -2,9 +2,11 @@ function setDescentRegularization(solver,value)
 % descent regularization parameter
 % nonsingular regularization parameter
 if value > 0
-    global descentRegularization
+    % Global variable
+    global ParNMPCGlobalVariable
+
     solver.descentRegularization = value;
-    descentRegularization = value;
+    ParNMPCGlobalVariable.descentRegularization = value;
 else
     error('Descent regularization parameter must be nonnegtive!');
 end
