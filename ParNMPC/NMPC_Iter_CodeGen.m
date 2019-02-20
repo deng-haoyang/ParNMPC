@@ -10,7 +10,8 @@ global ParNMPCGlobalVariable
 globalVariable = {'ParNMPCGlobalVariable',coder.Constant(ParNMPCGlobalVariable)};
 
 % global variables
-global dim N_global
+dim      = ParNMPCGlobalVariable.dim;
+N_global = ParNMPCGlobalVariable.N_global;
        
    
 % formulate args of NMPC_Iter
