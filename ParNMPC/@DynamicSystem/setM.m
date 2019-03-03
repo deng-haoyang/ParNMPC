@@ -3,6 +3,6 @@ function setM(plant,M)
     plant.isMEnabled = true;
 %     global isMEnabled
 %     isMEnabled = true;
-%     global ParNMPCGlobalVariable
-%     ParNMPCGlobalVariable.isMEnabled = true;
+    global ParNMPCGlobalVariable
+    ParNMPCGlobalVariable.isMEnabled = true;
 end
