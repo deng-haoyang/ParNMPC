@@ -38,7 +38,7 @@ With **`ParNMPC`**, you can define your own NMPC problem in a very easy way and 
 * MATLAB Symbolic Math Toolbox
 * C/C++ compiler supporting parallel code generation
 
-## Getting Started 
+## Getting Started (MATLAB 2018b)
 
 1. Select the Microsoft Visual C++ 2017 (C) compiler:
 ``` Matlab
