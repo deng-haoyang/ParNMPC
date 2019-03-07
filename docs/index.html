@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
@@ -40,9 +40,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="assets/stylesheets/application.982221ab.css">
       
-        <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="assets/stylesheets/application-palette.224b79ff.css">
       
       
         
@@ -51,7 +51,7 @@
       
     
     
-      <script src="assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -61,6 +61,35 @@
       
     
     <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-120133947-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -119,22 +148,19 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                ParNMPC Homepage
-              </span>
-              <span class="md-header-nav__topic">
-                What is ParNMPC
-              </span>
-            
+            <span class="md-header-nav__topic">
+              ParNMPC Homepage
+            </span>
+            <span class="md-header-nav__topic">
+              Introduction
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -157,7 +183,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -168,20 +193,18 @@
 
   
 
-
-  <a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
           </div>
         </div>
       
@@ -217,20 +240,18 @@
 
   
 
-
-  <a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -250,11 +271,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        What is ParNMPC
+        Introduction
       </label>
     
-    <a href="." title="What is ParNMPC" class="md-nav__link md-nav__link--active">
-      What is ParNMPC
+    <a href="." title="Introduction" class="md-nav__link md-nav__link--active">
+      Introduction
     </a>
     
       
@@ -295,30 +316,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-parnmpc-solves-the-ocp" title="How ParNMPC Solves the OCP?" class="md-nav__link">
-    How ParNMPC Solves the OCP?
+  <a href="#how-parnmpc-works" title="How ParNMPC works" class="md-nav__link">
+    How ParNMPC works
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#discretization" title="Discretization" class="md-nav__link">
-    Discretization
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handling-inequality-constraints" title="Handling inequality constraints" class="md-nav__link">
-    Handling inequality constraints
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#solving-the-kkt-conditions-iteratively-in-parallel" title="Solving the KKT conditions iteratively in parallel" class="md-nav__link">
-    Solving the KKT conditions iteratively in parallel
+  <a href="#variables" title="Variables" class="md-nav__link">
+    Variables
   </a>
   
 </li>
@@ -531,30 +538,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-parnmpc-solves-the-ocp" title="How ParNMPC Solves the OCP?" class="md-nav__link">
-    How ParNMPC Solves the OCP?
+  <a href="#how-parnmpc-works" title="How ParNMPC works" class="md-nav__link">
+    How ParNMPC works
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#discretization" title="Discretization" class="md-nav__link">
-    Discretization
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#handling-inequality-constraints" title="Handling inequality constraints" class="md-nav__link">
-    Handling inequality constraints
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#solving-the-kkt-conditions-iteratively-in-parallel" title="Solving the KKT conditions iteratively in parallel" class="md-nav__link">
-    Solving the KKT conditions iteratively in parallel
+  <a href="#variables" title="Variables" class="md-nav__link">
+    Variables
   </a>
   
 </li>
@@ -582,11 +575,12 @@
                 
                 
                 <h1 id="parnmpc-a-parallel-computing-toolbox-for-nonlinear-mpc">ParNMPC : A Parallel Computing Toolbox for Nonlinear MPC</h1>
-<p><em>Version 1808-1 (<a href="https://github.com/deng-haoyang/ParNMPC">Github: ParNMPC</a>) has been released!</em></p>
+<p><em>Version 1903-1 (<a href="https://github.com/deng-haoyang/ParNMPC">Github: ParNMPC</a>) has been released!</em></p>
 <h2 id="introduction">Introduction</h2>
-<p><strong><code class="codehilite">ParNMPC</code></strong> is a MATLAB real-time optimization toolkit for nonlinear model predictive control (NMPC).
-<strong><code class="codehilite">ParNMPC</code></strong> can utilize multiple CPU cores to solve the optimal control problem, and thus can be very fast (the computation time is usually in the range of <span><span class="MathJax_Preview">\mu</span><script type="math/tex">\mu</script></span>s). 
+<p><strong><code class="codehilite">ParNMPC</code></strong> is a MATLAB real-time optimization toolkit for nonlinear model predictive control (NMPC). 
 The purpose of <strong><code class="codehilite">ParNMPC</code></strong> is to provide an easy-to-use environment for NMPC problem formulation, closed-loop simulation, and deployment.</p>
+<p>With <strong><code class="codehilite">ParNMPC</code></strong>, you can define your own NMPC problem in a very easy way and <strong><code class="codehilite">ParNMPC</code></strong> will automatically generate self-contained C/C++ code for single- or multi-core CPUs. </p>
+<p><strong><code class="codehilite">ParNMPC</code></strong> is very fast even with only one core (the computation time is usually in the range of <span><span class="MathJax_Preview">\mu</span><script type="math/tex">\mu</script></span>s), and a high speedup can be achieved when parallel computing is enabled.</p>
 <h3 id="features">Features</h3>
 <ul>
 <li>Symbolic problem representation</li>
@@ -597,25 +591,21 @@ The purpose of <strong><code class="codehilite">ParNMPC</code></strong> is to pr
 <li>MATLAB &amp; Simulink </li>
 </ul>
 <h2 id="problems-supported-in-parnmpc">Problems Supported in  <strong><code class="codehilite">ParNMPC</code></strong></h2>
-<p>The optimization control problem (OCP) supported in <strong><code class="codehilite">ParNMPC</code></strong> has the following form:</p>
+<p>The optimal control problem (OCP) supported in <strong><code class="codehilite">ParNMPC</code></strong> has the following form:</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
 \min_{x(\cdot),\ u(\cdot)}&amp;\int^{T}_{0}L\left(u(t),x(t),p(t)\right)dt \\
 \text{s.t.}\quad &amp;x(0) = \bar{x}_0,\\
 &amp;M\left(u(t),x(t),p(t)\right)\dot{x}(t)=f\left(u(t),x(t),p(t)\right),\quad t\in[0,T],\\
 &amp; C(u(t),x(t),p(t))=0,\quad t\in[0,T],\\
-&amp; u_{min} \leq u(t) \leq u_{max},\quad t\in[0,T],\\
-&amp; x_{min} \leq x(t) \leq x_{max},\quad t\in[0,T],\\
-&amp; G_{min} \leq G\left(u(t),x(t),p(t)\right) \leq G_{max},\quad t\in[0,T].
+&amp; G\left(u(t),x(t),p(t)\right)\geq 0,\quad t\in[0,T].
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
 \min_{x(\cdot),\ u(\cdot)}&\int^{T}_{0}L\left(u(t),x(t),p(t)\right)dt \\
 \text{s.t.}\quad &x(0) = \bar{x}_0,\\
 &M\left(u(t),x(t),p(t)\right)\dot{x}(t)=f\left(u(t),x(t),p(t)\right),\quad t\in[0,T],\\
 & C(u(t),x(t),p(t))=0,\quad t\in[0,T],\\
-& u_{min} \leq u(t) \leq u_{max},\quad t\in[0,T],\\
-& x_{min} \leq x(t) \leq x_{max},\quad t\in[0,T],\\
-& G_{min} \leq G\left(u(t),x(t),p(t)\right) \leq G_{max},\quad t\in[0,T].
+& G\left(u(t),x(t),p(t)\right)\geq 0,\quad t\in[0,T].
 \end{align}</script>
 </div>
 <p>Here,</p>
@@ -633,7 +623,7 @@ The purpose of <strong><code class="codehilite">ParNMPC</code></strong> is to pr
 <tbody>
 <tr>
 <td><span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span></td>
-<td><code class="codehilite">[uDim,1]</code></td>
+<td><code class="codehilite">[dim.u,1]</code></td>
 <td>Input vector</td>
 <td><span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span></td>
 <td><code class="codehilite">[1,1]</code></td>
@@ -641,18 +631,18 @@ The purpose of <strong><code class="codehilite">ParNMPC</code></strong> is to pr
 </tr>
 <tr>
 <td><span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span></td>
-<td><code class="codehilite">[xDim,1]</code></td>
+<td><code class="codehilite">[dim.x,1]</code></td>
 <td>State vector</td>
 <td><span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span></td>
-<td><code class="codehilite">[muDim,1]</code></td>
+<td><code class="codehilite">[dim.mu,1]</code></td>
 <td>Equality constraint function</td>
 </tr>
 <tr>
 <td><span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span></td>
-<td><code class="codehilite">[pDim,1]</code></td>
+<td><code class="codehilite">[dim.p,1]</code></td>
 <td>Given parameter vector</td>
 <td><span><span class="MathJax_Preview">f</span><script type="math/tex">f</script></span></td>
-<td><code class="codehilite">[xDim,1]</code></td>
+<td><code class="codehilite">[dim.x,1]</code></td>
 <td>Dynamics</td>
 </tr>
 <tr>
@@ -660,109 +650,89 @@ The purpose of <strong><code class="codehilite">ParNMPC</code></strong> is to pr
 <td><code class="codehilite">[1,1]</code></td>
 <td>Prediction horizon</td>
 <td><span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span></td>
-<td><code class="codehilite">[xDim,xDim]</code></td>
+<td><code class="codehilite">[dim.x,dim.x]</code></td>
 <td>(Optional, e.g., Lagrange model)</td>
 </tr>
 <tr>
 <td><span><span class="MathJax_Preview">\bar{x}_0</span><script type="math/tex">\bar{x}_0</script></span></td>
-<td><code class="codehilite">[xDim,1]</code></td>
+<td><code class="codehilite">[dim.x,1]</code></td>
 <td>Current state vector</td>
 <td><span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span></td>
-<td><code class="codehilite">[GDim,1]</code></td>
+<td><code class="codehilite">[dim.z,1]</code></td>
 <td>Polytopic constraint function (<span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span> is linear in <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span> and <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>)</td>
-</tr>
-<tr>
-<td><span><span class="MathJax_Preview">u_{min}</span><script type="math/tex">u_{min}</script></span></td>
-<td><code class="codehilite">[uDim,1]</code></td>
-<td>Lower bound of <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span></td>
-<td><span><span class="MathJax_Preview">u_{max}</span><script type="math/tex">u_{max}</script></span></td>
-<td><code class="codehilite">[uDim,1]</code></td>
-<td>Upper bound of <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span></td>
-</tr>
-<tr>
-<td><span><span class="MathJax_Preview">x_{min}</span><script type="math/tex">x_{min}</script></span></td>
-<td><code class="codehilite">[xDim,1]</code></td>
-<td>Lower bound of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span></td>
-<td><span><span class="MathJax_Preview">x_{max}</span><script type="math/tex">x_{max}</script></span></td>
-<td><code class="codehilite">[xDim,1]</code></td>
-<td>Upper bound of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span></td>
-</tr>
-<tr>
-<td><span><span class="MathJax_Preview">G_{min}</span><script type="math/tex">G_{min}</script></span></td>
-<td><code class="codehilite">[GDim,1]</code></td>
-<td>Lower bound of <span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span></td>
-<td><span><span class="MathJax_Preview">G_{max}</span><script type="math/tex">G_{max}</script></span></td>
-<td><code class="codehilite">[GDim,1]</code></td>
-<td>Upper bound of <span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
+<p>With the parameter <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>, you can achive</p>
 <ul>
-<li>Varying dynamics, prediction horizon and references, and terminal cost function can be achieved by using the parameter <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>.</li>
+<li>Time-variant dynamics and references</li>
+<li>Terminal cost function and constraint</li>
 </ul>
 </div>
-<h2 id="how-parnmpc-solves-the-ocp">How <strong><code class="codehilite">ParNMPC</code></strong> Solves the OCP?</h2>
-<h3 id="discretization">Discretization</h3>
+<h2 id="how-parnmpc-works">How <strong><code class="codehilite">ParNMPC</code></strong> works</h2>
 <p><strong><code class="codehilite">ParNMPC</code></strong>  discretizes the OCP defined above into the following problem with <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span> steps:</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
-\min_{X,\ U}\sum_{i=1}^{N}&amp;L(u_i,x_i,p_i) \\
+\min_{x,\ u}\sum_{i=1}^{N}&amp;L(u_i,x_i,p_i) \\
 \text{s.t.}\quad &amp; x_0 = \bar{x}_0,\\
 &amp;F(x_{i-1},u_i,x_i,p_i)=0, \quad i\in\{1,\cdots,N\},\\
 &amp; C(u_i,x_i,p_i)=0,\quad i\in\{1,\cdots,N\},\\
-&amp; u_{min}\leq u_i\leq u_{max},\quad i\in\{1,\cdots,N\},\\
-&amp; x_{min}\leq x_i\leq x_{max},\quad i\in\{1,\cdots,N\},\\
-&amp; G_{min}\leq G(u_i,x_i,p_i)\leq G_{max},\quad i\in\{1,\cdots,N\}.
+&amp;  G(u_i,x_i,p_i) \geq 0,\quad i\in\{1,\cdots,N\}.
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
-\min_{X,\ U}\sum_{i=1}^{N}&L(u_i,x_i,p_i) \\
+\min_{x,\ u}\sum_{i=1}^{N}&L(u_i,x_i,p_i) \\
 \text{s.t.}\quad & x_0 = \bar{x}_0,\\
 &F(x_{i-1},u_i,x_i,p_i)=0, \quad i\in\{1,\cdots,N\},\\
 & C(u_i,x_i,p_i)=0,\quad i\in\{1,\cdots,N\},\\
-& u_{min}\leq u_i\leq u_{max},\quad i\in\{1,\cdots,N\},\\
-& x_{min}\leq x_i\leq x_{max},\quad i\in\{1,\cdots,N\},\\
-& G_{min}\leq G(u_i,x_i,p_i)\leq G_{max},\quad i\in\{1,\cdots,N\}.
+&  G(u_i,x_i,p_i) \geq 0,\quad i\in\{1,\cdots,N\}.
 \end{align}</script>
 </div>
-<p>Here, the continuous-time state equation <span><span class="MathJax_Preview">\dot{x}(t)=f(u(t),x(t),p(t))</span><script type="math/tex">\dot{x}(t)=f(u(t),x(t),p(t))</script></span> (if <span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span> is not imposed) is discretized to be <span><span class="MathJax_Preview">F(x_{i-1},u_i,x_i,p_i)=0</span><script type="math/tex">F(x_{i-1},u_i,x_i,p_i)=0</script></span>, e.g., the backward Euler's method with <span><span class="MathJax_Preview">F(x_{i-1},u_i,x_i,p_i) = x_{i-1} + f(u_i,x_i,p_i)\Delta\tau - x_i</span><script type="math/tex">F(x_{i-1},u_i,x_i,p_i) = x_{i-1} + f(u_i,x_i,p_i)\Delta\tau - x_i</script></span>, where <span><span class="MathJax_Preview">\Delta\tau=T/N</span><script type="math/tex">\Delta\tau=T/N</script></span>.</p>
-<h3 id="handling-inequality-constraints">Handling inequality constraints</h3>
-<p>The inequality constraints are converted into logarithmic barrier functions (i.e., interior-point method).
-The following equality-constrained problem is obtained:</p>
-<div>
-<div class="MathJax_Preview">\begin{align}
-\min_{X,\ U}\sum_{i=1}^{N}&amp;L(u_i,x_i,p_i)  \\
--\gamma\sum_{i=1}^{N}&amp;\sum_{j=1}^{n_{u}}\left(\log(u_{max(j)}-u_{i(j)})+\log(u_{i(j)}-u_{min(j)})\right)\\
--\gamma\sum_{i=1}^{N}&amp;\sum_{j=1}^{n_{x}}\left(\log(x_{max(j)}-x_{i(j)})+\log(x_{i(j)}-x_{min(j)})\right)\\
--\gamma\sum_{i=1}^{N}&amp;\sum_{j=1}^{n_{G}}\left(\log(G_{max(j)}-G_{i(j)})+\log(G_{i(j)}-G_{min(j)})\right)\\
-\text{s.t.}\quad &amp; x_0 = \bar{x}_0,\\
-&amp;F(x_{i-1},u_i,x_i,p_i)=0, \quad i\in\{1,\cdots,N\},\\
-&amp; C(u_i,x_i,p_i)=0,\quad i\in\{1,\cdots,N\}.
-\end{align}</div>
-<script type="math/tex; mode=display">\begin{align}
-\min_{X,\ U}\sum_{i=1}^{N}&L(u_i,x_i,p_i)  \\
--\gamma\sum_{i=1}^{N}&\sum_{j=1}^{n_{u}}\left(\log(u_{max(j)}-u_{i(j)})+\log(u_{i(j)}-u_{min(j)})\right)\\
--\gamma\sum_{i=1}^{N}&\sum_{j=1}^{n_{x}}\left(\log(x_{max(j)}-x_{i(j)})+\log(x_{i(j)}-x_{min(j)})\right)\\
--\gamma\sum_{i=1}^{N}&\sum_{j=1}^{n_{G}}\left(\log(G_{max(j)}-G_{i(j)})+\log(G_{i(j)}-G_{min(j)})\right)\\
-\text{s.t.}\quad & x_0 = \bar{x}_0,\\
-&F(x_{i-1},u_i,x_i,p_i)=0, \quad i\in\{1,\cdots,N\},\\
-& C(u_i,x_i,p_i)=0,\quad i\in\{1,\cdots,N\}.
-\end{align}</script>
-</div>
-<p>Here, <span><span class="MathJax_Preview">v_{(j)}</span><script type="math/tex">v_{(j)}</script></span> is the <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>-th element of a variable <span><span class="MathJax_Preview">v</span><script type="math/tex">v</script></span>, <span><span class="MathJax_Preview">G_{i(j)}</span><script type="math/tex">G_{i(j)}</script></span> is the  <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>-th element of <span><span class="MathJax_Preview">G(u_i,x_i,p_i)</span><script type="math/tex">G(u_i,x_i,p_i)</script></span>, and <span><span class="MathJax_Preview">\gamma</span><script type="math/tex">\gamma</script></span> is the barrier parameter.
-For simplicity, the same barrier parameter is used here. It can be set to be different for different constraints in <strong><code class="codehilite">ParNMPC</code></strong>.</p>
-<h3 id="solving-the-kkt-conditions-iteratively-in-parallel">Solving the KKT conditions iteratively in parallel</h3>
-<p>Then, <strong><code class="codehilite">ParNMPC</code></strong> derives the KKT conditions for the problem above by introducing Lagrange multipliers <span><span class="MathJax_Preview">\{\lambda_i\}_{i=1}^{N}</span><script type="math/tex">\{\lambda_i\}_{i=1}^{N}</script></span> for the state equations and <span><span class="MathJax_Preview">\{\mu_i\}_{i=1}^{N}</span><script type="math/tex">\{\mu_i\}_{i=1}^{N}</script></span> for the equality constraints.</p>
-<p>Next, the KKT conditions are solved iteratively in parallel for a given initial state <span><span class="MathJax_Preview">\bar{x}_0</span><script type="math/tex">\bar{x}_0</script></span> and given parameters <span><span class="MathJax_Preview">\{p_i\}_{i=1}^{N}</span><script type="math/tex">\{p_i\}_{i=1}^{N}</script></span>.
-The NMPC controller is implemented by applying the first optimal control input <span><span class="MathJax_Preview">u_1^*</span><script type="math/tex">u_1^*</script></span> as the actual input.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul>
-<li>The iterative solver of <strong><code class="codehilite">ParNMPC</code></strong> relies on warm start. <strong><code class="codehilite">ParNMPC</code></strong> provides tools to solve the very first OCP offline.</li>
-<li><strong><code class="codehilite">ParNMPC</code></strong> provides tools to define the controlled plant model for simulation.</li>
-</ul>
-</div>
+<p>Here, <span><span class="MathJax_Preview">F(x_{i-1},u_i,x_i,p_i)=0</span><script type="math/tex">F(x_{i-1},u_i,x_i,p_i)=0</script></span> is the discretized state-space model.
+<strong><code class="codehilite">ParNMPC</code></strong> solves the discretized OCP using the parallel primal-dual interior-point method, where the inequality constraints <span><span class="MathJax_Preview">G(u_i,x_i,p_i) \geq 0</span><script type="math/tex">G(u_i,x_i,p_i) \geq 0</script></span> are transferred into logarithmic barrier functions with a barrier parameter <span><span class="MathJax_Preview">\rho</span><script type="math/tex">\rho</script></span>. </p>
+<h3 id="variables">Variables</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span><span class="MathJax_Preview">\lambda</span><script type="math/tex">\lambda</script></span></td>
+<td><code class="codehilite">[dim.lambda,N]</code></td>
+<td>Lagrange multiplier corresponding to <span><span class="MathJax_Preview">F</span><script type="math/tex">F</script></span></td>
+</tr>
+<tr>
+<td><span><span class="MathJax_Preview">\mu</span><script type="math/tex">\mu</script></span></td>
+<td><code class="codehilite">[dim.mu,N]</code></td>
+<td>Lagrange multiplier corresponding to <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span></td>
+</tr>
+<tr>
+<td><span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span></td>
+<td><code class="codehilite">[dim.u,N]</code></td>
+<td></td>
+</tr>
+<tr>
+<td><span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span></td>
+<td><code class="codehilite">[dim.x,N]</code></td>
+<td></td>
+</tr>
+<tr>
+<td><span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span></td>
+<td><code class="codehilite">[dim.z,N]</code></td>
+<td>Lagrange multiplier corresponding to <span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span></td>
+</tr>
+<tr>
+<td><span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span> (LAMBDA)</td>
+<td><code class="codehilite">[dim.x,dim.x,N]</code></td>
+<td>Sensitivity</td>
+</tr>
+</tbody>
+</table>
                 
                   
                 
@@ -812,24 +782,17 @@ The NMPC controller is implemented by applying the first optimal control input <
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="assets/javascripts/application.583bbe55.js"></script>
+      <script src="assets/javascripts/application.d9aa80ab.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-      
-    
-    
-      
-        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-120133947-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
       
     
   </body>

@@ -1,4 +1,6 @@
 function codeGen(plant)
+    showInfo(plant);
+    disp('Generating plant...');
     if ~plant.isMEnabled
        % init M
        plant.M = symfun(eye(plant.dim.x),[plant.u;plant.x;plant.p]);
@@ -12,4 +14,5 @@ function codeGen(plant)
         'File','./funcgen/SIM_GEN_M',...
         'Vars',{plant.u;plant.x;plant.p},...
         'Outputs',{'M'});
+    disp('Done!')
 end

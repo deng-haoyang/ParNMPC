@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
@@ -40,9 +40,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.982221ab.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
       
       
         
@@ -51,7 +51,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -61,6 +61,35 @@
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-120133947-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -98,7 +127,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#interfaces" tabindex="1" class="md-skip">
+      <a href="#interfaces" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -119,22 +148,19 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                ParNMPC Homepage
-              </span>
-              <span class="md-header-nav__topic">
-                Interfaces
-              </span>
-            
+            <span class="md-header-nav__topic">
+              ParNMPC Homepage
+            </span>
+            <span class="md-header-nav__topic">
+              Interfaces
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -157,7 +183,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -168,20 +193,18 @@
 
   
 
-
-  <a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
           </div>
         </div>
       
@@ -217,20 +240,18 @@
 
   
 
-
-  <a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -241,8 +262,8 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="What is ParNMPC" class="md-nav__link">
-      What is ParNMPC
+    <a href=".." title="Introduction" class="md-nav__link">
+      Introduction
     </a>
   </li>
 
@@ -314,13 +335,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ocpsolver" title="OCPSolver" class="md-nav__link">
-    OCPSolver
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#dynamicsystem" title="DynamicSystem" class="md-nav__link">
     DynamicSystem
   </a>
@@ -341,15 +355,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#nmpc_iter" title="NMPC_Iter " class="md-nav__link">
-    NMPC_Iter 
+  <a href="#nmpc_solve" title="NMPC_Solve " class="md-nav__link">
+    NMPC_Solve 
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#nmpc_iter_codegen" title="NMPC_Iter_CodeGen" class="md-nav__link">
-    NMPC_Iter_CodeGen
+  <a href="#createoptions" title="createOptions" class="md-nav__link">
+    createOptions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nmpc_solve_codegen" title="NMPC_Solve_CodeGen" class="md-nav__link">
+    NMPC_Solve_CodeGen
   </a>
   
 </li>
@@ -547,13 +568,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ocpsolver" title="OCPSolver" class="md-nav__link">
-    OCPSolver
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#dynamicsystem" title="DynamicSystem" class="md-nav__link">
     DynamicSystem
   </a>
@@ -574,15 +588,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#nmpc_iter" title="NMPC_Iter " class="md-nav__link">
-    NMPC_Iter 
+  <a href="#nmpc_solve" title="NMPC_Solve " class="md-nav__link">
+    NMPC_Solve 
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#nmpc_iter_codegen" title="NMPC_Iter_CodeGen" class="md-nav__link">
-    NMPC_Iter_CodeGen
+  <a href="#createoptions" title="createOptions" class="md-nav__link">
+    createOptions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nmpc_solve_codegen" title="NMPC_Solve_CodeGen" class="md-nav__link">
+    NMPC_Solve_CodeGen
   </a>
   
 </li>
@@ -642,10 +663,6 @@
 <td>Configurate the NMPC solver</td>
 </tr>
 <tr>
-<td><code class="codehilite">OCPSolver</code></td>
-<td>Solve the very first OCP offline</td>
-</tr>
-<tr>
 <td><code class="codehilite">DynamicSystem</code></td>
 <td>Construct a dynamic system</td>
 </tr>
@@ -667,23 +684,27 @@
 <tbody>
 <tr>
 <td><code class="codehilite">dim</code></td>
-<td><code class="codehilite">structure.{lambda,mu,u,x,p}</code>, dimensions of lambda, mu, u, x, p.</td>
+<td><code class="codehilite">structure.{lambda,mu,u,x,z,p}</code>, dimensions of lambda, mu, u, x, z, p.</td>
 </tr>
 <tr>
 <td><code class="codehilite">lambda</code></td>
-<td><code class="codehilite">symbolic vector [xDim,1]</code>, multiplier vector.</td>
+<td><code class="codehilite">symbolic vector [dim.x,1]</code>, multiplier vector.</td>
 </tr>
 <tr>
 <td><code class="codehilite">mu</code></td>
-<td><code class="codehilite">symbolic vector [muDim,1]</code>, multiplier vector.</td>
+<td><code class="codehilite">symbolic vector [dim.mu,1]</code>, multiplier vector.</td>
 </tr>
 <tr>
 <td><code class="codehilite">u</code></td>
-<td><code class="codehilite">symbolic vector [uDim,1]</code>, input vector.</td>
+<td><code class="codehilite">symbolic vector [dim.u,1]</code>, input vector.</td>
 </tr>
 <tr>
 <td><code class="codehilite">x</code></td>
-<td><code class="codehilite">symbolic vector [xDim,1]</code>, state vector.</td>
+<td><code class="codehilite">symbolic vector [dim.x,1]</code>, state vector.</td>
+</tr>
+<tr>
+<td><code class="codehilite">z</code></td>
+<td><code class="codehilite">symbolic vector [zDim,1]</code>, multiplier vector.</td>
 </tr>
 <tr>
 <td><code class="codehilite">p</code></td>
@@ -691,11 +712,11 @@
 </tr>
 <tr>
 <td><code class="codehilite">f</code></td>
-<td><code class="codehilite">symbolic expression [xDim,1]</code>, function f.</td>
+<td><code class="codehilite">symbolic expression [dim.x,1]</code>, function f.</td>
 </tr>
 <tr>
 <td><code class="codehilite">M</code></td>
-<td><code class="codehilite">symbolic expression [xDim,xDim]</code>, matrix M .</td>
+<td><code class="codehilite">symbolic expression [dim.x,dim.x]</code>, matrix M .</td>
 </tr>
 <tr>
 <td><code class="codehilite">L</code></td>
@@ -703,11 +724,11 @@
 </tr>
 <tr>
 <td><code class="codehilite">C</code></td>
-<td><code class="codehilite">symbolic expression [muDim,1]</code>, function C.</td>
+<td><code class="codehilite">symbolic expression [dim.mu,1]</code>, function C.</td>
 </tr>
 <tr>
 <td><code class="codehilite">G</code></td>
-<td><code class="codehilite">symbolic expression [GDim,1]</code>, function G.</td>
+<td><code class="codehilite">symbolic expression [dim.z,1]</code>, function G.</td>
 </tr>
 <tr>
 <td><code class="codehilite">N</code></td>
@@ -729,30 +750,6 @@
 <td><code class="codehilite">isMEnabled</code></td>
 <td><code class="codehilite">bool</code>, whether the M matrix is enabled.</td>
 </tr>
-<tr>
-<td><code class="codehilite">uMax</code></td>
-<td><code class="codehilite">structure.{value,barrierParameter}</code>, upper bound of u.</td>
-</tr>
-<tr>
-<td><code class="codehilite">uMin</code></td>
-<td><code class="codehilite">structure.{value,barrierParameter}</code>, lower bound of u.</td>
-</tr>
-<tr>
-<td><code class="codehilite">xMax</code></td>
-<td><code class="codehilite">structure.{value,barrierParameter}</code>, upper bound of x.</td>
-</tr>
-<tr>
-<td><code class="codehilite">xMin</code></td>
-<td><code class="codehilite">structure.{value,barrierParameter}</code>, lower bound of x.</td>
-</tr>
-<tr>
-<td><code class="codehilite">GMax</code></td>
-<td><code class="codehilite">structure.{value,barrierParameter}</code>, upper bound of G.</td>
-</tr>
-<tr>
-<td><code class="codehilite">GMin</code></td>
-<td><code class="codehilite">structure.{value,barrierParameter}</code>, lower bound of G.</td>
-</tr>
 </tbody>
 </table>
 <table>
@@ -765,7 +762,7 @@
 <tbody>
 <tr>
 <td><code class="codehilite">OptimalControlProblem</code></td>
-<td>Constructor.<br>Input:<br><code class="codehilite">muDim</code>: <code class="codehilite">nonnegtive integer [1,1]</code>, dimension of mu.<br><code class="codehilite">uDim</code>: <code class="codehilite">positive integer [1,1]</code>, dimension of u.<br><code class="codehilite">xDim</code>: <code class="codehilite">positive integer [1,1]</code>, dimension of x.<br><code class="codehilite">pDim</code>: <code class="codehilite">nonnegtive integer [1,1]</code>, dimension of p.<br><code class="codehilite">T</code>: <code class="codehilite">positive [1,1]</code>, prediction horizon.<br><code class="codehilite">N</code>: <code class="codehilite">positive integer [1,1]</code>, number of discretization grids.<br>Output:<br><code class="codehilite">OptimalControlProblem</code></td>
+<td>Constructor.<br>Input:<br><code class="codehilite">dim.u</code>: <code class="codehilite">positive integer [1,1]</code>, dimension of u.<br><code class="codehilite">dim.x</code>: <code class="codehilite">positive integer [1,1]</code>, dimension of x.<br><code class="codehilite">pDim</code>: <code class="codehilite">nonnegtive integer [1,1]</code>, dimension of p.<br><code class="codehilite">N</code>: <code class="codehilite">positive integer [1,1]</code>, number of discretization grids.<br>Output:<br><code class="codehilite">OptimalControlProblem</code></td>
 </tr>
 <tr>
 <td><code class="codehilite">setf</code></td>
@@ -793,7 +790,7 @@
 </tr>
 <tr>
 <td><code class="codehilite">setC</code></td>
-<td>Set C.<br>Input:<br><code class="codehilite">C</code>: <code class="codehilite">symbolic expression [muDim,1]</code>, function C.<br>Output: none.</td>
+<td>Set C.<br>Input:<br><code class="codehilite">C</code>: <code class="codehilite">symbolic expression [dim.mu,1]</code>, function C.<br>Output: none.</td>
 </tr>
 <tr>
 <td><code class="codehilite">setT</code></td>
@@ -801,15 +798,7 @@
 </tr>
 <tr>
 <td><code class="codehilite">setG</code></td>
-<td>Set G.<br>Input:<br><code class="codehilite">C</code>: <code class="codehilite">symbolic expression [GDim,1]</code>, function G.<br>Output: none.</td>
-</tr>
-<tr>
-<td><code class="codehilite">setUpperBound</code></td>
-<td>Set the upper bound of u, x, or G.<br>Input:<br><code class="codehilite">field</code>: <code class="codehilite">string</code>, <code class="codehilite">&#39;x&#39;</code>, <code class="codehilite">&#39;u&#39;</code>, or <code class="codehilite">&#39;G&#39;</code>.<br><code class="codehilite">boundValue</code>: <code class="codehilite">[~Dim,1]</code>, bound value, i.e., <span><span class="MathJax_Preview">x_{max}</span><script type="math/tex">x_{max}</script></span>, <span><span class="MathJax_Preview">u_{max}</span><script type="math/tex">u_{max}</script></span>, or <span><span class="MathJax_Preview">G_{max}</span><script type="math/tex">G_{max}</script></span>.<br><code class="codehilite">barrierParameter</code>: <code class="codehilite">positive [~Dim,1]</code>, barrier parameter of the logarithmic function.</td>
-</tr>
-<tr>
-<td><code class="codehilite">setLowerBound</code></td>
-<td>Set the lower bound of u, x, or G.<br>Input:<br><code class="codehilite">field</code>: <code class="codehilite">string</code>, <code class="codehilite">&#39;x&#39;</code>, <code class="codehilite">&#39;u&#39;</code>, or <code class="codehilite">&#39;G&#39;</code>.<br><code class="codehilite">boundValue</code>: <code class="codehilite">[~Dim,1]</code>, bound value, i.e., <span><span class="MathJax_Preview">x_{min}</span><script type="math/tex">x_{min}</script></span>, <span><span class="MathJax_Preview">u_{min}</span><script type="math/tex">u_{min}</script></span>, or <span><span class="MathJax_Preview">G_{min}</span><script type="math/tex">G_{min}</script></span>.<br><code class="codehilite">barrierParameter</code>: <code class="codehilite">positive [~Dim,1]</code>, barrier parameter of the logarithmic function.</td>
+<td>Set G.<br>Input:<br><code class="codehilite">C</code>: <code class="codehilite">symbolic expression [dim.z,1]</code>, function G.<br>Output: none.</td>
 </tr>
 <tr>
 <td><code class="codehilite">setDiscretizationMethod</code></td>
@@ -867,92 +856,6 @@
 </tr>
 </tbody>
 </table>
-<h3 id="ocpsolver"><code class="codehilite">OCPSolver</code></h3>
-<p>Solve the very first OCP offline.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p><code class="codehilite">./NMPC_Problem_Formulation.m</code></p>
-</div>
-<table>
-<thead>
-<tr>
-<th>Properties</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="codehilite">OCP</code></td>
-<td><code class="codehilite">OptimalControlProblem</code>, OptimalControlProblem object.</td>
-</tr>
-<tr>
-<td><code class="codehilite">NMPCSolver</code></td>
-<td><code class="codehilite">NMPCSolver</code>, NMPCSolver object.</td>
-</tr>
-<tr>
-<td><code class="codehilite">x0</code></td>
-<td><code class="codehilite">[xDim,1]</code>, initial state.</td>
-</tr>
-<tr>
-<td><code class="codehilite">lambda</code></td>
-<td><code class="codehilite">[xDim,N]</code>, multipliers.</td>
-</tr>
-<tr>
-<td><code class="codehilite">mu</code></td>
-<td><code class="codehilite">[muDim,N]</code>, multipliers.</td>
-</tr>
-<tr>
-<td><code class="codehilite">u</code></td>
-<td><code class="codehilite">[uDim,N]</code>, inputs.</td>
-</tr>
-<tr>
-<td><code class="codehilite">x</code></td>
-<td><code class="codehilite">[xDim,N]</code>, states.</td>
-</tr>
-<tr>
-<td><code class="codehilite">p</code></td>
-<td><code class="codehilite">[pDim,N]</code>, given parameters.</td>
-</tr>
-<tr>
-<td><code class="codehilite">LAMBDA</code></td>
-<td><code class="codehilite">[xDim,xDim,N]</code>, dependent variable LAMBDA.</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Functions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="codehilite">OCPSolver</code></td>
-<td>Constructor.<br>Input:<br><code class="codehilite">OCP</code>: <code class="codehilite">OptimalControlProblem</code>, OptimalControlProblem object.<br><code class="codehilite">NMPCSolver</code>: <code class="codehilite">NMPCSolver</code>, NMPCSolver object.<br><code class="codehilite">x0</code>: <code class="codehilite">[xDim,1]</code>, initial state.<br><code class="codehilite">par</code>: <code class="codehilite">[pDim,N]</code>, given parameters.<br>Output:<br><code class="codehilite">OCPSolver</code></td>
-</tr>
-<tr>
-<td><code class="codehilite">OCPSolve</code></td>
-<td>Solve the OCP with a providing initial guess offline.<br>Input:<br><code class="codehilite">lambdaInitGuess</code>: <code class="codehilite">[xDim,N]</code>, initial guess of lambda.<br><code class="codehilite">muInitGuess</code>: <code class="codehilite">[muDim,N]</code>, initial guess of mu.<br><code class="codehilite">uInitGuess</code>: <code class="codehilite">[uDim,N]</code>, initial guess of u.<br><code class="codehilite">xInitGuess</code>: <code class="codehilite">[xDim,N]</code>, initial guess of x.<br><code class="codehilite">method</code>: <code class="codehilite">string</code>, <code class="codehilite">&#39;fmincon&#39;</code> or <code class="codehilite">&#39;NMPC_Iter&#39;</code>, solver.<br><code class="codehilite">maxIter</code>: <code class="codehilite">[1,1]</code>, max number of iterations.<br>Output: <br><code class="codehilite">lambda</code>: <code class="codehilite">[xDim,N]</code>, optimal value of lambda.<br><code class="codehilite">mu</code>: <code class="codehilite">[muDim,N]</code>, optimal value of mu.<br><code class="codehilite">u</code>: <code class="codehilite">[uDim,N]</code>, optimal value of u.<br><code class="codehilite">x</code>: <code class="codehilite">[xDim,N]</code>, optimal value of x.</td>
-</tr>
-<tr>
-<td><code class="codehilite">initFromMatFile</code></td>
-<td>Initialize from file with automatic interpolation.<br>Input:<br><code class="codehilite">matFile</code>: <code class="codehilite">string</code>, file name of the mat file.<br>Output: <br><code class="codehilite">lambda</code>: <code class="codehilite">[xDim,N]</code>, interpolated value of lambda.<br><code class="codehilite">mu</code>: <code class="codehilite">[muDim,N]</code>, interpolated value of mu.<br><code class="codehilite">u</code>: <code class="codehilite">[uDim,N]</code>, interpolated value of u.<br><code class="codehilite">x</code>: <code class="codehilite">[xDim,N]</code>, interpolated value of x.</td>
-</tr>
-<tr>
-<td><code class="codehilite">initFromStartEnd</code></td>
-<td>Initialize from the start and the end values by linear interpolation.<br>Input:<br><code class="codehilite">lambdaStart</code>: <code class="codehilite">[xDim,1]</code>, start value of lambda.<br><code class="codehilite">muStart</code>: <code class="codehilite">[muDim,1]</code>, start value of mu.<br><code class="codehilite">uStart</code>: <code class="codehilite">[uDim,1]</code>, start value of u.<br><code class="codehilite">xStart</code>: <code class="codehilite">[xDim,1]</code>, start value of x.<br><code class="codehilite">lambdaEnd</code>: <code class="codehilite">[xDim,1]</code>, end value of lambda.<br><code class="codehilite">muEnd</code>: <code class="codehilite">[muDim,1]</code>, end value of mu.<br><code class="codehilite">uEnd</code>: <code class="codehilite">[uDim,1]</code>, end value of u.<br><code class="codehilite">xEnd</code>: <code class="codehilite">[xDim,1]</code>, end value of x.<br>Output: <br><code class="codehilite">lambda</code>: <code class="codehilite">[xDim,N]</code>, interpolated value of lambda.<br><code class="codehilite">mu</code>: <code class="codehilite">[muDim,N]</code>, interpolated value of mu.<br><code class="codehilite">u</code>: <code class="codehilite">[uDim,N]</code>, interpolated value of u.<br><code class="codehilite">x</code>: <code class="codehilite">[xDim,N]</code>, interpolated value of x.</td>
-</tr>
-<tr>
-<td><code class="codehilite">getLAMBDA</code></td>
-<td>Get the dependent variable LAMBDA from the given x0, lambda, mu, u, x, p.<br>Input:<br><code class="codehilite">x0</code>: <code class="codehilite">[xDim,1]</code>, initial state.<br><code class="codehilite">lambda</code>: <code class="codehilite">[xDim,N]</code>, lambda.<br><code class="codehilite">mu</code>: <code class="codehilite">[muDim,N]</code>, mu.<br><code class="codehilite">u</code>: <code class="codehilite">[uDim,N]</code>, u.<br><code class="codehilite">x</code>: <code class="codehilite">[xDim,N]</code>, x.<br><code class="codehilite">p</code>: <code class="codehilite">[pDim,N]</code>, p.<br>Output:<br><code class="codehilite">LAMBDA</code>: <code class="codehilite">[xDim,xDim,N]</code>.</td>
-</tr>
-<tr>
-<td><code class="codehilite">getCost</code></td>
-<td>Get the cost function from the given u, x, p.<br>Input:<br><code class="codehilite">u</code>: <code class="codehilite">[uDim,N]</code>, u.<br><code class="codehilite">x</code>: <code class="codehilite">[xDim,N]</code>, x.<br><code class="codehilite">p</code>: <code class="codehilite">[pDim,N]</code>, p.<br>Output:<br><code class="codehilite">cost</code>: <code class="codehilite">[1,1]</code>.</td>
-</tr>
-</tbody>
-</table>
 <h3 id="dynamicsystem"><code class="codehilite">DynamicSystem</code></h3>
 <p>Construct a dynamic system <span><span class="MathJax_Preview">M(u(t),x(t),p(t))\dot{x}=f(u(t),x(t),p(t))</span><script type="math/tex">M(u(t),x(t),p(t))\dot{x}=f(u(t),x(t),p(t))</script></span>.</p>
 <div class="admonition example">
@@ -973,11 +876,11 @@
 </tr>
 <tr>
 <td><code class="codehilite">u</code></td>
-<td><code class="codehilite">symbolic vector [uDim,1]</code>, input vector.</td>
+<td><code class="codehilite">symbolic vector [dim.u,1]</code>, input vector.</td>
 </tr>
 <tr>
 <td><code class="codehilite">x</code></td>
-<td><code class="codehilite">symbolic vector [xDim,1]</code>, state vector.</td>
+<td><code class="codehilite">symbolic vector [dim.x,1]</code>, state vector.</td>
 </tr>
 <tr>
 <td><code class="codehilite">p</code></td>
@@ -985,11 +888,11 @@
 </tr>
 <tr>
 <td><code class="codehilite">f</code></td>
-<td><code class="codehilite">symbolic expression [xDim,1]</code>, function f.</td>
+<td><code class="codehilite">symbolic expression [dim.x,1]</code>, function f.</td>
 </tr>
 <tr>
 <td><code class="codehilite">M</code></td>
-<td><code class="codehilite">symbolic expression [xDim,xDim]</code>, matrix M .</td>
+<td><code class="codehilite">symbolic expression [dim.x,dim.x]</code>, matrix M .</td>
 </tr>
 <tr>
 <td><code class="codehilite">isMEnabled</code></td>
@@ -1007,15 +910,15 @@
 <tbody>
 <tr>
 <td><code class="codehilite">DynamicSystem</code></td>
-<td>Constructor.<br>Input:<br><code class="codehilite">uDim</code>: <code class="codehilite">[1,1]</code>, dimension of u.<br><code class="codehilite">xDim</code>: <code class="codehilite">[1,1]</code>, dimension of x.<br><code class="codehilite">pDim</code>: <code class="codehilite">[1,1]</code>, dimension of p.<br>Output:<br><code class="codehilite">DynamicSystem</code></td>
+<td>Constructor.<br>Input:<br><code class="codehilite">dim.u</code>: <code class="codehilite">[1,1]</code>, dimension of u.<br><code class="codehilite">dim.x</code>: <code class="codehilite">[1,1]</code>, dimension of x.<br><code class="codehilite">pDim</code>: <code class="codehilite">[1,1]</code>, dimension of p.<br>Output:<br><code class="codehilite">DynamicSystem</code></td>
 </tr>
 <tr>
 <td><code class="codehilite">setf</code></td>
-<td>Set f.<br>Input:<br><code class="codehilite">f</code>: <code class="codehilite">symbolic expression [xDim,1]</code>, function f.<br>Output: none.</td>
+<td>Set f.<br>Input:<br><code class="codehilite">f</code>: <code class="codehilite">symbolic expression [dim.x,1]</code>, function f.<br>Output: none.</td>
 </tr>
 <tr>
 <td><code class="codehilite">setM</code></td>
-<td>Set M.<br>Input:<br><code class="codehilite">M</code>: <code class="codehilite">symbolic expression [xDim,xDim]</code>, M matrix.<br>Output: none.</td>
+<td>Set M.<br>Input:<br><code class="codehilite">M</code>: <code class="codehilite">symbolic expression [dim.x,dim.x]</code>, M matrix.<br>Output: none.</td>
 </tr>
 <tr>
 <td><code class="codehilite">setStateName</code></td>
@@ -1045,12 +948,16 @@
 </thead>
 <tbody>
 <tr>
-<td><code class="codehilite">NMPC_Iter</code></td>
-<td>Perform one iteration to solve the NMPC problem.</td>
+<td><code class="codehilite">NMPC_Solve</code></td>
+<td>Solve the NMPC problem.</td>
 </tr>
 <tr>
-<td><code class="codehilite">NMPC_Iter_CodeGen</code></td>
-<td>Generate code for function <code class="codehilite">NMPC_Iter</code>.</td>
+<td><code class="codehilite">createOptions</code></td>
+<td>Create an option struct for <code class="codehilite">NMPC_Solve</code>.</td>
+</tr>
+<tr>
+<td><code class="codehilite">NMPC_Solve_CodeGen</code></td>
+<td>Generate code for <code class="codehilite">NMPC_Solve</code>.</td>
 </tr>
 <tr>
 <td><code class="codehilite">SIM_Plant_RK4</code></td>
@@ -1062,7 +969,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="nmpc_iter"><code class="codehilite">NMPC_Iter</code> <div id="NMPC_Iter"></div></h3>
+<h3 id="nmpc_solve"><code class="codehilite">NMPC_Solve</code> <div id="NMPC_Solve"></div></h3>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p><code class="codehilite">./Simu_Matlab.m</code></p>
@@ -1071,25 +978,52 @@
 <thead>
 <tr>
 <th>Function name</th>
-<th>NMPC_Iter</th>
+<th>NMPC_Solve</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Description</td>
-<td>Perform one iteration to solve the NMPC problem.</td>
+<td>Solve the NMPC problem.</td>
 </tr>
 <tr>
 <td>Input</td>
-<td><code class="codehilite">x0</code>: <code class="codehilite">[xDim,1]</code>, initial state.<br><code class="codehilite">lambda</code>: <code class="codehilite">[xDim,N/DoP,DoP]</code>, initial guess of lambda.<br><code class="codehilite">mu</code>: <code class="codehilite">[muDim,N/DoP,DoP]</code>, initial guess of mu.<br><code class="codehilite">u</code>: <code class="codehilite">[uDim,N/DoP,DoP]</code>, initial guess of u.<br><code class="codehilite">x</code>: <code class="codehilite">[xDim,N/DoP,DoP]</code>, initial guess of x.<br><code class="codehilite">p</code>: <code class="codehilite">[pDim,N/DoP,DoP]</code>, given parameters.<br><code class="codehilite">LAMBDA</code>: <code class="codehilite">[xDim,xDim,N/DoP,DoP]</code>, initial guess of LAMBDA.</td>
+<td><code class="codehilite">x0</code>: <code class="codehilite">[dim.x,1]</code>, initial state.<br><code class="codehilite">p</code>: <code class="codehilite">[pDim,N]</code>, given parameters.<br><code class="codehilite">options</code>: <code class="codehilite">struct</code>, options.</td>
 </tr>
 <tr>
 <td>Output</td>
-<td><code class="codehilite">lambda</code>: <code class="codehilite">[xDim,N/DoP,DoP]</code>.<br><code class="codehilite">mu</code>: <code class="codehilite">[muDim,N/DoP,DoP]</code>.<br><code class="codehilite">u</code>: <code class="codehilite">[uDim,N/DoP,DoP]</code>.<br><code class="codehilite">x</code>: <code class="codehilite">[xDim,N/DoP,DoP]</code>.<br><code class="codehilite">LAMBDA</code>: <code class="codehilite">[xDim,xDim,N/DoP,DoP]</code>.<br><code class="codehilite">cost</code>: <code class="codehilite">[1,1]</code>, evaluation of the cost function after iteration.<br><code class="codehilite">error</code>: <code class="codehilite">[1,1]</code>, Euclidean norm of the KKT conditions.<br><code class="codehilite">timeElapsed</code>: <code class="codehilite">[1,1]</code>, computation time in second.</td>
+<td><code class="codehilite">solution</code>: <code class="codehilite">struct</code>, solution.<br><code class="codehilite">output</code>: <code class="codehilite">struct</code>, output information.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="nmpc_iter_codegen"><code class="codehilite">NMPC_Iter_CodeGen</code></h3>
+<h3 id="createoptions"><code class="codehilite">createOptions</code></h3>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code class="codehilite">./Simu_Matlab.m</code></p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Function name</th>
+<th>createOptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Description</td>
+<td>Create an option struct for <code class="codehilite">NMPC_Solve</code>.</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Output</td>
+<td><code class="codehilite">options</code>: <code class="codehilite">struct</code>, options.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nmpc_solve_codegen"><code class="codehilite">NMPC_Solve_CodeGen</code></h3>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p><code class="codehilite">./Simu_Simulink_Setup.m</code></p>
@@ -1098,17 +1032,17 @@
 <thead>
 <tr>
 <th>Function name</th>
-<th>NMPC_Iter_CodeGen</th>
+<th>NMPC_Solve_CodeGen</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Description</td>
-<td>Generate code for function <code class="codehilite">NMPC_Iter</code>.</td>
+<td>Generate code for function <code class="codehilite">NMPC_Solve</code>.</td>
 </tr>
 <tr>
 <td>Input</td>
-<td><code class="codehilite">target</code>: <code class="codehilite">string</code>, <code class="codehilite">&#39;mex&#39;</code>, <code class="codehilite">&#39;dll&#39;</code>, or <code class="codehilite">&#39;mex&#39;</code>, target.<br><code class="codehilite">targetLang</code>: <code class="codehilite">string</code>, <code class="codehilite">&#39;C&#39;</code> or '<code class="codehilite">C++</code>', target language.<br><code class="codehilite">DoP</code>: <code class="codehilite">positive integer [1,1]</code>, degree of parallelism.</td>
+<td><code class="codehilite">target</code>: <code class="codehilite">string</code>, <code class="codehilite">&#39;mex&#39;</code>, <code class="codehilite">&#39;dll&#39;</code>, or <code class="codehilite">&#39;mex&#39;</code>, target.<br><code class="codehilite">targetLang</code>: <code class="codehilite">string</code>, <code class="codehilite">&#39;C&#39;</code> or '<code class="codehilite">C++</code>', target language.<br><code class="codehilite">options</code>: <code class="codehilite">struct</code>, options.</td>
 </tr>
 <tr>
 <td>Output</td>
@@ -1135,11 +1069,11 @@
 </tr>
 <tr>
 <td>Input</td>
-<td><code class="codehilite">u</code>: <code class="codehilite">[uDim,1]</code>, inputs applied to the plant.<br><code class="codehilite">x</code>: <code class="codehilite">[xDim,1]</code>, current state of the plant.<br><code class="codehilite">p</code>: <code class="codehilite">[pDim,1]</code>, given parameters.<br><code class="codehilite">Ts</code>: <code class="codehilite">positive [1,1]</code>, sampling interval.</td>
+<td><code class="codehilite">u</code>: <code class="codehilite">[dim.u,1]</code>, inputs applied to the plant.<br><code class="codehilite">x</code>: <code class="codehilite">[dim.x,1]</code>, current state of the plant.<br><code class="codehilite">p</code>: <code class="codehilite">[pDim,1]</code>, given parameters.<br><code class="codehilite">Ts</code>: <code class="codehilite">positive [1,1]</code>, sampling interval.</td>
 </tr>
 <tr>
 <td>Output</td>
-<td><code class="codehilite">xNext</code>: <code class="codehilite">[xDim,1]</code>, next state of the plant.</td>
+<td><code class="codehilite">xNext</code>: <code class="codehilite">[dim.x,1]</code>, next state of the plant.</td>
 </tr>
 </tbody>
 </table>
@@ -1237,24 +1171,17 @@
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../assets/javascripts/application.d9aa80ab.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-      
-    
-    
-      
-        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-120133947-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
       
     
   </body>

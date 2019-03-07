@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
@@ -40,9 +40,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.982221ab.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
       
       
         
@@ -51,7 +51,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -61,6 +61,35 @@
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-120133947-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -98,7 +127,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#workflow-of-parnmpc" tabindex="1" class="md-skip">
+      <a href="#workflow-of-parnmpc" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -119,22 +148,19 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                ParNMPC Homepage
-              </span>
-              <span class="md-header-nav__topic">
-                Workflow
-              </span>
-            
+            <span class="md-header-nav__topic">
+              ParNMPC Homepage
+            </span>
+            <span class="md-header-nav__topic">
+              Workflow
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -157,7 +183,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -168,20 +193,18 @@
 
   
 
-
-  <a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
           </div>
         </div>
       
@@ -217,20 +240,18 @@
 
   
 
-
-  <a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      GitHub
+<a href="https://github.com/deng-haoyang/ParNMPC" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -241,8 +262,8 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="What is ParNMPC" class="md-nav__link">
-      What is ParNMPC
+    <a href=".." title="Introduction" class="md-nav__link">
+      Introduction
     </a>
   </li>
 
@@ -347,13 +368,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#deployment-in-visual-studio" title="Deployment in Visual Studio" class="md-nav__link">
-    Deployment in Visual Studio
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -399,8 +413,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#file-dependency" title="File Dependency" class="md-nav__link">
-    File Dependency
+  <a href="#file-dependency-out-of-date" title="File Dependency (out of date)" class="md-nav__link">
+    File Dependency (out of date)
   </a>
   
 </li>
@@ -595,13 +609,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#deployment-in-visual-studio" title="Deployment in Visual Studio" class="md-nav__link">
-    Deployment in Visual Studio
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -647,8 +654,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#file-dependency" title="File Dependency" class="md-nav__link">
-    File Dependency
+  <a href="#file-dependency-out-of-date" title="File Dependency (out of date)" class="md-nav__link">
+    File Dependency (out of date)
   </a>
   
 </li>
@@ -692,11 +699,9 @@
 <li>
 <p>Formulate an OCP using Class <code class="codehilite">OptimalControlProblem</code>
 <div class="codehilite"><pre><span></span><span class="c">% Create an OptimalControlProblem object</span>
-<span class="n">OCP</span> <span class="p">=</span> <span class="n">OptimalControlProblem</span><span class="p">(</span><span class="n">muDim</span><span class="p">,</span><span class="c">... % constraints dim</span>
-                            <span class="n">uDim</span><span class="p">,</span><span class="c">...  % inputs dim</span>
-                            <span class="n">xDim</span><span class="p">,</span><span class="c">...  % states dim</span>
-                            <span class="n">pDim</span><span class="p">,</span><span class="c">...  % parameters dim (position reference)</span>
-                            <span class="n">T</span><span class="p">,</span><span class="c">...     % prediction horizon</span>
+<span class="n">OCP</span> <span class="p">=</span> <span class="n">OptimalControlProblem</span><span class="p">(</span><span class="n">dim</span><span class="p">.</span><span class="n">u</span><span class="p">,</span><span class="c">...  % inputs dim</span>
+                            <span class="n">dim</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="c">...  % states dim</span>
+                            <span class="n">dim</span><span class="p">.</span><span class="n">p</span><span class="p">,</span><span class="c">...  % parameters dim</span>
                             <span class="n">N</span><span class="p">);</span>       <span class="c">% num of discritization grids</span>
 
 <span class="c">% Give names to x, u, p (optional)                          </span>
@@ -704,8 +709,7 @@
 <span class="p">[</span><span class="o">~</span><span class="p">]</span> <span class="p">=</span> <span class="n">OCP</span><span class="p">.</span><span class="n">setInputName</span><span class="p">(</span><span class="o">~</span><span class="p">);</span>
 <span class="p">[</span><span class="o">~</span><span class="p">]</span> <span class="p">=</span> <span class="n">OCP</span><span class="p">.</span><span class="n">setParameterName</span><span class="p">(</span><span class="o">~</span><span class="p">);</span>
 
-<span class="c">% Reset the prediction horizon T </span>
-<span class="c">% (optional for variable horizon or nonuniform discretization)</span>
+<span class="c">% Set the prediction horizon T </span>
 <span class="n">OCP</span><span class="p">.</span><span class="n">setT</span><span class="p">(</span><span class="o">~</span><span class="p">);</span>
 
 <span class="c">% Set the dynamic function f</span>
@@ -720,16 +724,8 @@
 <span class="c">% Set the cost function L</span>
 <span class="n">OCP</span><span class="p">.</span><span class="n">setL</span><span class="p">(</span><span class="o">~</span><span class="p">);</span>
 
-<span class="c">% Set the bound constraints (optional)</span>
-<span class="n">OCP</span><span class="p">.</span><span class="n">setUpperBound</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">,</span><span class="o">~</span><span class="p">);</span>
-<span class="n">OCP</span><span class="p">.</span><span class="n">setLowerBound</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">,</span><span class="o">~</span><span class="p">);</span>
-<span class="n">OCP</span><span class="p">.</span><span class="n">setUpperBound</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="o">~</span><span class="p">);</span>
-<span class="n">OCP</span><span class="p">.</span><span class="n">setLowerBound</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="o">~</span><span class="p">);</span>
-
 <span class="c">% Set the polytopic constraint G (optional)</span>
 <span class="n">OCP</span><span class="p">.</span><span class="n">setG</span><span class="p">(</span><span class="o">~</span><span class="p">);</span>
-<span class="n">OCP</span><span class="p">.</span><span class="n">setUpperBound</span><span class="p">(</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="o">~</span><span class="p">);</span>
-<span class="n">OCP</span><span class="p">.</span><span class="n">setLowerBound</span><span class="p">(</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="o">~</span><span class="p">);</span>
 
 <span class="c">% Generate necessary files</span>
 <span class="n">OCP</span><span class="p">.</span><span class="n">codeGen</span><span class="p">();</span>
@@ -748,46 +744,26 @@
 </pre></div></p>
 </li>
 <li>
-<p>Solve the very first OCP for a given initial state and given parameters using Class <code class="codehilite">OCPSolver</code>
-<div class="codehilite"><pre><span></span><span class="c">% Set the initial state     </span>
+<p>Solve the very first OCP offline to provide an accurate initial guess
+<div class="codehilite"><pre><span></span><span class="c">% Set the initial state</span>
 <span class="n">x0</span> <span class="p">=</span> <span class="p">[</span><span class="o">~</span><span class="p">];</span>
 
-<span class="c">% Set the parameters        </span>
-<span class="n">par</span> <span class="p">=</span> <span class="p">[</span><span class="o">~</span><span class="p">];</span>
+<span class="c">% Set the parameters</span>
+<span class="n">p</span>  <span class="p">=</span> <span class="p">[</span><span class="o">~</span><span class="p">];</span>
 
-<span class="c">% Create an OCPSolver object</span>
-<span class="n">ocpSolver</span> <span class="p">=</span> <span class="n">OCPSolver</span><span class="p">(</span><span class="n">OCP</span><span class="p">,</span><span class="n">nmpcSolver</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">par</span><span class="p">);</span>
+<span class="c">% Create an initial guess</span>
+<span class="n">solutionInitGuess</span> <span class="p">=</span> <span class="p">[</span><span class="o">~</span><span class="p">];</span>
 
-<span class="c">% Choose one of the following methods to provide an initial guess:</span>
-<span class="c">% 1. init guess by input</span>
-<span class="n">lambdaInitGuess</span> <span class="p">=</span> <span class="p">[</span><span class="o">~</span><span class="p">];</span>
-<span class="n">muInitGuess</span>     <span class="p">=</span> <span class="p">[</span><span class="o">~</span><span class="p">];</span>
-<span class="n">uInitGuess</span>      <span class="p">=</span> <span class="p">[</span><span class="o">~</span><span class="p">];</span>
-<span class="n">xInitGuess</span>      <span class="p">=</span> <span class="p">[</span><span class="o">~</span><span class="p">];</span>
-<span class="c">% 2. init guess by interpolation</span>
-<span class="p">[</span><span class="n">lambdaInitGuess</span><span class="p">,</span><span class="n">muInitGuess</span><span class="p">,</span><span class="n">uInitGuess</span><span class="p">,</span><span class="n">xInitGuess</span><span class="p">]</span> <span class="p">=</span> <span class="c">...</span>
-    <span class="n">ocpSolver</span><span class="p">.</span><span class="n">initFromStartEnd</span><span class="p">(</span><span class="o">~</span><span class="p">);</span>
-<span class="c">% 3. init guess from file</span>
-<span class="p">[</span><span class="n">lambdaInitGuess</span><span class="p">,</span><span class="n">muInitGuess</span><span class="p">,</span><span class="n">uInitGuess</span><span class="p">,</span><span class="n">xInitGuess</span><span class="p">]</span> <span class="p">=</span> <span class="c">...</span>
-                        <span class="n">ocpSolver</span><span class="p">.</span><span class="n">initFromMatFile</span><span class="p">(</span><span class="o">~</span><span class="p">);</span>
+<span class="c">% Solve the </span>
+<span class="n">solution</span> <span class="p">=</span> <span class="n">NMPC_SolveOffline</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">solutionInitGuess</span><span class="p">,</span><span class="n">rho</span><span class="p">,</span><span class="n">maxIter</span><span class="p">);</span>
 
-<span class="c">% Solve the OCP                     </span>
-<span class="p">[</span><span class="n">lambda</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">]</span> <span class="p">=</span> <span class="n">ocpSolver</span><span class="p">.</span><span class="n">OCPSolve</span><span class="p">(</span><span class="n">lambdaInitGuess</span><span class="p">,</span><span class="c">...</span>
-                                     <span class="n">muInitGuess</span><span class="p">,</span><span class="c">...</span>
-                                     <span class="n">uInitGuess</span><span class="p">,</span><span class="c">...</span>
-                                     <span class="n">xInitGuess</span><span class="p">,</span><span class="c">...</span>
-                                     <span class="n">method</span><span class="c">...</span>
-                                     <span class="n">maxIter</span><span class="p">);</span>
 
-<span class="c">% Get the dependent variable LAMBDA</span>
-<span class="n">LAMBDA</span> <span class="p">=</span> <span class="n">ocpSolver</span><span class="p">.</span><span class="n">getLAMBDA</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">par</span><span class="p">);</span>
+<span class="c">% Save to file for Simu_Matlab.m</span>
+<span class="n">save</span> <span class="n">GEN_initData</span><span class="p">.</span><span class="n">mat</span> <span class="n">dim</span> <span class="n">x0</span> <span class="n">p</span> <span class="n">N</span>
 
-<span class="c">% Check the cost % (optional)</span>
-<span class="n">cost</span> <span class="p">=</span> <span class="n">ocpSolver</span><span class="p">.</span><span class="n">getCost</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">par</span><span class="p">);</span> 
-
-<span class="c">% Save to file for further use</span>
-<span class="n">save</span> <span class="n">GEN_initData</span><span class="p">.</span><span class="n">mat</span>  <span class="c">...</span>
-     <span class="n">x0</span> <span class="n">lambda</span> <span class="n">mu</span> <span class="n">u</span> <span class="n">x</span> <span class="n">par</span> <span class="n">LAMBDA</span> <span class="o">~</span>
+<span class="c">% Set initial guess</span>
+<span class="k">global</span> <span class="n">ParNMPCGlobalVariable</span>
+<span class="n">ParNMPCGlobalVariable</span><span class="p">.</span><span class="n">solutionInitGuess</span> <span class="p">=</span> <span class="n">solution</span><span class="p">;</span>
 </pre></div></p>
 </li>
 <li>
@@ -824,12 +800,12 @@
 <tr>
 <td><code class="codehilite">M</code> enabled</td>
 <td><code class="codehilite">&#39;Euler&#39;</code></td>
-<td><code class="codehilite">&#39;GaussNewton&#39;</code> or <code class="codehilite">&#39;GaussNewtonLC&#39;</code></td>
+<td><code class="codehilite">&#39;GaussNewton&#39;</code></td>
 </tr>
 <tr>
 <td><code class="codehilite">M</code> disabled</td>
-<td>All  discretization methods</td>
-<td>When <code class="codehilite">&#39;Euler&#39;</code>: All Hessian approximation methods ;<br>When else: <code class="codehilite">&#39;GaussNewton&#39;</code> or  <code class="codehilite">&#39;GaussNewtonLC&#39;</code>;</td>
+<td>All</td>
+<td>All</td>
 </tr>
 </tbody>
 </table>
@@ -837,13 +813,12 @@
 <p>In order to do the closed-loop simulation for the problem defined above, two functions are provided:</p>
 <ul>
 <li>
-<p><code class="codehilite">NMPC_Iter</code>: function of the NMPC solver to carry out one iteration. See <a href="../interfaces/#NMPC_Iter">Interfaces &gt; Functions &gt; NMPC_Iter</a>.</p>
+<p><code class="codehilite">NMPC_Solve</code>: function of the NMPC solver. See <a href="../interfaces/#NMPC_Solve">Interfaces &gt; Functions &gt; NMPC_Solve</a>.</p>
 </li>
 <li>
 <p><code class="codehilite">SIM_Plant_RK4</code>: one-step simulation of the controlled plant based on the 4-th order Runge-Kutta method. See <a href="../interfaces/#SIM_Plant_RK4">Interfaces &gt; Functions &gt; SIM_Plant_RK4</a>.</p>
 </li>
 </ul>
-<p>The degree of parallelism in <code class="codehilite">NMPC_Iter</code> depends on how you slice its input parameters. For example, an input parameter <code class="codehilite">a</code> with shape <code class="codehilite">[aDim,N]</code> split or reshaped into <code class="codehilite">[aDim,N/DoP,DoP]</code> will result in a degree of parallelism of <code class="codehilite">DoP</code>, which can utilize <code class="codehilite">DoP</code> cores to compute in parallel. In the case of <code class="codehilite">DoP=1</code>, the NMPC solver performs one Newton's (depending on your choice) iteration exactly and is equivalent to the interior-point method.</p>
 <h2 id="code-generation-and-deployment">Code Generation and Deployment</h2>
 <h3 id="matlab">MATLAB</h3>
 <p>Here, assume your closed-loop simulation is performed in <code class="codehilite">Simu_Matlab.m</code>.</p>
@@ -856,60 +831,9 @@
 <p class="admonition-title">Example</p>
 <p><code class="codehilite">./Simu_Matlab_Codegen.m</code></p>
 </div>
-<ol>
-<li>
-<p>Declare global variables as constants:
-<div class="codehilite"><pre><span></span><span class="k">global</span> <span class="n">discretizationMethod</span> <span class="n">isMEnabled</span> <span class="c">...</span>
-       <span class="n">uMin</span> <span class="n">uMax</span> <span class="n">xMin</span> <span class="n">xMax</span> <span class="n">GMax</span> <span class="n">GMin</span> <span class="c">...</span>
-       <span class="n">veryBigNum</span>
-
-<span class="n">globalVariable</span> <span class="p">=</span> <span class="p">{</span><span class="s">&#39;discretizationMethod&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">discretizationMethod</span><span class="p">),</span><span class="c">...</span>
-                  <span class="s">&#39;isMEnabled&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">isMEnabled</span><span class="p">),</span><span class="c">...</span>
-                  <span class="s">&#39;uMax&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">uMax</span><span class="p">),</span><span class="c">...</span>
-                  <span class="s">&#39;uMin&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">uMin</span><span class="p">),</span><span class="c">...</span>
-                  <span class="s">&#39;xMax&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">xMax</span><span class="p">),</span><span class="c">...</span>
-                  <span class="s">&#39;xMin&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">xMin</span><span class="p">),</span><span class="c">...</span>
-                  <span class="s">&#39;GMax&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">GMax</span><span class="p">),</span><span class="c">...</span>
-                  <span class="s">&#39;GMin&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">GMin</span><span class="p">),</span><span class="c">...</span>
-                  <span class="s">&#39;veryBigNum&#39;</span><span class="p">,</span><span class="n">coder</span><span class="p">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">veryBigNum</span><span class="p">)};</span>
-</pre></div></p>
-</li>
-<li>
-<p>Generate code using <code class="codehilite">codegen</code>:
-<div class="codehilite"><pre><span></span><span class="n">codegen</span> <span class="o">-</span><span class="n">config</span><span class="p">:</span><span class="n">lib</span> <span class="n">Simu_Matlab</span> <span class="o">-</span><span class="n">globals</span> <span class="n">globalVariable</span> 
-</pre></div>
-C code will be automatically generated to <code class="codehilite">./codegen/lib/Simu_Matlab</code>.</p>
-</li>
-</ol>
-<h4 id="deployment-in-visual-studio">Deployment in Visual Studio</h4>
-<ol>
-<li>
-<p>Create an empty Win32 Console Application project.</p>
-</li>
-<li>
-<p>Change to Release x64 mode.</p>
-</li>
-<li>
-<p>Add  <code class="codehilite">*.h</code> and <code class="codehilite">*.c</code> files in <code class="codehilite">.\codegen\lib\Simu_Matlab</code> to the project.</p>
-</li>
-<li>
-<p>Add  <code class="codehilite">main.h</code> and <code class="codehilite">main.c</code> in <code class="codehilite">.\codegen\lib\Simu_Matlab\examples</code> to the project.</p>
-</li>
-<li>
-<p>Add directory <code class="codehilite">.\codegen\lib\Simu_Matlab</code> to <strong>Properties &gt; C/C++ &gt; General &gt;  Additional Include Directories</strong>.</p>
-</li>
-<li>
-<p>Add <code class="codehilite">tmwtypes.h</code> in directory <code class="codehilite">C:\Program Files\MATLAB\R2018b\extern\include</code> (for example) to the project or that directory to <strong>Properties &gt; C/C++ &gt; General &gt;  Additional Include Directories</strong>.</p>
-</li>
-<li>
-<p><strong>Properties &gt; C/C++ &gt; Language &gt;  Open MP Support: Yes (/openmp)</strong>.</p>
-</li>
-<li>
-<p>Compile and run. If there is something wrong with the <code class="codehilite">fopen</code> function when compiling, add <code class="codehilite">_CRT_SECURE_NO_WARNINGS</code> to <strong>Properties &gt; C/C++ &gt; Preprocessor &gt;  Preprocessor Definitions</strong>.</p>
-</li>
-</ol>
+<p>An executable file that performs the closed-loop simulation will be generated automatically.</p>
 <h3 id="simulink">Simulink <div id="workflow_deploy_simulink"></div></h3>
-<p>Here, assume your closed-loop simulation is performed in Simulink. You can call the generated C/C++ solver function <code class="codehilite">NMPC_Iter</code> directly to compute the optimal input.</p>
+<p>Here, assume your closed-loop simulation is performed in Simulink. You can call the generated C/C++ solver function <code class="codehilite">NMPC_Solve</code> directly to compute the optimal input.</p>
 <h4 id="code-generation_1">Code generation</h4>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
@@ -917,25 +841,13 @@ C code will be automatically generated to <code class="codehilite">./codegen/lib
 </div>
 <ol>
 <li>
-<p>Define the degree of parallelism:
-<div class="codehilite"><pre><span></span><span class="n">DoP</span> <span class="p">=</span> <span class="o">~</span><span class="p">;</span> <span class="c">% degree of parallism: 1 = in serial, otherwise in parallel</span>
+<p>Define and configurate options for NMPC_Solve:
+<div class="codehilite"><pre><span></span><span class="n">options</span> <span class="p">=</span> <span class="n">createOptions</span><span class="p">();</span>
 </pre></div></p>
 </li>
 <li>
-<p>Split <span><span class="MathJax_Preview">\{\lambda_i\}_{i=1}^{N}</span><script type="math/tex">\{\lambda_i\}_{i=1}^{N}</script></span>, <span><span class="MathJax_Preview">\{\mu_i\}_{i=1}^{N}</span><script type="math/tex">\{\mu_i\}_{i=1}^{N}</script></span>, <span><span class="MathJax_Preview">\{u_i\}_{i=1}^{N}</span><script type="math/tex">\{u_i\}_{i=1}^{N}</script></span>, <span><span class="MathJax_Preview">\{x_i\}_{i=1}^{N}</span><script type="math/tex">\{x_i\}_{i=1}^{N}</script></span>, <span><span class="MathJax_Preview">\{p_i\}_{i=1}^{N}</span><script type="math/tex">\{p_i\}_{i=1}^{N}</script></span>, and <span><span class="MathJax_Preview">\{\Lambda_i\}_{i=1}^{N}</span><script type="math/tex">\{\Lambda_i\}_{i=1}^{N}</script></span> along the prediction horizon into <code class="codehilite">DoP</code> pieces for warm start:
-<div class="codehilite"><pre><span></span><span class="n">sizeSeg</span>     <span class="p">=</span> <span class="n">N</span><span class="o">/</span><span class="n">DoP</span><span class="p">;</span>
-<span class="n">lambdaSplit</span> <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">lambda</span><span class="p">,</span> <span class="n">lambdaDim</span><span class="p">,</span>  <span class="n">sizeSeg</span><span class="p">,</span><span class="n">DoP</span><span class="p">);</span>
-<span class="n">muSplit</span>     <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span>     <span class="n">muDim</span><span class="p">,</span>      <span class="n">sizeSeg</span><span class="p">,</span><span class="n">DoP</span><span class="p">);</span>
-<span class="n">uSplit</span>      <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">u</span><span class="p">,</span>      <span class="n">uDim</span><span class="p">,</span>       <span class="n">sizeSeg</span><span class="p">,</span><span class="n">DoP</span><span class="p">);</span>
-<span class="n">xSplit</span>      <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>      <span class="n">xDim</span><span class="p">,</span>       <span class="n">sizeSeg</span><span class="p">,</span><span class="n">DoP</span><span class="p">);</span>
-<span class="n">pSplit</span>      <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">par</span><span class="p">,</span>    <span class="n">pDim</span><span class="p">,</span>       <span class="n">sizeSeg</span><span class="p">,</span><span class="n">DoP</span><span class="p">);</span>
-<span class="n">LAMBDASplit</span> <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">LAMBDA</span><span class="p">,</span> <span class="n">xDim</span><span class="p">,</span> <span class="n">xDim</span><span class="p">,</span> <span class="n">sizeSeg</span><span class="p">,</span><span class="n">DoP</span><span class="p">);</span>
-</pre></div></p>
-</li>
-<li>
-<p>Generate dll (lib or mex) and copy it to the working directory:
-<div class="codehilite"><pre><span></span><span class="n">NMPC_Iter_CodeGen</span><span class="p">(</span><span class="s">&#39;dll&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="n">DoP</span><span class="p">);</span>
-<span class="n">copyfile</span><span class="p">(</span><span class="s">&#39;./codegen/dll/NMPC_Iter/NMPC_Iter.dll&#39;</span><span class="p">);</span> <span class="c">% NMPC_Iter.so in linux</span>
+<p>Generate code:
+<div class="codehilite"><pre><span></span><span class="n">NMPC_Solve_CodeGen</span><span class="p">(</span><span class="o">~</span><span class="p">,</span><span class="o">~</span><span class="p">,</span><span class="n">options</span><span class="p">);</span>
 </pre></div></p>
 </li>
 </ol>
@@ -944,43 +856,53 @@ C code will be automatically generated to <code class="codehilite">./codegen/lib
 <p class="admonition-title">Example</p>
 <p><code class="codehilite">./Simu_Simulink.slx</code></p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
 <p>This example shows how to call the generated C interface in Simulink using the <code class="codehilite">coder.cevel</code> function within a <code class="codehilite">MATLAB Function</code> block. 
 You can also call the C/C++ interface using S-function.</p>
-</div>
 <ol>
 <li>
 <p>Open the Simulation Target pane in the Simulink Editor:
 <strong>Simulation &gt; Model Configuration Parameters &gt; Simulation Target</strong>.</p>
 </li>
 <li>
-<p>Add <code class="codehilite"><span class="cp">#include</span> <span class="cpf">&quot;NMPC_Iter.h&quot;</span><span class="cp"></span></code> to <strong>Insert custom C code in generated: Header file</strong>.</p>
+<p>Add <code class="codehilite"><span class="cp">#include</span> <span class="cpf">&quot;NMPC_Solve.h&quot;</span><span class="cp"></span></code> to <strong>Insert custom C code in generated: Header file</strong>.</p>
+</li>
+<li>
+<p>Add <code class="codehilite">NMPC_Solve_initialize();</code> to <strong>Insert custom C code in generated: Initialize function</strong>.</p>
+</li>
+<li>
+<p>Add <code class="codehilite">NMPC_Solve_terminate();</code> to <strong>Insert custom C code in generated: Terminate function</strong>.</p>
 </li>
 <li>
 <p>Add the following directory to <strong>Additional Build Information: Include directories</strong>:
-<div class="codehilite"><pre><span></span><span class="o">./</span><span class="n">codegen</span><span class="o">/</span><span class="n">dll</span><span class="o">/</span><span class="n">NMPC_Iter</span>
+<div class="codehilite"><pre><span></span><span class="o">./</span><span class="n">codegen</span><span class="o">/~/</span><span class="n">NMPC_Solve</span>
 </pre></div></p>
 </li>
 <li>
-<p>Add <code class="codehilite">NMPC_Iter.lib</code> (<code class="codehilite">NMPC_Iter.so</code> in linux) to <strong>Additional Build Information: Libraries</strong>.</p>
+<p>Add <code class="codehilite">NMPC_Solve.lib</code> (<code class="codehilite">NMPC_Solve.so</code> in linux) to <strong>Additional Build Information: Libraries</strong>.</p>
 </li>
 <li>
 <p>Call the generated C function in a <code class="codehilite">MATLAB Function</code> block in Simulink:
-<div class="codehilite"><pre><span></span><span class="n">coder</span><span class="p">.</span><span class="n">ceval</span><span class="p">(</span><span class="s">&#39;NMPC_Iter&#39;</span><span class="p">,</span><span class="c">...</span>
+<div class="codehilite"><pre><span></span><span class="n">output</span> <span class="p">=</span> <span class="n">createOutput</span><span class="p">();</span>
+<span class="n">solution</span> <span class="p">=</span> <span class="n">createNonemptySolution</span><span class="p">();</span>
+<span class="n">coder</span><span class="p">.</span><span class="n">ceval</span><span class="p">(</span><span class="s">&#39;NMPC_Solve&#39;</span><span class="p">,</span><span class="c">...</span>
              <span class="n">x0</span><span class="p">,</span><span class="c">...</span>
-             <span class="n">coder</span><span class="p">.</span><span class="n">ref</span><span class="p">(</span><span class="n">lambdaSplit</span><span class="p">),</span><span class="c">...</span>
-             <span class="n">coder</span><span class="p">.</span><span class="n">ref</span><span class="p">(</span><span class="n">muSplit</span><span class="p">),</span><span class="c">... (optional)</span>
-             <span class="n">coder</span><span class="p">.</span><span class="n">ref</span><span class="p">(</span><span class="n">uSplit</span><span class="p">),</span><span class="c">...</span>
-             <span class="n">coder</span><span class="p">.</span><span class="n">ref</span><span class="p">(</span><span class="n">xSplit</span><span class="p">),</span><span class="c">...</span>
-             <span class="n">coder</span><span class="p">.</span><span class="n">ref</span><span class="p">(</span><span class="n">pSplit</span><span class="p">),</span><span class="c">...  (optional)</span>
-             <span class="n">coder</span><span class="p">.</span><span class="n">ref</span><span class="p">(</span><span class="n">LAMBDASplit</span><span class="p">),</span><span class="c">...</span>
-             <span class="n">coder</span><span class="p">.</span><span class="n">wref</span><span class="p">(</span><span class="n">cost</span><span class="p">),</span><span class="c">...</span>
-             <span class="n">coder</span><span class="p">.</span><span class="n">wref</span><span class="p">(</span><span class="n">error</span><span class="p">),</span><span class="c">...</span>
-             <span class="n">coder</span><span class="p">.</span><span class="n">wref</span><span class="p">(</span><span class="n">timeElapsed</span><span class="p">));</span>
+             <span class="n">p</span><span class="p">,</span><span class="c">... % (optional)</span>
+             <span class="n">coder</span><span class="p">.</span><span class="n">wref</span><span class="p">(</span><span class="n">solution</span><span class="p">),</span><span class="c">...</span>
+             <span class="n">coder</span><span class="p">.</span><span class="n">wref</span><span class="p">(</span><span class="n">output</span><span class="p">));</span>
 </pre></div></p>
 </li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alternatively, steps 1-6 can be done using the following commands.
+<div class="codehilite"><pre><span></span>Simu_Simulink
+set_param(&#39;Simu_Simulink&#39;, &#39;SimCustomHeaderCode&#39;, &#39;#include &quot;NMPC_Solve.h&quot;&#39;)
+set_param(&#39;Simu_Simulink&#39;, &#39;SimCustomInitializer&#39;, &#39;NMPC_Solve_initialize();&#39;)
+set_param(&#39;Simu_Simulink&#39;, &#39;SimCustomTerminator&#39;, &#39;NMPC_Solve_terminate();&#39;)
+set_param(&#39;Simu_Simulink&#39;, &#39;SimUserLibraries&#39;, &#39;NMPC_Solve.lib&#39;)
+set_param(&#39;Simu_Simulink&#39;, &#39;SimUserIncludeDirs&#39;, &#39;./codegen/~/NMPC_Solve&#39;)
+</pre></div></p>
+</div>
 <h2 id="accelerating-simulation-using-mex-function">Accelerating Simulation using MEX-function</h2>
 <ol>
 <li>
@@ -990,7 +912,7 @@ You can also call the C/C++ interface using S-function.</p>
 <p><code class="codehilite">./Simu_Simulink_Setup.m</code></p>
 </div>
 <p>Following the code generation for Simulink procedure, MEX-function can be generated by modifying the generation target to <code class="codehilite">mex</code>:
-<div class="codehilite"><pre><span></span><span class="n">NMPC_Iter_CodeGen</span><span class="p">(</span><span class="s">&#39;mex&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="n">args_NMPC_Iter</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="n">NMPC_Solve_CodeGen</span><span class="p">(</span><span class="s">&#39;mex&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="n">options</span><span class="p">);</span>
 </pre></div></p>
 </li>
 <li>
@@ -999,18 +921,11 @@ You can also call the C/C++ interface using S-function.</p>
 <p class="admonition-title">Example</p>
 <p><code class="codehilite">./Simu_Matlab.m</code></p>
 </div>
-<p>Modify <code class="codehilite">NMPC_Iter</code> to <code class="codehilite">NMPC_Iter_mex</code> to call the generated <code class="codehilite">mex</code> function:
-<div class="codehilite"><pre><span></span><span class="p">[</span><span class="n">lambdaSplit</span><span class="p">,</span><span class="n">muSplit</span><span class="p">,</span><span class="n">uSplit</span><span class="p">,</span><span class="n">xSplit</span><span class="p">,</span><span class="c">...</span>
- <span class="n">LAMBDASplit</span><span class="p">,</span><span class="n">cost</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="n">timeElapsed</span><span class="p">]</span> <span class="p">=</span>
- <span class="n">NMPC_Iter_mex</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">lambdaSplit</span><span class="p">,</span><span class="n">muSplit</span><span class="p">,</span><span class="c">...</span>
-               <span class="n">uSplit</span><span class="p">,</span><span class="n">xSplit</span><span class="p">,</span><span class="n">pSplit</span><span class="p">,</span><span class="c">...</span>
-               <span class="n">LAMBDASplit</span><span class="p">);</span>
-</pre></div>
-and run.</p>
-<p>MEX-function is typically slower than C code. However, it can speed up your simulation to check the closed-loop response.</p>
+<p>Modify <code class="codehilite">NMPC_Solve</code> to <code class="codehilite">NMPC_Solve_mex</code> to call the generated <code class="codehilite">mex</code> function and run.</p>
+<p>MEX-function is typically slower than C code. However, it can speed up your simulation to check the closed-loop response. </p>
 </li>
 </ol>
-<h2 id="file-dependency">File Dependency</h2>
+<h2 id="file-dependency-out-of-date">File Dependency (out of date)</h2>
 <p align="center">
 <img src="../P_F_D.png"  >
 </p>
@@ -1091,24 +1006,17 @@ and run.</p>
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../assets/javascripts/application.d9aa80ab.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-      
-    
-    
-      
-        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-120133947-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
       
     
   </body>
