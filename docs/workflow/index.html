@@ -702,7 +702,7 @@
 <span class="n">OCP</span> <span class="p">=</span> <span class="n">OptimalControlProblem</span><span class="p">(</span><span class="n">dim</span><span class="p">.</span><span class="n">u</span><span class="p">,</span><span class="c">...  % inputs dim</span>
                             <span class="n">dim</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="c">...  % states dim</span>
                             <span class="n">dim</span><span class="p">.</span><span class="n">p</span><span class="p">,</span><span class="c">...  % parameters dim</span>
-                            <span class="n">N</span><span class="p">);</span>       <span class="c">% num of discritization grids</span>
+                            <span class="n">N</span><span class="p">);</span>        <span class="c">% num of discretization grids</span>
 
 <span class="c">% Give names to x, u, p (optional)                          </span>
 <span class="p">[</span><span class="o">~</span><span class="p">]</span> <span class="p">=</span> <span class="n">OCP</span><span class="p">.</span><span class="n">setStateName</span><span class="p">(</span><span class="o">~</span><span class="p">);</span>
@@ -754,7 +754,8 @@
 <span class="c">% Create an initial guess</span>
 <span class="n">solutionInitGuess</span> <span class="p">=</span> <span class="p">[</span><span class="o">~</span><span class="p">];</span>
 
-<span class="c">% Solve the </span>
+<span class="c">% Solve the optimal control problem for given values of x0 and p </span>
+<span class="c">% with barrier parameter rho</span>
 <span class="n">solution</span> <span class="p">=</span> <span class="n">NMPC_SolveOffline</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">solutionInitGuess</span><span class="p">,</span><span class="n">rho</span><span class="p">,</span><span class="n">maxIter</span><span class="p">);</span>
 
 
@@ -769,7 +770,7 @@
 <li>
 <p>Define the controlled plant using Class <code class="codehilite">DynamicSystem</code> (optional for simulation)
 <div class="codehilite"><pre><span></span><span class="c">% Create a DynamicSystem object</span>
-<span class="n">plant</span> <span class="p">=</span> <span class="n">DynamicSystem</span><span class="p">(</span><span class="n">uDim</span><span class="p">,</span><span class="n">xDim</span><span class="p">,</span><span class="n">pDim</span><span class="p">);</span>
+<span class="n">plant</span> <span class="p">=</span> <span class="n">DynamicSystem</span><span class="p">(</span><span class="n">dim</span><span class="p">.</span><span class="n">u</span><span class="p">,</span><span class="n">dim</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">dim</span><span class="p">.</span><span class="n">p</span><span class="p">);</span>
 
 <span class="c">% Give names to x, u, p (optional)</span>
 <span class="p">[</span><span class="o">~</span><span class="p">]</span> <span class="p">=</span> <span class="n">plant</span><span class="p">.</span><span class="n">setStateName</span><span class="p">(</span><span class="o">~</span><span class="p">);</span>
