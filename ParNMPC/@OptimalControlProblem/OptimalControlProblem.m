@@ -2,6 +2,7 @@ classdef OptimalControlProblem < DynamicSystem
    properties
       lambda % symbolic variable
       mu % symbolic variable
+      barrierPara % symbolic variable
       L % symbolic function
       C % symbolic function
       N % num of discretization grids - interger variable
@@ -34,6 +35,7 @@ classdef OptimalControlProblem < DynamicSystem
           % create symVar
           OCP.lambda = sym('lambda',[OCP.dim.lambda,1]);
           OCP.mu = sym('mu',[OCP.dim.mu,1]);
+          OCP.barrierPara = sym('barrierPara',[1,1]);
           %
           OCP.T = T;
           OCP.N = N;

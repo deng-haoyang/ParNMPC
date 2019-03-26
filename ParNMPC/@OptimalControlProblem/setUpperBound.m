@@ -14,7 +14,7 @@ function setUpperBound(OCP,field,boundValue,barrierParameter)
                 % xMax
                 if OCP.xMax.value(i) ~= OCP.veryBigNum
                     OCP.LBarrier.xMax = OCP.LBarrier.xMax - ...
-                        OCP.xMax.barrierParameter(i)*log(OCP.xMax.value(i)-OCP.x(i));
+                        OCP.barrierPara*OCP.xMax.barrierParameter(i)*log(OCP.xMax.value(i)-OCP.x(i));
                 end
             end
             
@@ -27,7 +27,7 @@ function setUpperBound(OCP,field,boundValue,barrierParameter)
                 % uMax
                 if OCP.uMax.value(i) ~= OCP.veryBigNum
                     OCP.LBarrier.uMax = OCP.LBarrier.uMax - ...
-                        OCP.uMax.barrierParameter(i)*log(OCP.uMax.value(i)-OCP.u(i));
+                        OCP.barrierPara*OCP.uMax.barrierParameter(i)*log(OCP.uMax.value(i)-OCP.u(i));
                 end
             end
     
@@ -46,7 +46,7 @@ function setUpperBound(OCP,field,boundValue,barrierParameter)
                     % GMax
                     if OCP.GMax.value(i)~=OCP.veryBigNum
                         OCP.LBarrier.GMax = OCP.LBarrier.GMax - ...
-                            OCP.GMax.barrierParameter(i)*log(OCP.GMax.value(i)-G_formula(i));
+                            OCP.barrierPara*OCP.GMax.barrierParameter(i)*log(OCP.GMax.value(i)-G_formula(i));
                     end
                 end
             end

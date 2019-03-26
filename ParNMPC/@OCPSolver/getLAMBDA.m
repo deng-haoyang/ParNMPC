@@ -1,4 +1,4 @@
-function LAMBDA = getLAMBDA(solver,x0,lambda,mu,u,x,p)
+function LAMBDA = getLAMBDA(solver,x0,lambda,mu,u,x,p,barrierPara)
 xDim = solver.OCP.dim.x;
 N    = solver.OCP.N;
 
@@ -16,5 +16,6 @@ LAMBDA = zeros(xDim,xDim,N);
                           u,...
                           x,...
                           p,...
-                          LAMBDA);
+                          LAMBDA,...
+                          barrierPara);
 end

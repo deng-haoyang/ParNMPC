@@ -27,7 +27,7 @@ classdef OCPSolver < handle
       [lambda,mu,u,x] = initFromMatFile(solver,matFile)
       [lambda,mu,u,x] = initFromStartEnd(solver,lambdaStart,muStart,uStart,xStart,...
                                                 lambdaEnd,  muEnd,  uEnd,  xEnd)
-      LAMBDA = getLAMBDA(solver,x0,lambda,mu,u,x,p)
+      LAMBDA = getLAMBDA(solver,x0,lambda,mu,u,x,p,barrierPara)
       cost  = getCost(solver,u,x,p)
    end
 end

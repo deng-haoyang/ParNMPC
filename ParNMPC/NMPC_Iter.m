@@ -1,6 +1,10 @@
-function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,u,x,p,LAMBDA) %#codegen
+function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,u,x,p,LAMBDA,barrierPara) %#codegen
     timerRTIStart = Timer();
-    
+    if coder.target('MATLAB') % Normal excution
+        numThreads = 0;
+    else % Code generation
+        numThreads = DoP;
+    end
     % global variables
     global ParNMPCGlobalVariable
     discretizationMethod = ParNMPCGlobalVariable.discretizationMethod;
@@ -14,17 +18,13 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
     veryBigNum = ParNMPCGlobalVariable.veryBigNum;
     nonsingularRegularization  = ParNMPCGlobalVariable.nonsingularRegularization;
     descentRegularization = ParNMPCGlobalVariable.descentRegularization;
-       
-    [xDim,sizeSeg,DoP] = size(x);
-    lambdaDim = xDim;
-    [muDim,sizeSeg,DoP] = size(mu);
+    lambdaDim = ParNMPCGlobalVariable.dim.lambda;
+    muDim = ParNMPCGlobalVariable.dim.mu;
+    uDim = ParNMPCGlobalVariable.dim.u;
+    xDim = ParNMPCGlobalVariable.dim.x;
+    %
     [uDim,sizeSeg,DoP] = size(u);
-    if coder.target('MATLAB') % Normal excution
-        % in serial
-        numThreads = 0;
-    else % Code generation
-        numThreads = DoP;
-    end
+
     LAMBDA_N    = zeros(xDim,xDim);
     
     % backup 
@@ -105,7 +105,7 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
             p_j_i   = p_i(:,j);
             
             % Jacobian Evaluation
-            [L_j_i,LBarrier_j_i,Lu_j_i,Lx_j_i] = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i);
+            [L_j_i,LBarrier_j_i,Lu_j_i,Lx_j_i] = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i,barrierPara);
             
             C_i(:,j) = zeros(muDim,1);
             Cu_j_i   = zeros(muDim,uDim);
@@ -115,9 +115,9 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
             end
             [F_j_i,Fu_j_i,Fx_j_i] = OCP_F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
             
-            Aux_j_i   = OCP_Aux(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i);
-            Axx_j_i   = OCP_Axx(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i) + xDRMatrix; % descent regularization
-            Auu_j_i   = OCP_Auu(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i) + uDRMatrix; % descent regularization
+            Aux_j_i   = OCP_Aux(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i,barrierPara);
+            Axx_j_i   = OCP_Axx(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i,barrierPara) + xDRMatrix; % descent regularization
+            Auu_j_i   = OCP_Auu(lambda_j_i,mu_j_i,u_j_i,x_j_i,p_j_i,barrierPara) + uDRMatrix; % descent regularization
             
             d_CHuT_muu_j_i  = [    NSRMatrix,       Cu_j_i;...
                                    Cu_j_i.',        Auu_j_i]; % nonsingular regularization
@@ -441,7 +441,7 @@ function [lambda,mu,u,x,LAMBDA,cost,error,timeElapsed] = NMPC_Iter(x0,lambda,mu,
             if j < sizeSeg
                 lambdaNext_i(:,j) = lambda_i(:,j+1);
             end
-            [L_i(:,j),LBarrier_j_i,Lu_j_i,Lx_j_i] = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i);
+            [L_i(:,j),LBarrier_j_i,Lu_j_i,Lx_j_i] = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i,barrierPara);
             C_i(:,j) = zeros(muDim,1);
             Cu_j_i   = zeros(muDim,uDim);
             Cx_j_i   = zeros(muDim,xDim);

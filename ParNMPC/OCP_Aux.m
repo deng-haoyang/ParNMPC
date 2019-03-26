@@ -1,3 +1,3 @@
-function Aux = OCP_Aux(lambda,mu,u,x,p)
-	Aux = OCP_GEN_Aux(lambda,mu,u,x,p);
+function Aux = OCP_Aux(lambda,mu,u,x,p,barrierPara)
+	Aux = OCP_GEN_Aux(lambda,mu,u,x,p,barrierPara);
 end

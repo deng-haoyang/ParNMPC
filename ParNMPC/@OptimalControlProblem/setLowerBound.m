@@ -13,7 +13,7 @@ function setLowerBound(OCP,field,boundValue,barrierParameter)
                 % xMin
                 if OCP.xMin.value(i) ~= -OCP.veryBigNum
                     OCP.LBarrier.xMin =  OCP.LBarrier.xMin - ...
-                        OCP.xMin.barrierParameter(i)*log(OCP.x(i)-OCP.xMin.value(i));
+                        OCP.barrierPara*OCP.xMin.barrierParameter(i)*log(OCP.x(i)-OCP.xMin.value(i));
                 end
             end
             
@@ -25,7 +25,7 @@ function setLowerBound(OCP,field,boundValue,barrierParameter)
             for i = 1:OCP.dim.u
                 if OCP.uMin.value(i) ~= -OCP.veryBigNum
                     OCP.LBarrier.uMin = OCP.LBarrier.uMin - ...
-                        OCP.uMin.barrierParameter(i)*log(OCP.u(i)-OCP.uMin.value(i));
+                        OCP.barrierPara*OCP.uMin.barrierParameter(i)*log(OCP.u(i)-OCP.uMin.value(i));
                 end
             end
             
@@ -43,7 +43,7 @@ function setLowerBound(OCP,field,boundValue,barrierParameter)
                     % GMin
                     if OCP.GMin.value(i) ~= -OCP.veryBigNum
                         OCP.LBarrier.GMin = OCP.LBarrier.GMin - ...
-                            OCP.GMin.barrierParameter(i)*log(G_formula(i)-OCP.GMin.value(i));
+                            OCP.barrierPara*OCP.GMin.barrierParameter(i)*log(G_formula(i)-OCP.GMin.value(i));
                     end
                 end
             end

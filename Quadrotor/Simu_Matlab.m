@@ -1,6 +1,6 @@
 %% For closed-loop simulation or code generation
 function Simu_Matlab
-DoP        = 1; % degree of parallism: 1 = in serial, otherwise in parallel
+DoP        = 40; % degree of parallism: 1 = in serial, otherwise in parallel
 simuLength = 10;
 Ts         = 0.01; % sampling interval
 
@@ -30,6 +30,18 @@ xSplit      = reshape(x,     xDim,     sizeSeg,DoP);
 pSplit      = reshape(par,   pDim,     sizeSeg,DoP);
 LAMBDASplit = reshape(LAMBDA,xDim,xDim,sizeSeg,DoP);
 
+solutionInitialGuess.lambdaSplit = lambdaSplit;
+solutionInitialGuess.muSplit     = muSplit;
+solutionInitialGuess.uSplit      = uSplit;
+solutionInitialGuess.xSplit      = xSplit;
+solutionInitialGuess.LAMBDASplit = LAMBDASplit;
+
+options = NMPCSolveOptions();
+% options.MaxIterNumTotal = 20;
+% options.barrierParaDescentRate = 0.1;
+% options.TolEnd   = 1e-5;
+% options.barrierParaInit = 0.1;
+
 % define record variables
 rec.x       = zeros(simuSteps+1,xDim);
 rec.x(1,:)  = x0.';
@@ -40,48 +52,24 @@ rec.cost    = zeros(simuSteps,1);
 rec.t       = zeros(simuSteps,1);
 rec.cpuTime = zeros(simuSteps,1);
 %% Simulation
-MaxIterNum = 15;
-tolerance  = 5e-3;
 
 % init
 cost        = 0;
-error       = 0;
-timeElapsed = 0;
 RTITimeAll  = 0;
 
 for step = 1:simuSteps %simulation steps
-    RTITime = 0;
     % Solve the optimal control problem
-    for iter=1:MaxIterNum
-        [lambdaSplit,...
-         muSplit,...
-         uSplit,...
-         xSplit,...
-         LAMBDASplit,...
-         cost,...
-         error,...
-         timeElapsed] = NMPC_Iter(x0,...
-                                  lambdaSplit,...
-                                  muSplit,...
-                                  uSplit,...
-                                  xSplit,...
-                                  pSplit,...
-                                  LAMBDASplit);
-
-        RTITime = RTITime + timeElapsed;
-        if error<tolerance
-            break;
-        end
-    end
-    RTITimeAll = RTITimeAll + RTITime;
-    
+    [solutionInitialGuess,solutionEnd,output] = NMPC_Solve(x0,pSplit,solutionInitialGuess,options);
+    RTITime     = output.timeElapsed;
+    iter        = output.iterTotal;
+    iterInit    = output.iterInit;
+    error       = output.errorEnd;
     % Obtain the first optimal control input
-    uOpt = uSplit(:,1,1);
+    uOpt = solutionEnd.uSplit(:,1,1);
     
     % System simulation by the 4th-order Explicit Runge-Kutta Method
     pSimVal = zeros(0,1);
     x0 = SIM_Plant_RK4(uOpt(1:4,1),x0,pSimVal,Ts);
-%     x0([2;4;6]) = x0([2;4;6]) + randn(3,1)*0.01;
     % Update parameters
     if step >= 300 && step <= 305
         pSplit(1,:,:) =  pSplit(1,:,:) + 0.1; % X ref
@@ -103,7 +91,8 @@ for step = 1:simuSteps %simulation steps
     rec.cost(step,:)     = cost;
     if coder.target('MATLAB')
          disp(['Step: ',num2str(step),'/',num2str(simuSteps),...
-               '   NumIter: ',num2str(iter),...
+               '   iterInit: ',num2str(iterInit),...
+               '   iterTotal: ',num2str(iter),...
                '   error:' ,num2str(error)]);
     end
 end

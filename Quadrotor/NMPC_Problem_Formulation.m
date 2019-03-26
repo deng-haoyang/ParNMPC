@@ -4,16 +4,16 @@ addpath('../ParNMPC/')
 
 % Create an OptimalControlProblem object
 OCP = OptimalControlProblem(0,... % dim of equality constraints
-                            7,... % dim of inputs 
-                            9,... % dim of states 
+                            5,... % dim of inputs
+                            9,... % dim of states
                             5,... % dim of parameters
                             1,... % T: prediction horizon
                             40);  % N: num of discritization grids
 % Give names to x, u, p
 [X,dX,Y,dY,Z,dZ,Gamma,Beta,Alpha] = ...
     OCP.setStateName({'X','dX','Y','dY','Z','dZ','Gamma','Beta','Alpha'});
-[a,omegaX,omegaY,omegaZ,slackdX,slackdY,slackdZ] = ...
-    OCP.setInputName({'a','omegaX','omegaY','omegaZ','slackdX','slackdY','slackdZ'});
+[a,omegaX,omegaY,omegaZ,slack] = ...
+    OCP.setInputName({'a','omegaX','omegaY','omegaZ','slack'});
 [XSP,YSP,ZSP,T] = ...
     OCP.setParameterName({'XSP','YSP','ZSP','T'},[1 2 3 5]);
 
@@ -41,26 +41,26 @@ xRef = [XSP;0;YSP;0;ZSP;0;0;0;0];
 uRef = [g;0;0;0];
 L =    0.5*(OCP.x-xRef).'*Q*(OCP.x-xRef)...
      + 0.5*(OCP.u(1:4)-uRef).'*R*(OCP.u(1:4)-uRef)...
-     + 1000*slackdX^2 + 1000*slackdY^2 + 1000*slackdZ^2;
+     + 1000*slack^2;
 OCP.setL(L);
 
 % Set the bound constraints
-uMax = [11;1; 1; 1; Inf; Inf; Inf];
-uMin = [0;-1;-1;-1; 0;   0;   0];
+uMax = [11;1; 1; 1; Inf];
+uMin = [0;-1;-1;-1; 0];
 uBarrierPara = ones(OCP.dim.u,1)*OCP.p(4);
 OCP.setUpperBound('u',uMax,uBarrierPara);
 OCP.setLowerBound('u',uMin,uBarrierPara);
 
 % Set the linear constraints G(u,x,p)
-G = [dX - slackdX; dX + slackdX;...
-     dY - slackdY; dY + slackdY;...
-     dZ - slackdZ; dZ + slackdZ];
+G = [Gamma - slack; Gamma + slack;...
+     Beta  - slack; Beta  + slack;...
+     Alpha - slack; Alpha + slack];
 GMax = [   1; Inf;...
            1; Inf;...
-           1; Inf];
+           1; Inf]*0.2;
 GMin = [-Inf;  -1;...
         -Inf;  -1;...
-        -Inf;  -1];
+        -Inf;  -1]*0.2;
 GBarrierPara = ones(6,1)*OCP.p(4);
 OCP.setG(G);
 OCP.setUpperBound('G',GMax,GBarrierPara);
@@ -77,7 +77,7 @@ end
 nmpcSolver = NMPCSolver(OCP);
 
 % Configurate the Hessian approximation method
-nmpcSolver.setHessianApproximation('GaussNewton');
+nmpcSolver.setHessianApproximation('Newton');
 
 % Generate necessary files
 isReGen = true; % is re-gen?
@@ -101,7 +101,7 @@ par      = zeros(pDim,N);
 par(1,:) = 0;   % X setpoint
 par(2,:) = 0;   % Y setpoint
 par(3,:) = 0;   % Z setpoint 
-par(4,:) = 0.05; % barrier parameter
+par(4,:) = 1; % barrier parameter
 par(5,:) = 1;   % prediction horizon
 
 % Create an OCPSolver object
@@ -117,11 +117,11 @@ ocpSolver = OCPSolver(OCP,nmpcSolver,x0,par);
 % 2. init guess by interpolation
 lambdaStart = randn(xDim,1);
 muStart     = randn(muDim,1);
-uStart      = [uRef;1;1;1];
+uStart      = [uRef;1];
 xStart      = x0;
 lambdaEnd   = zeros(lambdaDim,1);
 muEnd       = zeros(muDim,1);
-uEnd        = [uRef;1;1;1];
+uEnd        = [uRef;1];
 xEnd        = xRef;
 [lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess] = ...
     ocpSolver.initFromStartEnd(lambdaStart,muStart,uStart,xStart,...
@@ -142,7 +142,7 @@ xEnd        = xRef;
 plot(x([1 3 5],:).');
 
 % Get the dependent variable LAMBDA
-LAMBDA = ocpSolver.getLAMBDA(x0,lambda,mu,u,x,par);
+LAMBDA = ocpSolver.getLAMBDA(x0,lambda,mu,u,x,par,1);
 
 % Save to file
 save GEN_initData.mat  ...
@@ -172,7 +172,7 @@ fPlant = [  dX;...
             omegaX*cos(Gamma)*tan(Beta) + omegaY*sin(Gamma)*tan(Beta) + omegaZ];
         
 % Set the dynamic function f
-plant.setf(fPlant); % same model 
+plant.setf(fPlant); % same model
 
 % Generate necessary files
 isSIMReGen = true;
