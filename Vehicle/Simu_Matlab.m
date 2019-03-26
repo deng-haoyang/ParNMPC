@@ -95,16 +95,11 @@ if coder.target('MATLAB')% Normal excution
     disp(['Time Elapsed for NMPC_Solve: ',num2str(tTotal) ' seconds ']);
 else % Code generation
     coder.cinclude('stdio.h');
-    coder.cinclude('omp.h');
     % show Time Elapsed for RTI
     fmt1 = coder.opaque( 'const char *',['"',...
                                         'Time Elapsed for NMPC_Solve: %f s\r\n',...
-                                        'Timer Precision: %f us\r\n',...
                                         '"']);
-    wtrick = 0; % Timer precision
-    wtrick = coder.ceval('omp_get_wtick');
-    wtrick = wtrick*1e6;
-    coder.ceval('printf',fmt1, tTotal,wtrick);
+    coder.ceval('printf',fmt1, tTotal);
     % Log to file
     fileID = fopen('GEN_log_rec.txt','w');
     % printf header
