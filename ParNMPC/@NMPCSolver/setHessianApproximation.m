@@ -6,6 +6,8 @@ if solver.OCP.isMEnabled == false
             solver.HessianApproximation = 'GaussNewton';
         case 'GaussNewtonLC'
             solver.HessianApproximation = 'GaussNewtonLC';
+        case 'GaussNewtonLF'
+            solver.HessianApproximation = 'GaussNewtonLF';
         case 'Newton'
             solver.HessianApproximation = 'Newton';
         otherwise
@@ -21,5 +23,8 @@ else
             solver.HessianApproximation = 'GaussNewton';
     end
 end
-disp(['Hessian approximation method: ' solver.HessianApproximation]);
+
+global ParNMPCGlobalVariable
+ParNMPCGlobalVariable.HessianApproximation      = solver.HessianApproximation;
+
 end

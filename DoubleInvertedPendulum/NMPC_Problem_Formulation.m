@@ -3,17 +3,19 @@ addpath('../ParNMPC/')
 %% Formulate an OCP using Class OptimalControlProblem
 
 % Create an OptimalControlProblem object
-OCP = OptimalControlProblem(0,... % constraints dim
-                            1,... % inputs dim
-                            6,... % states dim
-                            8,... % parameters dim
-                            1.5,... % T: prediction horizon
+OCP = OptimalControlProblem(2,... % dim of inputs 
+                            6,... % dim of states 
+                            7,... % dim of parameters 
                             48);  % N: num of discritization grids
+
 % Give names to x, u, p
 [X,Theta1,Theta2,dX,dTheta1,dTheta2] = ...
     OCP.setStateName({'X','Theta1','Theta2','dX','dTheta1','dTheta2'});
-[F] = ...
-    OCP.setInputName({'F'});
+[F,slack] = ...
+    OCP.setInputName({'F','slack'});
+
+% Set the prediction horizon T
+OCP.setT(1.5);
 
 % Set the dynamic function f
 g  = 9.81;
@@ -50,32 +52,25 @@ OCP.setM(M);
 OCP.setDiscretizationMethod('Euler');
 
 % Set the cost function L
-lambdaDim = OCP.dim.lambda;
-muDim     = OCP.dim.mu;
-uDim      = OCP.dim.u;
-xDim      = OCP.dim.x;
-pDim      = OCP.dim.p;
-N         = OCP.N;
 Q = diag(OCP.p(1:6));
 R = diag(OCP.p(7));
 xRef  = [0;0;0;0;0;0];
 uRef  = 0;
 L     =   0.5*(OCP.x-xRef).'*Q*(OCP.x-xRef)...
-        + 0.5*(OCP.u-uRef).'*R*(OCP.u-uRef);
+        + 0.5*(OCP.u(1)-uRef).'*R*(OCP.u(1)-uRef)...
+        +1e6*slack^2;
 OCP.setL(L);
 
-% Set the bound constraints
-uMax  =  10;
-uMin  = -10;
-uBarrierPara = OCP.p(8);
-OCP.setUpperBound('u',uMax,uBarrierPara);
-OCP.setLowerBound('u',uMin,uBarrierPara);
+% Set the linear constraints G(u,x,p)>=0
+G =[ OCP.u(1) + 10;...
+    -OCP.u(1) + 10;...
+     slack;...
+     X + slack + 0.09;...
+    -X + slack + 0.09];
+OCP.setG(G);
 
 % Generate necessary files
-isReGen = true; % is re-gen?
-if isReGen
-    OCP.codeGen();
-end
+OCP.codeGen();
 %% Configrate the solver using Class NMPCSolver
 
 % Create a NMPCSolver object
@@ -85,79 +80,43 @@ nmpcSolver = NMPCSolver(OCP);
 nmpcSolver.setHessianApproximation('GaussNewton');
 
 % Generate necessary files
-isReGen = true; % is re-gen?
-if isReGen
-    nmpcSolver.codeGen();
-end
+nmpcSolver.codeGen();
 %% Solve the very first OCP for a given initial state and given parameters using Class OCPSolver
 
 % Set the initial state
 x0   = [0;pi;pi;0;0;0];
 
-% Set the parameters
+% Set the parameter p
+dim      = OCP.dim;
+N        = OCP.N;
 QDiagVal = [10;10;10;1;1;1];
 RDiagVal = 0.1;
-par = zeros(pDim,N);
-par(1:7,:) = repmat([QDiagVal;RDiagVal],1,N);
-par(1:7,end) = [100;100;100;10;10;10;0.1]; % terminal penlty
-par(8,:) = 0.1; % barrier parameter
+p        = zeros(dim.p,N);
+p(1:7,:) = repmat([QDiagVal;RDiagVal],1,N);
+p(1:7,end) = [100;100;100;10;10;10;0.1]; % terminal penlty
 
-% Create an OCPSolver object
-ocpSolver = OCPSolver(OCP,nmpcSolver,x0,par);
+% init
+solutionInitGuess.lambda = [randn(dim.lambda,1),zeros(dim.lambda,1)];
+solutionInitGuess.mu     = [randn(dim.mu,1),randn(dim.mu,1)];
+solutionInitGuess.u      = [uRef;1];
+solutionInitGuess.x      = [x0,xRef];
+solutionInitGuess.z      = ones(dim.z,N);
+solutionInitGuess.LAMBDA = zeros(dim.lambda,dim.lambda,N);
+solution = NMPC_SolveOffline(x0,p,solutionInitGuess,0.01,1000);
 
-% Choose one of the following methods to provide an initial guess:
-% 1. init guess by input
-
-% lambdaInitGuess = repmat(randn(lambdaDim,1),1,N);
-% muInitGuess     = repmat(randn(muDim,1),1,N);
-% uInitGuess      = repmat(uRef,1,N);
-% xInitGuess      = repmat(xRef,1,N);
-
-% 2. init guess by interpolation
-
-lambdaStart = randn(xDim,1);
-muStart     = randn(muDim,1);
-uStart      = uRef;
-xStart      = x0;
-lambdaEnd   = zeros(lambdaDim,1);
-muEnd       = zeros(muDim,1);
-uEnd        = uRef;
-xEnd        = xRef;
-[lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess] = ...
-    ocpSolver.initFromStartEnd(lambdaStart,muStart,uStart,xStart,...
-                               lambdaEnd,  muEnd,  uEnd,  xEnd);
-% 3. init guess from file
-
-% [lambdaInitGuess,muInitGuess,uInitGuess,xInitGuess] = ...
-%                         ocpSolver.initFromMatFile('GEN_initData.mat');
-
-% Solve the OCP
-[lambda,mu,u,x] = ocpSolver.OCPSolve(lambdaInitGuess,...
-                                      muInitGuess,...
-                                      uInitGuess,...
-                                      xInitGuess,...
-                                      'NMPC_Iter',...
-                                      40);
-plot(x([2 3],:).');
+plot(solution.x([2 3],:).');
 figure(2);
-plot(u(1,:).');
+plot(solution.u(1,:).');
 figure(3);
-plot(x(1,:).');
-
-% Get the dependent variable LAMBDA
-LAMBDA = ocpSolver.getLAMBDA(x0,lambda,mu,u,x,par);
-
-% Get the cost
-cost = ocpSolver.getCost(u,x,par);
+plot(solution.x(1,:).');
 
 % Save to file
-save GEN_initData.mat  ...
-     lambdaDim muDim uDim xDim pDim N...
-     x0 lambda mu u x par LAMBDA
-	 
+save GEN_initData.mat  dim x0 p N
+global ParNMPCGlobalVariable
+ParNMPCGlobalVariable.solutionInitGuess = solution;
 %% Define the controlled plant using Class DynamicSystem
 
-% M(u,x,p)\dot(x) = f(u,x,p)
+% M(u,x,p) \dot(x) = f(u,x,p)
 % Create a DynamicSystem object
 plant = DynamicSystem(1,6,0);
 
@@ -171,8 +130,6 @@ plant = DynamicSystem(1,6,0);
 plant.setf(f); % same model 
 plant.setM(M); % same model 
 
+
 % Generate necessary files
-isSIMReGen = true;
-if isSIMReGen
-    plant.codeGen();
-end
+plant.codeGen();

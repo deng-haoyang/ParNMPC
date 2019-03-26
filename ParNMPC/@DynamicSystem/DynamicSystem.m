@@ -29,6 +29,7 @@ classdef DynamicSystem < handle
       varargout = setStateName(plant,varargin)
       varargout = setInputName(plant,varargin)
       varargout = setParameterName(plant,varargin)
+      showInfo(plant)
       codeGen(plant)
    end
 end
