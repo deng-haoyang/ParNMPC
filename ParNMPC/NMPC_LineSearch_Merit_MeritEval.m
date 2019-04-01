@@ -22,14 +22,14 @@ function merit = NMPC_LineSearch_Merit_MeritEval(xPrev,rho,u,x,p,phiX,phiC)
         p_i = p(:,:,i);
         xPrev_i   = xPrev(:,:,i);
         Merit_i   = Merit(:,:,i);
-        phiX_i = phiX(:,:,i);
-        phiC_i = phiC(:,:,i);
+        phiX_i = phiX;%
+        phiC_i = phiC;%
         for j = sizeSeg:-1:1
             u_j_i   = u_i(:,j);
             x_j_i   = x_i(:,j);
             p_j_i   = p_i(:,j);
-            phiX_j_i = phiX_i(:,j);
-            phiC_j_i = phiC_i(:,j);
+            phiX_j_i = phiX_i;%
+            phiC_j_i = phiC_i;%
             % Function Evaluation
             if j > 1
                 xPrev_i(:,j) = x_i(:,j-1);

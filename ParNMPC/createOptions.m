@@ -21,8 +21,9 @@
     options.isLineSearch       = false;
     % line search method
     options.lineSearchMethod   = 'merit';
-    
     %% degree of parallism
     % 1: in serial, otherwise in parallel
     options.DoP          = 1;
+    %% display
+    options.printLevel   = 0;
 end

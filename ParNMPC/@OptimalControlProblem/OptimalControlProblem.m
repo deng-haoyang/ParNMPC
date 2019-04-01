@@ -57,5 +57,7 @@ classdef OptimalControlProblem < DynamicSystem
       codeGen(OCP)
       showInfo(OCP)
       createNonemptySolution_FuncGen(OCP)
+      OCP_GEN_fdt_FuncGen(OCP) % when external f is used  
+      OCP_GEN_fdt_fudt_fxdt_FuncGen(OCP) % when external f is used
    end
 end

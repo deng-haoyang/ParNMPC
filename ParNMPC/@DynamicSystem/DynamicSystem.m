@@ -31,5 +31,6 @@ classdef DynamicSystem < handle
       varargout = setParameterName(plant,varargin)
       showInfo(plant)
       codeGen(plant)
+      SIM_GEN_f_FuncGen(plant)
    end
 end

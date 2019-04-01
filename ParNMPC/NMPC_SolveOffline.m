@@ -54,6 +54,7 @@ function solution = NMPC_SolveOffline(x0,p,solutionInitGuess,rho,maxIter)
     options.tolEnd       = 1e-5;
     options.maxIterTotal = maxIter;
     options.isLineSearch = true;
+    options.printLevel   = 1;
     
     disp(' ');
     disp('Solving the optimal control problem...');

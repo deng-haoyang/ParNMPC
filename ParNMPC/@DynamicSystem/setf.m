@@ -1,3 +1,7 @@
 function setf(obj,f)
-    obj.f = symfun(f,[obj.u;obj.x;obj.p]);
+    if  isa(f,'char')
+        obj.f = 'external';
+    else
+        obj.f = symfun(f,[obj.u;obj.x;obj.p]);
+    end
 end

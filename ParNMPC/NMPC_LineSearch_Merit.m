@@ -14,7 +14,7 @@ function [lambdaSplit,muSplit,uSplit,xSplit,stepSize,timeElapsed] = ...
     % Init 
     stepSize            = 1;
     epsilon             = 1e-7; % directional directive
-    stepSizeDecayRate   = 0.5;
+    stepSizeDecayRate   = 0.75;
     stepSizeMin         = 5e-2;
     eta                 = 0.1; 
     
@@ -55,7 +55,6 @@ function [lambdaSplit,muSplit,uSplit,xSplit,stepSize,timeElapsed] = ...
     %% 
 
     if stepSize ~= 1
-%         disp(stepSize);
         lambdaSplit = (1-stepSize)*lambdaSplit_k + stepSize* lambdaSplit;
         muSplit     = (1-stepSize)*muSplit_k     + stepSize* muSplit;
         uSplit      = (1-stepSize)*uSplit_k      + stepSize* uSplit;

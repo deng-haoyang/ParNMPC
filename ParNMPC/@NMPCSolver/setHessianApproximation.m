@@ -1,6 +1,6 @@
 function setHessianApproximation(solver,method)
 
-if solver.OCP.isMEnabled == false
+if solver.OCP.isMEnabled == false && ~isa(solver.OCP.f,'char')
     switch method
         case 'GaussNewton'
             solver.HessianApproximation = 'GaussNewton';

@@ -60,10 +60,6 @@ function [solution,output] = NMPC_Solve(x0,p,options)
     rho     = options.rhoInit;
     mode    = 1;
     
-%     if options.isLineSearch
-    phiX = abs(lambdaSplit);
-    phiC = abs(muSplit);
-%     end
 
     % Iteration
     for iter=1:options.maxIterTotal
@@ -77,18 +73,21 @@ function [solution,output] = NMPC_Solve(x0,p,options)
             NMPC_Solve_SearchDirection(x0,pSplit,rho,lambdaSplit,muSplit,uSplit,xSplit,zSplit,LAMBDASplit);
         output.timeElapsed.searchDirection = output.timeElapsed.searchDirection + tSearchDirection; 
         %% Line search
+        stepSize = 1;
         if options.isLineSearch
             switch options.lineSearchMethod
                 case 'merit'
-                    % phiX = max{abs(lambdaSplit),(phiX + abs(lambdaSplit))/2};
-                    scaling = 1.0;
-                    avgPhiX = (phiX + abs(lambdaSplit))/2;
-                    diffPhiX = phiX - avgPhiX;
-                    phiX(diffPhiX<0) = avgPhiX(diffPhiX<0);
-                    avgPhiC = (phiC + abs(muSplit))/2;
-                    diffPhiC = phiC - avgPhiC;
-                    phiC(diffPhiC<0) = avgPhiX(diffPhiC<0);
-                    [lambdaSplit,muSplit,uSplit,xSplit,~,tLineSearch] = ...
+                    scaling = 1.5;
+                    
+                    lambdaSplitAbs = abs(lambdaSplit);
+                    lambdaSplitMax3 =  max(lambdaSplitAbs,[],2);
+                    phiX = max(lambdaSplitMax3,[],3);
+                    
+                    muSplitAbs = abs(muSplit);
+                    muSplitMax3 =  max(muSplitAbs,[],2);
+                    phiC = max(muSplitMax3,[],3);
+                   
+                    [lambdaSplit,muSplit,uSplit,xSplit,stepSize,tLineSearch] = ...
                         NMPC_LineSearch_Merit(x0,pSplit,rho,lambdaSplit_k,muSplit_k,uSplit_k,xSplit_k,...
                                         lambdaSplit,muSplit,uSplit,xSplit,phiX*scaling,phiC*scaling);
                 case 'filter'
@@ -106,6 +105,20 @@ function [solution,output] = NMPC_Solve(x0,p,options)
                      KKTError.Hu*scaling;...
                      KKTError.costateEquation*scaling]);
         output.timeElapsed.KKTErrorCheck = output.timeElapsed.KKTErrorCheck + tKKTErrorCheck;
+        %% print
+        if coder.target('MATLAB') % Normal excution
+            if options.printLevel == 1
+                printMsg = ['Iter: ',num2str(iter),...
+                            '   KKTError: ',num2str(error),...
+                            '   Cost: ',num2str(costL),...
+                            '   rho: ',num2str(rho),...
+                            '   Step size: ',num2str(stepSize)];
+                disp(printMsg);
+            end
+        end
+        %
+%         disp(iter);
+%         disp(error);
         %% barrier parameter update
         switch mode
             case 1 % init
