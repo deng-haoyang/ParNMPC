@@ -60,7 +60,6 @@ function [solution,output] = NMPC_Solve(x0,p,options)
     rho     = options.rhoInit;
     mode    = 1;
     
-
     % Iteration
     for iter=1:options.maxIterTotal
         % backup
@@ -68,25 +67,22 @@ function [solution,output] = NMPC_Solve(x0,p,options)
         muSplit_k     = muSplit;
         uSplit_k      = uSplit;
         xSplit_k      = xSplit;
-        %% Search direction 
-        [lambdaSplit,muSplit,uSplit,xSplit,zSplit,LAMBDASplit,tSearchDirection] = ...
+        %% Search direction
+        [lambdaSplit,muSplit,uSplit,xSplit,zSplit,LAMBDASplit,KKTError,costL,tSearchDirection] = ...
             NMPC_Solve_SearchDirection(x0,pSplit,rho,lambdaSplit,muSplit,uSplit,xSplit,zSplit,LAMBDASplit);
-        output.timeElapsed.searchDirection = output.timeElapsed.searchDirection + tSearchDirection; 
+        output.timeElapsed.searchDirection = output.timeElapsed.searchDirection + tSearchDirection;
         %% Line search
         stepSize = 1;
         if options.isLineSearch
             switch options.lineSearchMethod
                 case 'merit'
                     scaling = 1.5;
-                    
                     lambdaSplitAbs = abs(lambdaSplit);
                     lambdaSplitMax3 =  max(lambdaSplitAbs,[],2);
                     phiX = max(lambdaSplitMax3,[],3);
-                    
                     muSplitAbs = abs(muSplit);
                     muSplitMax3 =  max(muSplitAbs,[],2);
                     phiC = max(muSplitMax3,[],3);
-                   
                     [lambdaSplit,muSplit,uSplit,xSplit,stepSize,tLineSearch] = ...
                         NMPC_LineSearch_Merit(x0,pSplit,rho,lambdaSplit_k,muSplit_k,uSplit_k,xSplit_k,...
                                         lambdaSplit,muSplit,uSplit,xSplit,phiX*scaling,phiC*scaling);
@@ -97,13 +93,24 @@ function [solution,output] = NMPC_Solve(x0,p,options)
             output.timeElapsed.lineSearch = output.timeElapsed.lineSearch + tLineSearch;
         end
         %% KKT error
-        scaling =  max(abs(xSplit(:)))/max(abs(lambdaSplit(:)));
-        [KKTError,costL,tKKTErrorCheck]   = ...
-            NMPC_KKTError(x0,pSplit,rho,lambdaSplit,muSplit,uSplit,xSplit);
-        error = max([KKTError.stateEquation;...
-                     KKTError.C;...
-                     KKTError.Hu*scaling;...
-                     KKTError.costateEquation*scaling]);
+        tKKTErrorCheck = 0;
+        if options.checkKKTErrorAfterIteration
+            [KKTError,costL,tKKTErrorCheck]   = ...
+                NMPC_KKTError(x0,pSplit,rho,lambdaSplit,muSplit,uSplit,xSplit);
+            KKTErrorScaling = 1;
+        else
+            % avoid chattering of the num of iter
+            KKTErrorScaling = 5;
+        end
+        sMax = 100;
+        lambda_L1Norm = norm(lambdaSplit(:),1);
+        HuScaling =  (lambda_L1Norm + norm(muSplit(:),1))/(dim.lambda+dim.mu)/N;
+        HuScaling = max(sMax,HuScaling)/sMax;
+        costateEquationScaling = max(sMax,lambda_L1Norm/dim.lambda/N)/sMax;
+        error = max([KKTError.stateEquation*KKTErrorScaling;...
+                     KKTError.C/KKTErrorScaling;...
+                     KKTError.Hu/HuScaling/KKTErrorScaling;...
+                     KKTError.costateEquation/costateEquationScaling/KKTErrorScaling]);
         output.timeElapsed.KKTErrorCheck = output.timeElapsed.KKTErrorCheck + tKKTErrorCheck;
         %% print
         if coder.target('MATLAB') % Normal excution
@@ -116,9 +123,6 @@ function [solution,output] = NMPC_Solve(x0,p,options)
                 disp(printMsg);
             end
         end
-        %
-%         disp(iter);
-%         disp(error);
         %% barrier parameter update
         switch mode
             case 1 % init
@@ -150,7 +154,6 @@ function [solution,output] = NMPC_Solve(x0,p,options)
                 end
         end
     end
-    
     solution.lambda = reshape(lambdaSplit, dim.lambda,   N);
     solution.mu     = reshape(muSplit,     dim.mu,       N);
     solution.u      = reshape(uSplit,      dim.u,        N);
@@ -162,7 +165,6 @@ function [solution,output] = NMPC_Solve(x0,p,options)
     output.KKTError        = error;
     output.rho             = rho;
     output.iterTotal       = iter;
-        
     
     tEnd = Timer();
 

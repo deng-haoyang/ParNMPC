@@ -1,4 +1,4 @@
-function [lambda,mu,u,x,z,LAMBDA,timeElapsed] = ...
+function [lambda,mu,u,x,z,LAMBDA,KKTError,costL,timeElapsed] = ...
                 NMPC_Solve_SearchDirection(x0,p,rho,lambda,mu,u,x,z,LAMBDA) %#codegen
     tStart = Timer();
     
@@ -53,6 +53,16 @@ function [lambda,mu,u,x,z,LAMBDA,timeElapsed] = ...
     p_x_Lambda      = zeros(xDim,xDim,sizeSeg,DoP);
     p_x_F           = zeros(xDim,xDim,sizeSeg,DoP);
     
+    KKTxEquation      = zeros(1, DoP);
+    KKTC              = zeros(1, DoP);
+    KKTHu             = zeros(1, DoP);
+    KKTlambdaEquation = zeros(1, DoP);
+    L                 = zeros(1,sizeSeg,DoP);
+    KKTError.stateEquation   = 0;
+    KKTError.C               = 0;
+    KKTError.Hu              = 0;
+    KKTError.costateEquation = 0;
+    
     % coupling variable for each segment
     xPrev(:,1,1) = x0;
     for i=2:1:DoP
@@ -77,7 +87,14 @@ function [lambda,mu,u,x,z,LAMBDA,timeElapsed] = ...
         p_lambda_Lambda_i = zeros(xDim,xDim,sizeSeg);
         p_x_Lambda_i      = zeros(xDim,xDim,sizeSeg);
         p_x_F_i           = zeros(xDim,xDim,sizeSeg);
-                
+        
+        
+        xEq_i      = zeros(xDim,sizeSeg);
+        C_i        = zeros(muDim,sizeSeg);
+        HuT_i      = zeros(uDim,sizeSeg);
+        lambdaEq_i = zeros(lambdaDim,sizeSeg);
+        L_i        = zeros(1,sizeSeg);
+        
         for j = sizeSeg:-1:1
             lambda_j_i  = lambda_i(:,j);
             mu_j_i  = mu_i(:,j);
@@ -87,7 +104,7 @@ function [lambda,mu,u,x,z,LAMBDA,timeElapsed] = ...
             p_j_i   = p_i(:,j);
             
             % Function and Jacobian
-            [~,Lu_j_i, Lx_j_i]    = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i);
+            [L_j_i,Lu_j_i, Lx_j_i]    = OCP_L_Lu_Lx(u_j_i,x_j_i,p_j_i);
             [~,LBu_j_i,LBx_j_i]   = OCP_LB_LBu_LBx(u_j_i,x_j_i,p_j_i);
             
             C_j_i    = zeros(muDim,1);
@@ -192,6 +209,12 @@ function [lambda,mu,u,x,z,LAMBDA,timeElapsed] = ...
             p_x_Lambda_i(:,:,j)   = p_x_Lambda_j_i;
             p_x_F_i(:,:,j) = p_x_F_j_i;
             LAMBDA_i(:,:,j) = LAMBDA_j_i;
+            %
+            xEq_i(:,j)      = xEq_j_i;
+            C_i(:,j)        = C_j_i;
+            HuT_i(:,j)      = HAlluT_j_i;
+            lambdaEq_i(:,j) = lambdaEq_j_i;
+            L_i(:,j)        = L_j_i;
         end
         
         % Recover
@@ -208,8 +231,21 @@ function [lambda,mu,u,x,z,LAMBDA,timeElapsed] = ...
         p_lambda_Lambda(:,:,:,i) = p_lambda_Lambda_i;
         p_x_Lambda(:,:,:,i) = p_x_Lambda_i;
         p_x_F(:,:,:,i) = p_x_F_i;
-                
+        
+        %
+        KKTxEquation(:,i)      = norm(xEq_i,     Inf);
+        KKTC(:,i)              = norm(C_i,       Inf);
+        KKTHu(:,i)             = norm(HuT_i,     Inf);
+        KKTlambdaEquation(:,i) = norm(lambdaEq_i,Inf);
+        L(:,:,i)               = L_i;
     end
+    %%
+    KKTError.stateEquation   = max(KKTxEquation(:));
+    KKTError.C               = max(KKTC(:));
+    KKTError.Hu              = max(KKTHu(:));
+    KKTError.costateEquation = max(KKTlambdaEquation(:));
+    costL = sum(L(:));
+
     %% Step 2: Backward correction due to the approximation of lambda
     for i = DoP:-1:1
         for j = sizeSeg:-1:1
@@ -264,7 +300,7 @@ function [lambda,mu,u,x,z,LAMBDA,timeElapsed] = ...
         end
     end
     parfor (i=1:1:DoP,numThreads)
-    % for i=1:1:DoP
+%     for i=1:1:DoP
         lambda_i = lambda(:,:,i);
         mu_i = mu(:,:,i);
         u_i = u(:,:,i);

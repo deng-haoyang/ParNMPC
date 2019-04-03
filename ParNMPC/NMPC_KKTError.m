@@ -24,7 +24,7 @@ function [KKTError,costL,timeElapsed] = NMPC_KKTError(x0,p,rho,lambda,mu,u,x)
         numThreads = DoP;
     end
     
-    % Local 
+    % Local
     KKTxEquation      = zeros(1, DoP);
     KKTC              = zeros(1, DoP);
     KKTHu             = zeros(1, DoP);
@@ -41,6 +41,7 @@ function [KKTError,costL,timeElapsed] = NMPC_KKTError(x0,p,rho,lambda,mu,u,x)
     end
     
     parfor (i=1:1:DoP,numThreads)
+%     for i=1:1:DoP
         lambda_i = lambda(:,:,i);
         mu_i = mu(:,:,i);
         u_i = u(:,:,i);

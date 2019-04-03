@@ -26,4 +26,7 @@
     options.DoP          = 1;
     %% display
     options.printLevel   = 0;
+    %% check KKT error after iteration
+    % whether to check the KKT error after iteration
+    options.checkKKTErrorAfterIteration = true;
 end
