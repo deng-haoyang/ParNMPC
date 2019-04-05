@@ -60,6 +60,10 @@ function [solution,output] = NMPC_Solve(x0,p,options)
     rho     = options.rhoInit;
     mode    = 1;
     
+    % initialize a filter [LAll;xEq+C;flag]
+    lineSearchFilterWidth = 10;
+    lineSearchFilter = zeros(3,lineSearchFilterWidth);
+    
     % Iteration
     for iter=1:options.maxIterTotal
         % backup
@@ -87,8 +91,13 @@ function [solution,output] = NMPC_Solve(x0,p,options)
                         NMPC_LineSearch_Merit(x0,pSplit,rho,lambdaSplit_k,muSplit_k,uSplit_k,xSplit_k,...
                                         lambdaSplit,muSplit,uSplit,xSplit,phiX*scaling,phiC*scaling);
                 case 'filter'
-                    % TODO
+                    [lambdaSplit,muSplit,uSplit,xSplit,lineSearchFilter,stepSize,tLineSearch] = ...
+                        NMPC_LineSearch_Filter(x0,pSplit,rho,lambdaSplit_k,muSplit_k,uSplit_k,xSplit_k,...
+                                        lambdaSplit,muSplit,uSplit,xSplit,lineSearchFilter);
                 otherwise
+                    if coder.target('MATLAB') % Normal excution
+                            warning('Specified linesearch method is not supported!');
+                    end
             end
             output.timeElapsed.lineSearch = output.timeElapsed.lineSearch + tLineSearch;
         end
@@ -154,6 +163,7 @@ function [solution,output] = NMPC_Solve(x0,p,options)
                 end
         end
     end
+    %% Reshape
     solution.lambda = reshape(lambdaSplit, dim.lambda,   N);
     solution.mu     = reshape(muSplit,     dim.mu,       N);
     solution.u      = reshape(uSplit,      dim.u,        N);

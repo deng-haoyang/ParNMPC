@@ -16,7 +16,12 @@ function setG(OCP,G)
     OCP.dim.z      = zDim;
     OCP.z          = sym('z',[OCP.dim.z,1]);
     OCP.LBarrier   = sym(0);
+    %% barrier term
     for i = 1:zDim
         OCP.LBarrier = OCP.LBarrier - log(G_formula(i));
+    end
+    %% linear damping term
+    for i = 1:zDim
+        OCP.LBarrier = OCP.LBarrier + 1e-4*G_formula(i);
     end
 end

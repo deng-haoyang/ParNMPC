@@ -55,20 +55,20 @@ function solution = NMPC_SolveOffline(x0,p,solutionInitGuess,rho,maxIter)
     options.maxIterTotal = maxIter;
     options.isLineSearch = true;
     options.printLevel   = 1;
-    
+    options.lineSearchMethod = 'filter';
     disp(' ');
     disp('Solving the optimal control problem...');
     disp('Note that this function can only be used offline to provide an accurate initial guess');
     disp(['Barrier parameter (rho): ', num2str(rho)]);
     disp(['Max number of iterations: ', num2str(maxIter)]);
     disp(['is linesearch enabled: ', 'Yes']);
+    disp(['Linesearch method: ', options.lineSearchMethod]);
     
     [solution,output] = NMPC_Solve(x0,p,options);
     
     disp([ 'Solution obtained:', ' iterations: ',  num2str(output.iterTotal), ', KKTError:' ,num2str(output.KKTError)]);
 
 end
-
 
 function x_N = interpolation(x_in,N)
     
