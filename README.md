@@ -36,6 +36,7 @@ With **`ParNMPC`**, you can define your own NMPC problem in a very easy way and 
 * MATLAB Optimization Toolbox
 * MATLAB Parallel Computing Toolbox
 * MATLAB Symbolic Math Toolbox
+* Simulink Coder
 * C/C++ compiler supporting parallel code generation
 
 ## Getting Started (MATLAB 2018b)

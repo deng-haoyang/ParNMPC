@@ -38,7 +38,7 @@ cfg.GenerateReport          = true;
 cfg.DynamicMemoryAllocation = 'off';
 if ~strcmp(target,'mex')
     cfg.BuildConfiguration  = 'Faster Runs';
-%     cfg.SupportNonFinite    = false;
+    cfg.SupportNonFinite    = false;
     cfg.GenerateExampleMain = 'DoNotGenerate';
 end
 
