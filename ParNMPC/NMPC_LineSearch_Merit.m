@@ -39,7 +39,7 @@ function [lambdaSplit,muSplit,uSplit,xSplit,stepSize,timeElapsed] = ...
         merit_epsilon = NMPC_LineSearch_Merit_MeritEval(xPrev,rho,u_epsilon,x_epsilon,pSplit,phiX,phiC);
         %% directional directive of the merit function 
         DDmerit = (merit_epsilon - merit_0)/epsilon;
-        %% search a step size 
+        %% search a step size  
         while stepSize>stepSizeMin
             % stepSize
             u_stepSize = (1-stepSize)*uSplit_k + stepSize*uSplit;

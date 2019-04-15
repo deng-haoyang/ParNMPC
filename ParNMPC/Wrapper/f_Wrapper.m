@@ -1,4 +1,4 @@
-function dx = f_Wrapper(u,x,p)
+function dx = f_Wrapper(u,x,p,parIdx)
 % dx = f(u,x,p)
     if coder.target('MATLAB') 
         % Specify your own f(u,x,p) function for normal excution

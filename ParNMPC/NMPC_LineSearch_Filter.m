@@ -22,7 +22,7 @@ function [lambdaSplit,muSplit,uSplit,xSplit,filter,stepSize,timeElapsed] = ...
     xPrev           = zeros(xDim,sizeSeg,DoP);
     xPrev(:,1,1)    = x0;
     %%
-    if norm(xSplit(:)-xSplit_k(:),1)<1e-6
+    if norm(xSplit(:)-xSplit_k(:),1)<1e-7
         stepSize = 1;
     else
         %% search a step size 

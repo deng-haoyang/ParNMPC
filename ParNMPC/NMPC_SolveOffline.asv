@@ -41,10 +41,7 @@ function solution = NMPC_SolveOffline(x0,p,solutionInitGuess,rho,maxIter)
         warning('Initial guess of z is not provided!');
         solutionInitGuess.z = ones(dim.z,N);
     end
-    checkFeasibility(solutionInitGuess,p);
-    solutionInitGuess.LAMBDA = zeros(dim.x,dim.x,N);
-    ParNMPCGlobalVariable.solutionInitGuess = solutionInitGuess;
-
+    solutionInitGuess.LAMBDA = zeros(dim.x,dim.x,2);
     %%
     clear NMPC_Solve
     options = createOptions();
@@ -64,6 +61,7 @@ function solution = NMPC_SolveOffline(x0,p,solutionInitGuess,rho,maxIter)
     disp(['Max number of iterations: ', num2str(maxIter)]);
     disp(['is linesearch enabled: ', 'Yes']);
     disp(['Linesearch method: ', options.lineSearchMethod]);
+    
     try
         [solution,output] = NMPC_Solve(x0,p,options);
         disp([ 'Solution obtained:', ' iterations: ',  num2str(output.iterTotal), ', KKTError:' ,num2str(output.KKTError)]);

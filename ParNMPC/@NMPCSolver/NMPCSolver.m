@@ -5,6 +5,7 @@ classdef NMPCSolver < handle
       HessianApproximation      = 'GaussNewton';
       nonsingularRegularization = 1e-9;
       descentRegularization     = 0;
+      isApproximateInvFx        = false;
    end
    methods
       function solver = NMPCSolver(OCP)
@@ -14,11 +15,13 @@ classdef NMPCSolver < handle
             ParNMPCGlobalVariable.nonsingularRegularization = solver.nonsingularRegularization;
             ParNMPCGlobalVariable.descentRegularization     = solver.descentRegularization;
             ParNMPCGlobalVariable.HessianApproximation      = 'GaussNewton';
+            ParNMPCGlobalVariable.isApproximateInvFx        = false;
       end
       codeGen(solver)
       setHessianApproximation(solver,method)
       setNonsingularRegularization(solver,value)
       setDescentRegularization(solver,value)
+      setInvFxMethod(solver,method)
       showInfo(solver)
    end
 end

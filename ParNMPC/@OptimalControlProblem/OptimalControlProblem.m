@@ -33,6 +33,7 @@ classdef OptimalControlProblem < DynamicSystem
           ParNMPCGlobalVariable.discretizationMethod = 'Euler';
           ParNMPCGlobalVariable.dim        = OCP.dim;
           ParNMPCGlobalVariable.isMEnabled = false;
+%           ParNMPCGlobalVariable.isfExternal= false;
           ParNMPCGlobalVariable.N          = N;
           ParNMPCGlobalVariable.solutionInitGuess.lambda = zeros(xDim,N);
           ParNMPCGlobalVariable.solutionInitGuess.u      = zeros(uDim,N);

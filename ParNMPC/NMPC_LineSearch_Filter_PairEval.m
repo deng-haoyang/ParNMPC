@@ -43,7 +43,7 @@ function [l1Norm_LALL,l1Norm_xEq,l1Norm_C] = NMPC_LineSearch_Filter_PairEval(xPr
             if muDim ~= 0
                 C_j_i = OCP_C(u_j_i,x_j_i,p_j_i);
             end
-            F_j_i     = OCP_F(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
+            F_j_i     = OCP_F(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled,i);
             xEq_j_i   = F_j_i + xPrev_j_i;
             
             l1Norm_LAll_i(:,j) = LAll_j_i;

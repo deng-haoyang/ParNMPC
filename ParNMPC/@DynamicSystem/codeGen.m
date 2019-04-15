@@ -7,10 +7,12 @@ function codeGen(plant)
     end
     if isa(plant.f,'char')
         % external
-        disp('Please specify your own f(u,x,p) function in fSim_Wrapper.m');   
         isExistfWrapper = exist('./fSim_Wrapper.m','file');
         if isExistfWrapper ~= 2
             copyfile('../ParNMPC/Wrapper/fSim_Wrapper.m','./fSim_Wrapper.m');
+            disp('Please specify your own f(u,x,p) function in fSim_Wrapper.m');   
+        else
+            disp('fSim_Wrapper.m already exists and will be kept');
         end
         plant.SIM_GEN_f_FuncGen();
     else

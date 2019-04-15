@@ -61,17 +61,24 @@ function codeGen(OCP)
     'Outputs',{'C'});
 
     %% f, fu, fx, M(optional)
+    parIdx = sym('parIdx');
+    UXPParIdx = {OCP.u;OCP.x;OCP.p;parIdx};
     if isa(OCP.f,'char')
         % external
-        disp('Please specify your own f(u,x,p) function in fWrapper.m');
-        disp('Please specify your own f_fu_fx(u,x,p) function in f_fu_fx_Wrapper.m');   
         isExistfWrapper = exist('./f_Wrapper.m','file');
         if isExistfWrapper ~= 2
             copyfile('../ParNMPC/Wrapper/f_Wrapper.m');
+            disp('Please specify your own f(u,x,p) function in fWrapper.m');
+        else
+            disp('fWrapper.m already exists and will be kept');
         end
         isExistf_fu_fx_Wrapper = exist('./f_fu_fx_Wrapper.m','file');
         if isExistf_fu_fx_Wrapper ~= 2
             copyfile('../ParNMPC/Wrapper/f_fu_fx_Wrapper.m');
+            disp(['Please specify your own f_fu_fx(u,x,p) function in f_fu_fx_Wrapper.m', ...
+                    ' (finite difference is used by default)']);   
+        else
+            disp('f_fu_fx_Wrapper.m already exists and will be kept');   
         end
         OCP.OCP_GEN_fdt_FuncGen();
         OCP.OCP_GEN_fdt_fudt_fxdt_FuncGen();
@@ -82,11 +89,11 @@ function codeGen(OCP)
 
         matlabFunction(fdt,fudt,fxdt,...
             'File','./funcgen/OCP_GEN_fdt_fudt_fxdt',...
-            'Vars',UXP,...
+            'Vars',UXPParIdx,...
             'Outputs',{'fdt','fudt','fxdt'});
         matlabFunction(fdt,...
             'File','./funcgen/OCP_GEN_fdt',...
-            'Vars',UXP,...
+            'Vars',UXPParIdx,...
             'Outputs',{'fdt'});
     end
     matlabFunction(OCP.M,...

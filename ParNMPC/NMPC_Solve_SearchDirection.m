@@ -8,6 +8,7 @@ function [lambda,mu,u,x,z,LAMBDA,KKTError,costL,timeElapsed] = ...
     isMEnabled                 = ParNMPCGlobalVariable.isMEnabled;
     nonsingularRegularization  = ParNMPCGlobalVariable.nonsingularRegularization;
     descentRegularization      = ParNMPCGlobalVariable.descentRegularization;
+    isApproximateInvFx         = ParNMPCGlobalVariable.isApproximateInvFx;
     lambdaDim                  = ParNMPCGlobalVariable.dim.x;
     muDim                      = ParNMPCGlobalVariable.dim.mu;
     uDim                       = ParNMPCGlobalVariable.dim.u;
@@ -113,7 +114,7 @@ function [lambda,mu,u,x,z,LAMBDA,KKTError,costL,timeElapsed] = ...
             if muDim ~=0
                 [C_j_i,Cu_j_i,Cx_j_i] = OCP_C_Cu_Cx(u_j_i,x_j_i,p_j_i);
             end
-            [F_j_i,Fu_j_i,Fx_j_i] = OCP_F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
+            [F_j_i,Fu_j_i,Fx_j_i] = OCP_F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled,i);
             
             % KKT
             if j > 1
@@ -149,7 +150,11 @@ function [lambda,mu,u,x,z,LAMBDA,KKTError,costL,timeElapsed] = ...
             if j < sizeSeg
                 LAMBDA_i(:,:,j) = LAMBDA_i(:,:,j+1);
             end
-            invFx_j_i     = inv(Fx_j_i);
+            if isApproximateInvFx
+                invFx_j_i = -Fx_j_i-2*eye(xDim);
+            else
+                invFx_j_i =  inv(Fx_j_i);
+            end
             LAMBDAUncrt_j_i  = invFx_j_i.'*(AxxCondensed_j_i -LAMBDA_i(:,:,j) )*invFx_j_i;
 
             Aux_invFx_j_i  = AuxCondensed_j_i*invFx_j_i;

@@ -43,7 +43,7 @@ function merit = NMPC_LineSearch_Merit_MeritEval(xPrev,rho,u,x,p,phiX,phiC)
             if muDim ~= 0
                 C_j_i = OCP_C(u_j_i,x_j_i,p_j_i);
             end
-            F_j_i     = OCP_F(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled);
+            F_j_i     = OCP_F(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled,i);
             xEq_j_i   = F_j_i + xPrev_j_i;
             Merit_i(:,j) = LAll_j_i + phiX_j_i.'*abs(xEq_j_i) + phiC_j_i.'*abs(C_j_i);
         end
