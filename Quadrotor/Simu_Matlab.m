@@ -57,13 +57,13 @@ for step = 1:simuSteps %simulation steps
 
     % Update parameters
     if step >= 300 && step <= 304
-        p(1,:,:) =  p(1,:,:) + 0.5; % X ref
-        p(2,:,:) =  p(2,:,:) - 0.5; % Y ref
-        p(3,:,:) =  p(3,:,:) + 0.5; % Z ref
+        p(1,:) =  p(1,:) + 0.5; % X ref
+        p(2,:) =  p(2,:) - 0.5; % Y ref
+        p(3,:) =  p(3,:) + 0.5; % Z ref
     elseif step >= 600 && step <= 601
-        p(1,:,:) = p(1,:,:)  - 0.5; % X ref
-        p(2,:,:) = p(2,:,:)  + 0.5; % Y ref
-        p(3,:,:) = p(3,:,:)  - 0.5; % Z ref
+        p(1,:) = p(1,:)  - 0.5; % X ref
+        p(2,:) = p(2,:)  + 0.5; % Y ref
+        p(3,:) = p(3,:)  - 0.5; % Z ref
     end
     
     
