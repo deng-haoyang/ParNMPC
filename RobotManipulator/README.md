@@ -29,10 +29,11 @@ Compiler options:
 - -fopenmp
 
 Linker options:
--lboost_system 
--lurdfdom_model 
--lgomp
--lpthread
+
+- -lboost_system 
+- -lurdfdom_model 
+- -lgomp
+- -lpthread
 
 ## Computation time
 In our setup (T = 1 s, N = 18, DOP = 6, i7-8950HK@2.9 GHz), the computation time is about 170 us/iteration. 
