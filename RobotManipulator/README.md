@@ -3,7 +3,9 @@
 ## Description
 
 This example demonstrates how to use ParNMPC to control a 7 DOF robot manipulator using user-defined dynamics and derivatives. 
-The robot manipulator's dynamics and derivatives are computed using Pinocchio (https://stack-of-tasks.github.io/pinocchio/), which is a very efficient C++ library for rigid multi-body dynamics computations. Since Pinocchio currently only supports Mac and Linux, we here demonstrate how to do the simulation on Ubuntu 18.04.
+The robot manipulator's dynamics and derivatives are computed using Pinocchio (https://stack-of-tasks.github.io/pinocchio/), which is a very efficient C++ library for rigid multi-body dynamics computations. Since Pinocchio currently only supports Mac and Linux, we here demonstrate how to do the simulation on Ubuntu 18.04. 
+
+The task is to control the manipulator to its desired reference under the constraints of the input torques and velocities.
 
 ## How to generate code?
 
