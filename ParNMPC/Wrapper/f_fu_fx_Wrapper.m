@@ -1,7 +1,9 @@
 function [f,fu,fx] = f_fu_fx_Wrapper(u,x,p,parIdx)
 % fu and fx are calculated using finite difference by default
 
-% dx = f(u,x,p)
+% dx/dt = f(u,x,p)
+% parIdx: index of the core (for reentrant purpose)
+
     [xDim,~] = size(x);
     [uDim,~] = size(u);
     f = f_Wrapper(u,x,p,parIdx);
