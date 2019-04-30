@@ -9,11 +9,11 @@ The robot manipulator's dynamics and derivatives are computed using Pinocchio (h
 
 The task is to control the manipulator to its desired reference under the constraints of the input torques and velocities. 
 
-- Velocity constraint: |qdot|<pi/2 rad/s
-- Input constraint: |tau|<10 N
+- Input constraint: |tau| < 10 N
+- Velocity constraint: |qdot| < pi/2 rad/s
 - Initial position: [0,0,0,0,0,0,0]
-- Setpoint in 0 to 4s: [0,pi/2,0,pi/2,0,pi/2,0]
-- Setpoint in 4 to 8s: [pi/2,0,pi/2,0,pi/2,0,pi/2]
+- Setpoint in 0 to 4 s: [0,pi/2,0,pi/2,0,pi/2,0]
+- Setpoint in 4 to 8 s: [pi/2,0,pi/2,0,pi/2,0,pi/2]
 - Zero gravity
 
 
