@@ -9,8 +9,11 @@ The robot manipulator's dynamics and derivatives are computed using Pinocchio (h
 
 1. Open `NMPC_Problem_Formulation.m` and run.
 2. Open `Simu_Matlab_Codegen.m` and run.
+
 The closed-loop simulation C++ files will be generated to `./codegen/lib/Simu_Matlab`. 
+
 The Pinocchio interface is in `./kuka_iiwa14_pinocchio` (very simple). 
+
 The urdf file of the manipulator is in `./kuka_iiwa14_pinocchio` (from MATLAB).
 
 ## How to run the generated C++ code?
@@ -19,10 +22,11 @@ The urdf file of the manipulator is in `./kuka_iiwa14_pinocchio` (from MATLAB).
 2. Follow the Pinocchio document, compile, and run. 
 
 Compiler options:
--DPINOCCHIO_URDFDOM_TYPEDEF_SHARED_PTR 
--DPINOCCHIO_URDFDOM_USE_STD_SHARED_PTR
--DPINOCCHIO_WITH_URDFDOM  
--fopenmp
+
+- -DPINOCCHIO_URDFDOM_TYPEDEF_SHARED_PTR 
+- -DPINOCCHIO_URDFDOM_USE_STD_SHARED_PTR
+- -DPINOCCHIO_WITH_URDFDOM  
+- -fopenmp
 
 Linker options:
 -lboost_system 
