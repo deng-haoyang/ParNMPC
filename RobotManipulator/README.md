@@ -1,5 +1,7 @@
 # Joint angle control of the 7 DOF robot manipulator KUKA LBR iiwa 14
 
+![image]( https://github.com/ideaDeng/Gifs/blob/master/lbr8s.gif)
+
 ## Description
 
 This example demonstrates how to use ParNMPC to control a 7 DOF robot manipulator using user-defined dynamics and derivatives. 
