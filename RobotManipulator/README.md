@@ -36,17 +36,17 @@ The urdf file of the manipulator is in `./iiwa_description` (from MATLAB).
 
    Type the following commands in terminal sequentially:
 
-   mkdir build
+   $ mkdir build
 
-   cd build
+   $ cd build
 
-   cmake ..
+   $ cmake ..
 
-   make
+   $ make
 
-   cd ../bin
+   $ cd ../bin
 
-   ./iiwa14_NMPC
+   $ ./iiwa14_NMPC
 
 ## Computation time
 In our setup (T = 1 s, N = 18, DOP = 6, i7-8950HK@2.9 GHz), the computation time is about 170 us/iteration. 
