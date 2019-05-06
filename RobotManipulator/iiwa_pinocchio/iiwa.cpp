@@ -14,7 +14,7 @@ pinocchio::Data sim_data(model);
 
 void iiwa14_init()
 {
-    std::string filename = "iiwa14.urdf";
+    std::string filename = "../iiwa_description/iiwa14.urdf";
     pinocchio::urdf::buildModel(filename,model);
     model.gravity.setZero();
     // init for NMPC
