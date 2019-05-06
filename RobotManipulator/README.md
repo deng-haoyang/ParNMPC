@@ -34,19 +34,15 @@ The urdf file of the manipulator is in `./iiwa_description` (from MATLAB).
 1. Install Pinocchio on Ubuntu (https://stack-of-tasks.github.io/pinocchio/).
 2. Compile and run (supposing the current directory is RobotManipulator)
 
-   Type the following commands in terminal sequentially:
-
+Type the following commands in terminal sequentially:
+```
    $ mkdir build
-
    $ cd build
-
    $ cmake ..
-
    $ make
-
    $ cd ../bin
-
    $ ./iiwa14_NMPC
+```
 
 ## Computation time
 In our setup (T = 1 s, N = 18, DOP = 6, i7-8950HK@2.9 GHz), the computation time is about 170 us/iteration. 
