@@ -47,6 +47,6 @@ A sampling rate of 1 KHz can be achieved in real time.
 
 ## Contributors
 
-- Thanks [Xuanchen Zhang](https://github.com/xuhuairuogu) (USTC) for providing the wonderful build interface.
+- Thank [Xuanchen Zhang](https://github.com/xuhuairuogu) (USTC) for providing the wonderful build interface.
 
 
