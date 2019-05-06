@@ -22,7 +22,7 @@ The task is to control the manipulator to its desired reference under the constr
 1. Open `NMPC_Problem_Formulation.m` and run.
 2. Open `Simu_Matlab_Codegen.m` and run.
 
-The closed-loop simulation C++ files will be generated to `./codegen/lib/Simu_Matlab`. 
+The closed-loop simulation C++ files will be generated to `./codegen/lib/Simu_Matlab` and `./codegen/lib/Simu_Matlab/examples`. 
 
 The Pinocchio interface is in `./kuka_iiwa14_pinocchio` (very simple). 
 
@@ -37,7 +37,7 @@ Compiler options:
 
 - -DPINOCCHIO_URDFDOM_TYPEDEF_SHARED_PTR 
 - -DPINOCCHIO_URDFDOM_USE_STD_SHARED_PTR
-- -DPINOCCHIO_WITH_URDFDOM  
+- -DPINOCCHIO_WITH_URDFDOM
 - -fopenmp
 
 Linker options:
