@@ -26,6 +26,13 @@ classdef OptimalControlProblem < DynamicSystem
           OCP.dim.subDim = OCP.dim.lambda+OCP.dim.mu+OCP.dim.u+OCP.dim.x;
           % create symVar
           OCP.lambda = sym('lambda',[OCP.dim.lambda,1]); 
+          if size(OCP.lambda,1) ~= OCP.dim.lambda
+              OCP.lambda = OCP.lambda.';
+          end
+          if size(OCP.mu,1) ~= 0
+              OCP.mu = OCP.mu.';
+              OCP.z = OCP.z.';
+          end
           %
           OCP.N = N; 
           % Global variable

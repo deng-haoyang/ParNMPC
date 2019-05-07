@@ -15,6 +15,9 @@ function setG(OCP,G)
     ParNMPCGlobalVariable.solutionInitGuess.z = zeros(zDim,ParNMPCGlobalVariable.N);
     OCP.dim.z      = zDim;
     OCP.z          = sym('z',[OCP.dim.z,1]);
+    if size(OCP.z,1) ~= OCP.dim.z
+       OCP.z = OCP.z.';
+    end
     OCP.LBarrier   = sym(0);
     %% barrier term
     for i = 1:zDim

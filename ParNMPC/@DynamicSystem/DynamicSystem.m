@@ -20,6 +20,12 @@ classdef DynamicSystem < handle
           plant.u = sym('u',[plant.dim.u,1]);
           plant.x = sym('x',[plant.dim.x,1]);
           plant.p = sym('p',[plant.dim.p,1]);
+          if size(plant.u,1) ~= plant.dim.u
+              plant.u = plant.u.';
+              plant.x = plant.x.';
+              plant.p = plant.p.';
+          end
+          
           % 
 %           global isMEnabled
 %           isMEnabled = false;
