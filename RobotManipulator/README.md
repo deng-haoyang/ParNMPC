@@ -31,7 +31,9 @@ The urdf file of the manipulator is in `./iiwa_description` (from MATLAB).
 
 ## How to run the generated C++ code?
 
-1. Install Pinocchio on Ubuntu (https://stack-of-tasks.github.io/pinocchio/).
+1. Install Pinocchio on Ubuntu (https://stack-of-tasks.github.io/pinocchio/). 
+Make sure that you can run successfully the two C++ examples in https://gepettoweb.laas.fr/doc/stack-of-tasks/pinocchio/master/doxygen-html/index.html.
+
 2. Compile and run (supposing the current directory is RobotManipulator). 
 Type the following commands in terminal sequentially:
 
