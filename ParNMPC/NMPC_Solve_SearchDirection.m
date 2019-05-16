@@ -112,7 +112,7 @@ function [lambda,mu,u,x,z,LAMBDA,KKTError,costL,timeElapsed] = ...
             Cu_j_i   = zeros(muDim,uDim);
             Cx_j_i   = zeros(muDim,xDim);
             if muDim ~=0
-                [C_j_i,Cu_j_i,Cx_j_i] = OCP_C_Cu_Cx(u_j_i,x_j_i,p_j_i);
+                [C_j_i,Cu_j_i,Cx_j_i] = OCP_C_Cu_Cx(u_j_i,x_j_i,p_j_i,i);
             end
             [F_j_i,Fu_j_i,Fx_j_i] = OCP_F_Fu_Fx(u_j_i,x_j_i,p_j_i,discretizationMethod,isMEnabled,i);
             

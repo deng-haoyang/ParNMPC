@@ -58,7 +58,7 @@ classdef OptimalControlProblem < DynamicSystem
       varargout = setInputName(OCP,varargin)
       varargout = setParameterName(OCP,varargin)
       setL(OCP,L)
-      setC(OCP,C)
+      setC(OCP,varargin)
       setT(OCP,T)
       setG(OCP,G)
       setDiscretizationMethod(OCP,method)
@@ -67,5 +67,7 @@ classdef OptimalControlProblem < DynamicSystem
       createNonemptySolution_FuncGen(OCP)
       OCP_GEN_fdt_FuncGen(OCP) % when external f is used  
       OCP_GEN_fdt_fudt_fxdt_FuncGen(OCP) % when external f is used
+      OCP_GEN_C_FuncGen(OCP) % when external C is used  
+      OCP_GEN_C_Cu_Cx_FuncGen(OCP) % when external C is used
    end
 end

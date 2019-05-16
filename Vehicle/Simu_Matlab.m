@@ -49,18 +49,19 @@ for step = 1:simuSteps %simulation steps
     tTotal        = tTotal + output.timeElapsed.total;
     
     %
-    if mod(step,20)==0
-        clf
-        plot(solution.x(1,:),solution.x(2,:));
-        hold on
-        circle(0,0,sqrt(1));
-        hold on
-        circle(2,2,sqrt(1));
-        hold on
-        plot(3.5,2,'*')
-        hold on
-        plot(x0(1),x0(2),'o')
-    end
+%     if mod(step,20)==0
+%         clf
+%         plot(solution.x(1,:),solution.x(2,:));
+%         hold on
+%         circle(0,0,sqrt(1));
+%         hold on
+%         circle(2,2,sqrt(1));
+%         hold on
+%         plot(3.5,2,'*')
+%         hold on
+%         plot(x0(1),x0(2),'o')
+%     end
+
     % Obtain the first optimal control input
     uOptimal = solution.u(:,1);
     

@@ -30,7 +30,7 @@ OCP.setDiscretizationMethod('RK4');
 % Set the equality constraint function C
 C = [y^2    +  z^2     - C1;...
     (y-2)^2 + (z-2)^2  - C2];
-OCP.setC(C);
+OCP.setC(C); % 
 
 % Set the cost function L
 xRef = [3.5;2;0;0];
@@ -59,7 +59,7 @@ OCP.codeGen();
 nmpcSolver = NMPCSolver(OCP);
 
 % Configurate the Hessian approximation method
-nmpcSolver.setHessianApproximation('GaussNewton');
+nmpcSolver.setHessianApproximation('GaussNewtonLF');
 
 % Generate necessary files
 nmpcSolver.codeGen();
@@ -74,8 +74,8 @@ N    = OCP.N;
 p    = zeros(dim.p,N);
 
 % Solve the very first OCP 
-solutionInitGuess.lambda = [randn(dim.lambda,1),zeros(dim.lambda,1)];
-solutionInitGuess.mu     = randn(dim.mu,1);
+solutionInitGuess.lambda = [10*rand(dim.lambda,1),zeros(dim.lambda,1)];
+solutionInitGuess.mu     = 10*rand(dim.mu,1);
 solutionInitGuess.u      = [0;0;3;3;1];
 solutionInitGuess.x      = [x0,xRef];
 solutionInitGuess.z      = ones(dim.z,N);

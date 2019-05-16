@@ -25,3 +25,5 @@ if ~strcmp(myCCompiler.Manufacturer,'Microsoft')
 end
 % generate exe
 codegen -config cfg Simu_Matlab -globals globalVariable
+%% Run 
+!Simu_Matlab

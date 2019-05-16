@@ -49,28 +49,53 @@ function codeGen(OCP)
     'Vars',UXP,...
     'Outputs',{'L'});
     %% C, Cu, Cx
-    Cu = jacobian(OCP.C,OCP.u);
-    Cx = jacobian(OCP.C,OCP.x);
-    matlabFunction(OCP.C,Cu,Cx,...
-    'File','./funcgen/OCP_GEN_C_Cu_Cx',...
-    'Vars',UXP,...
-    'Outputs',{'C','Cu','Cx'});
-    matlabFunction(OCP.C,...
-    'File','./funcgen/OCP_GEN_C',...
-    'Vars',UXP,...
-    'Outputs',{'C'});
+    parIdx = sym('parIdx');
+    UXPParIdx = {OCP.u;OCP.x;OCP.p;parIdx};
+
+    if isa(OCP.C,'char')
+        % external
+        isExistCWrapper = exist('./C_Wrapper.m','file');
+        if isExistCWrapper ~= 2
+            copyfile('../ParNMPC/Wrapper/C_Wrapper.m');
+            disp('Please specify your own C(u,x,p) function in C_Wrapper.m');
+        else
+            disp('C_Wrapper.m already exists and will be kept');
+        end
+        isExistC_Cu_Cx_Wrapper = exist('./C_Cu_Cx_Wrapper.m','file');
+        if isExistC_Cu_Cx_Wrapper ~= 2
+            copyfile('../ParNMPC/Wrapper/C_Cu_Cx_Wrapper.m');
+            disp(['Please specify your own C_Cu_Cx(u,x,p) function in C_Cu_Cx_Wrapper.m', ...
+                    ' (finite difference is used by default)']);   
+        else
+            disp('C_Cu_Cx_Wrapper.m already exists and will be kept');   
+        end
+        OCP.OCP_GEN_C_FuncGen();
+        OCP.OCP_GEN_C_Cu_Cx_FuncGen();
+    else
+        Cu = jacobian(OCP.C,OCP.u);
+        Cx = jacobian(OCP.C,OCP.x);
+        matlabFunction(OCP.C,Cu,Cx,...
+        'File','./funcgen/OCP_GEN_C_Cu_Cx',...
+        'Vars',UXPParIdx,...
+        'Outputs',{'C','Cu','Cx'});
+        matlabFunction(OCP.C,...
+        'File','./funcgen/OCP_GEN_C',...
+        'Vars',UXPParIdx,...
+        'Outputs',{'C'});
+    end
 
     %% f, fu, fx, M(optional)
     parIdx = sym('parIdx');
     UXPParIdx = {OCP.u;OCP.x;OCP.p;parIdx};
+
     if isa(OCP.f,'char')
         % external
         isExistfWrapper = exist('./f_Wrapper.m','file');
         if isExistfWrapper ~= 2
             copyfile('../ParNMPC/Wrapper/f_Wrapper.m');
-            disp('Please specify your own f(u,x,p) function in fWrapper.m');
+            disp('Please specify your own f(u,x,p) function in f_Wrapper.m');
         else
-            disp('fWrapper.m already exists and will be kept');
+            disp('f_Wrapper.m already exists and will be kept');
         end
         isExistf_fu_fx_Wrapper = exist('./f_fu_fx_Wrapper.m','file');
         if isExistf_fu_fx_Wrapper ~= 2
