@@ -55,9 +55,11 @@ A sampling rate of 1 KHz can be achieved in real time.
 - Thank [Xuanchen Zhang](https://github.com/xuhuairuogu) (USTC) for providing the wonderful build interface.
 
 
+
 ## Path following (coming soon)
 
-Similarly, you can use ParNMPC to control the end effector to follow a straight line or a sine path:
+
+Similarly, you can use ParNMPC to control the end effector to follow a straight line or a sine path ([reference](https://ieeexplore.ieee.org/abstract/document/7575680)):
 
 ![image]( https://github.com/ideaDeng/Gifs/blob/master/pose_nmpc_pf_line.gif)
 
