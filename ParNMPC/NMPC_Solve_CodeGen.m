@@ -52,6 +52,8 @@ switch target
         genMSg = ['Generating ', target, ' file for NMPC_Solve...' ];
     case 'lib'
         genMSg = ['Generating ', targetLang, ' source files for NMPC_Solve...' ];
+		cfg.GenerateExampleMain = 'GenerateCodeOnly';
+        cfg.GenCodeOnly = true;
     case 'dll'
         if isunix
             genMSg = ['Generating NMPC_Solve.so...' ];
