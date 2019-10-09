@@ -72,7 +72,6 @@ function [lambda,mu,u,x,z,LAMBDA,KKTError,costL,timeElapsed] = ...
     end
     %% V(:,index_inside_sig_j,which_sigment_i)
     parfor (i=1:1:DoP,numThreads)
-%     for i=1:1:DoP
         lambda_i = lambda(:,:,i);
         mu_i     = mu(:,:,i);
         u_i      = u(:,:,i);
