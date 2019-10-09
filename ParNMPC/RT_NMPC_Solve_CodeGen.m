@@ -200,5 +200,13 @@ fprintf(fileID, '#define c_zDim %d\n\n',dim.z);
 
 fprintf(fileID, '#endif\n');
 fclose(fileID);
-
+%%
+isExistCMakeLists = exist('./CMakeLists.txt','file');
+if isExistCMakeLists ~= 2
+    copyfile('../ParNMPC/PreemptRTNMPC/CMakeLists.txt');
+else
+    disp('CMakeLists.txt already exists and will be kept');   
+end
 disp('Ok!');
+
+
