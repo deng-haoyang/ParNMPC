@@ -26,9 +26,11 @@ classdef DynamicSystem < handle
               plant.p = plant.p.';
           end
           
-          % 
-%           global isMEnabled
-%           isMEnabled = false;
+          global PlantGlobalVariable
+          PlantGlobalVariable.dim.u = uDim;
+          PlantGlobalVariable.dim.x = xDim;
+          PlantGlobalVariable.dim.p = pDim;
+          PlantGlobalVariable.isMEnabled = false;
       end
       setf(plant,f)
       setM(plant,M)
