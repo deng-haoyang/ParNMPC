@@ -118,13 +118,13 @@ ParNMPCGlobalVariable.solutionInitGuess = solution;
 
 % M(u,x,p) \dot(x) = f(u,x,p)
 % Create a DynamicSystem object
-plant = DynamicSystem(1,6,0);
+plant = DynamicSystem(2,6,0);
 
 % Give names to x, u
 [X,Theta1,Theta2,dX,dTheta1,dTheta2] = ...
     plant.setStateName({'X','Theta1','Theta2','dX','dTheta1','dTheta2'});
-[F] = ...
-    plant.setInputName({'F'});
+[F,slack] = ...
+    plant.setInputName({'F','slack'});
 
 % Set the dynamic function f
 plant.setf(f); % same model 

@@ -53,7 +53,7 @@ for step = 1:simuSteps %simulation steps
     
     % System simulation by the 4th-order Explicit Runge-Kutta Method
     pSimVal = zeros(0,1);
-    x0 = SIM_Plant_RK4(uOptimal(1,1),x0,pSimVal,Ts);
+    x0 = SIM_Plant_RK4(uOptimal(:,1),x0,pSimVal,Ts);
 
     % Update parameters
     
