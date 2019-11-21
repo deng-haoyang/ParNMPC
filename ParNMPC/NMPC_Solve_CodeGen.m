@@ -91,7 +91,6 @@ if strcmp(target,'dll')
         strAll = [];
         tline = fgetl(fid);
         while ischar(tline)
-            disp(tline)
             isFound = strfind(tline, 'omp');
             if isempty(isFound)
                 strAll = [strAll,tline,'\n'];
