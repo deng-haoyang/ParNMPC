@@ -13,12 +13,14 @@ options.maxIterInit  = 5;
 % generate code
 NMPC_Solve_CodeGen('dll','C',options);
 
-% settings for simulink to call the generated code
+%% settings for simulink to call the generated code
 Simu_Simulink
 set_param('Simu_Simulink', 'SimCustomHeaderCode',   '#include "NMPC_Solve.h"')
 set_param('Simu_Simulink', 'SimCustomInitializer',  'NMPC_Solve_initialize();')
 set_param('Simu_Simulink', 'SimCustomTerminator',   'NMPC_Solve_terminate();')
-if isunix
+if ismac
+    set_param('Simu_Simulink', 'SimUserLibraries',      'NMPC_Solve.dylib')
+elseif isunix
     set_param('Simu_Simulink', 'SimUserLibraries',      'NMPC_Solve.so')
 elseif ispc
     set_param('Simu_Simulink', 'SimUserLibraries',      'NMPC_Solve.lib')

@@ -12,7 +12,7 @@ globalVariable = {'ParNMPCGlobalVariable',coder.Constant(ParNMPCGlobalVariable)}
 cfg = coder.config('lib');
 cfg.FilePartitionMethod = 'SingleFile';
 cfg.TargetLang = 'C';
-stackUsageMax = (xDim+uDim)*N/360*200000;
+stackUsageMax = (xDim+uDim)*N/360*10000;
 cfg.StackUsageMax = stackUsageMax;
 cfg.BuildConfiguration = 'Faster Runs'; 
 cfg.SupportNonFinite = false; 
@@ -21,7 +21,12 @@ cfg.GenCodeOnly = false; % true to generate code only
 myCCompiler = mex.getCompilerConfigurations(cfg.TargetLang,'Selected');
 clear NMPC_Solve % must be cleared before code generation
 if ~strcmp(myCCompiler.Manufacturer,'Microsoft')
-    cfg.PostCodeGenCommand = 'buildInfo.addLinkFlags(''-fopenmp'')';
+    if ismac
+        % flag to call openmp in mac
+        cfg.PostCodeGenCommand = 'buildInfo.addLinkFlags(''-Xpreprocessor -fopenmp'')';
+    else
+        cfg.PostCodeGenCommand = 'buildInfo.addLinkFlags(''-fopenmp'')';
+    end
 end
 % generate exe
 codegen -config cfg Simu_Matlab -globals globalVariable
