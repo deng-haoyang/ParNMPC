@@ -35,6 +35,9 @@ if ismac
         isInParallel = false;
         warning('Mac is only supported for parallel code generation from R2019a!');
     end
+    if DoP == 1
+        isInParallel = true;
+    end
 end
 cfg.EnableOpenMP            = isInParallel;
 cfg.TargetLang              = targetLang;
