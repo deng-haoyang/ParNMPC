@@ -30,7 +30,7 @@ function [solution,output] = NMPC_Solve(x0,p,options)
     end
     if dim.z ~= 0
         zInit      = reshape(solutionInitGuess.z,      dim.z,        sizeSeg, options.DoP);
-    end    
+    end
     
     % Init 
     lambdaSplit = lambdaInit;
