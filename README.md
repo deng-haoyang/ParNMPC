@@ -85,4 +85,4 @@ Citing the toolbox (conference version):
 
 ## License
 
-ParNMPC is licensed under the BSD 2-Clause "Simplified" License
+ParNMPC is distributed under the BSD 2-Clause "Simplified" License.
