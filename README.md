@@ -56,3 +56,33 @@ With **`ParNMPC`**, you can define your own NMPC problem in a very easy way and 
 4. Open `Simu_Simulink_Setup.m` and run. 
 
 5. Open `Simu_Simulink.slx` and run. 
+
+
+## Citing ParNMPC
+
+Citing the parallel algorithm:
+
+```
+@article{deng2019parallel,
+  title={A parallel Newton-type method for nonlinear model predictive control},
+  author={Deng, Haoyang and Ohtsuka, Toshiyuki},
+  journal={Automatica},
+  volume={109},
+  pages={108560},
+  year={2019}}
+```
+Citing the toolbox (conference version):
+
+```
+@inproceedings{deng2018parallel,
+  title={A parallel code generation toolkit for nonlinear model predictive control},
+  author={Deng, Haoyang and Ohtsuka, Toshiyuki},
+  booktitle={Proceedings of the 57th {IEEE} {C}onference on {D}ecision and {C}ontrol},
+  pages={4920--4926},
+  year={2018},
+  address={Miami, USA}}
+```
+
+## License
+
+ParNMPC is licensed under the BSD 2-Clause "Simplified" License
