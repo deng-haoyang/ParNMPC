@@ -1,7 +1,7 @@
 function setDescentRegularization(solver,value)
 % descent regularization parameter
 % nonsingular regularization parameter
-if value > 0
+if value >= 0
     % Global variable
     global ParNMPCGlobalVariable
 

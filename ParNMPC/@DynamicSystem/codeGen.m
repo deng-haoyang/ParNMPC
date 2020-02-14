@@ -1,9 +1,15 @@
 function codeGen(plant)
+    if plant.dim.x + plant.dim.u < plant.THRESHOLD_DIM_UX
+        isOptimize = true;
+    else
+        isOptimize = false;
+    end
+
     showInfo(plant);
     disp('Generating plant...');
     if ~plant.isMEnabled
        % init M
-       plant.M = symfun(eye(plant.dim.x),[plant.u;plant.x;plant.p]);
+       plant.M = sym(eye(plant.dim.x));
     end
     if isa(plant.f,'char')
         % external
@@ -19,11 +25,11 @@ function codeGen(plant)
         matlabFunction(plant.f,...
             'File','./funcgen/SIM_GEN_f',...
             'Vars',{plant.u;plant.x;plant.p},...
-            'Outputs',{'f'});
+            'Outputs',{'f'},'Optimize',isOptimize);
     end
     matlabFunction(plant.M,...
         'File','./funcgen/SIM_GEN_M',...
         'Vars',{plant.u;plant.x;plant.p},...
-        'Outputs',{'M'});
+        'Outputs',{'M'},'Optimize',isOptimize);
     disp('Done!')
 end

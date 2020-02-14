@@ -1,12 +1,13 @@
 function setG(OCP,G)
     % assert
-    Gux = jacobian(G,[OCP.u;OCP.x]);
-    hasUX = has(Gux(:),[OCP.u;OCP.x]);
-    if sum(hasUX(:)) ~= 0
-        error('G must be a linear function of u and x!');
+    if OCP.dim.u + OCP.dim.x < 30
+        Gux = jacobian(G,[OCP.u;OCP.x]);
+        hasUX = has(Gux(:),[OCP.u;OCP.x]);
+        if sum(hasUX(:)) ~= 0
+            error('G must be a linear function of u and x!');
+        end
     end
-    
-    OCP.G = symfun(G,[OCP.u;OCP.x;OCP.p]);
+    OCP.G = G;
     % Global variable
     global ParNMPCGlobalVariable
     G_formula = formula(OCP.G);

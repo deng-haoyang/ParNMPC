@@ -7,6 +7,7 @@ classdef DynamicSystem < handle
       f % symbolic function
       M % symbolic function
       isMEnabled = false; % enable dot x = inv(M)*f
+      THRESHOLD_DIM_UX = 30;
    end
    methods
       function plant = DynamicSystem(uDim,...

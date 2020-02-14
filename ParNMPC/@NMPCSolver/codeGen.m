@@ -5,6 +5,12 @@ unknowns = [solver.OCP.lambda;...
             solver.OCP.x;...
             solver.OCP.p];
         
+        
+if solver.OCP.dim.x + solver.OCP.dim.u < solver.OCP.THRESHOLD_DIM_UX
+    isOptimize = true;
+else
+    isOptimize = false;
+end
 % LAll = solver.OCP.L + rho*solver.OCP.LBarrier.all;
 L = solver.OCP.L;
 
@@ -36,7 +42,7 @@ end
 showInfo(solver);
 %% Generate Hessian for NMPC
 disp('Generating Hessian...')
-A = symfun(A_,unknowns);
+A = A_;
 Au  = jacobian(A,solver.OCP.u);
 Ax  = jacobian(A,solver.OCP.x);
 
@@ -66,6 +72,6 @@ LambdaMuUXZP = {solver.OCP.lambda;...
 matlabFunction(AuuCondensed,AuxCondensed,AxxCondensed,...
     'File','./funcgen/OCP_GEN_Auu_Aux_Axx_Condensed',...
     'Vars',LambdaMuUXZP,...
-    'Outputs',{'AuuCondensed','AuxCondensed','AxxCondensed'});
+    'Outputs',{'AuuCondensed','AuxCondensed','AxxCondensed'},'Optimize',isOptimize);
 disp('Done!');
 end
