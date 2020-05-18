@@ -7,6 +7,8 @@ function [z_i,stepSizeMaxZ_i,stepSizeMaxG_i] = ...
         [~,sizeSeg] = size(x_i);
 
         % line search variables
+        stepSizeMaxZ_i = 1;
+        stepSizeMaxG_i = 1;
 
         % update z
         if zDim ~= 0
